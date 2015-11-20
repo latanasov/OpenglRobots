@@ -23,6 +23,8 @@ public class RobotSkeleton {
     SkeletonPart rArm;
     SkeletonPart lLeg;
     SkeletonPart rLeg;
+    SkeletonPart joint;
+    SkeletonPart lEye;
     Vector oPos;
 
     public RobotSkeleton(Vector oPos) {
@@ -39,8 +41,18 @@ public class RobotSkeleton {
           this.head.isToBeScaled=true;
           this.bodyCore = new SkeletonBodyCore(pShape.Cube, oPos);
           bodyComposition.add(this.bodyCore);
+          this.lArm = new SkeletonArm(pShape.Cube, oPos);
+          bodyComposition.add(this.lArm);
+          this.rArm = new SkeletonArm(pShape.Cube, oPos);
+          Vector newPos=new Vector (0,-1,0.5);
+          this.rArm.setPos(newPos);
+          bodyComposition.add(this.rArm);
+          this.joint = new SkeletonJoint(pShape.Sphere, oPos);
+          bodyComposition.add(this.joint);
+          this.lEye = new SkeletonEye(pShape.Sphere, oPos);
+          bodyComposition.add(this.lEye);
        
-       
+     
     }
 
 }

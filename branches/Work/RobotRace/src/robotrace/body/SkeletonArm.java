@@ -13,7 +13,7 @@ import robotrace.Vector;
  */
 public class SkeletonArm extends SkeletonPart {
 
-    final Vector partOffset = new Vector(0, 0, 0);
+    final Vector partOffset = new Vector(0, 1, 0.5);
 
     public SkeletonArm(pShape partShape, Vector oPos) {
         super(partShape, oPos);
@@ -26,4 +26,8 @@ public class SkeletonArm extends SkeletonPart {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+   public void setPos(Vector newPos) {
+       this.partPos=newPos;
+    }
 }

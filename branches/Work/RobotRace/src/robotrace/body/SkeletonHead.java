@@ -18,13 +18,18 @@ public class SkeletonHead extends SkeletonPart {
 
     public SkeletonHead(pShape partShape, Vector oPos) {
         super(partShape, oPos);
-        this.partOffset=new Vector(0,0,1);
+        this.partOffset=new Vector(0,0,1.75);
         this.partPos = this.oPos.add(this.partOffset);
 
     }
 
     @Override
     public void calcInitPos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setPos(Vector newPos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

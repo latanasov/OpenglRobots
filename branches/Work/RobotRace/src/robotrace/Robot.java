@@ -79,7 +79,8 @@ class Robot {
            tempPart=this.Skeleton.bodyComposition.get(i);
             if (tempPart.isToBeScaled)
             {
-             this.rotate3D(gl, this.position ,tempPart.partPos ,35);
+            this.rotate3D(gl, this.position ,tempPart.partPos ,35);
+               //this.scale3D(gl, 2, 1, 1, tempPart.partPos);
             }
                   gl.glTranslatef((float)tempPart.partPos.x,(float) tempPart.partPos.y, (float) tempPart.partPos.z);
 
@@ -94,6 +95,7 @@ class Robot {
             
             // draw body
             case Sphere:  
+                    glut.glutSolidSphere(0.1, 32, 32);
                      break;
             
             // draw arm    
@@ -183,7 +185,7 @@ class Robot {
     
     void rotate3D (GL2 gl, Vector p1, Vector p2, float thetaDegree)
     {
-         float vx = (float) (p2.x - p1.x);
+        float vx = (float) (p2.x - p1.x);
         float vy = (float) (p2.y - p1.y);
         float vz = (float) (p2.z - p1.z);
             
@@ -192,6 +194,10 @@ class Robot {
         gl.glTranslatef((float) -p1.x, (float) -p1.y,(float) -p1.z);
     }
        
-
+    void scale3D (GL2 gl, float sx, float sy, float sz, Vector p1)
+    {       
+       // gl.glTranslatef((float)p1.x, (float)p1.y,(float)p1.z);
+        gl.glScalef(sx, sy, sz);
+    }
 
 }
