@@ -293,6 +293,7 @@ public class RobotRace extends Base {
            glut.glutSolidCone(0.05, 0.1, 32, 16);  
         gl.glPopMatrix();
         
+        gl.glColor3f(1f, 0f, 1f);
     }
  
     /**

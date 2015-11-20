@@ -57,10 +57,36 @@ class Robot {
         if (stickFigure)
         {
             // draw stcik robot
-            gl.glBegin(GL_LINES);
-           gl.glVertex3d(0, 0, 0);
-           gl.glVertex3d(0, 1, 0);
-        gl.glEnd();
+            Vector headPos = new Vector(0,0,0);
+            Vector bodyPos = new Vector(0,0,0);
+            Vector lArmPos = new Vector(0,0,0);
+            Vector rArmPos = new Vector(0,0,0);
+            Vector lLegPos = new Vector(0,0,0);
+            Vector rLegPos = new Vector(0,0,0);
+            
+                    //, lArmPos, rArmPos, lLegPos, rLegPos;
+            headPos = this.Skeleton.head.partPos;
+            bodyPos = this.Skeleton.bodyCore.partPos;
+            lArmPos = this.Skeleton.lArm.partPos;
+            rArmPos = this.Skeleton.rArm.partPos;
+            lLegPos = this.Skeleton.lLeg.partPos;
+            rLegPos = this.Skeleton.rLeg.partPos;
+            
+            // draw head, body, arm and leg
+            gl.glPushMatrix();
+               gl.glTranslatef((float)headPos.x, (float)headPos.y, (float)headPos.z);
+               glut.glutSolidSphere(0.4, 32, 32);
+            gl.glPopMatrix();
+
+            this.drawLine(gl, headPos, bodyPos);
+            this.drawLine(gl, lArmPos, rArmPos);
+            this.drawLine(gl, bodyPos, lLegPos);
+            this.drawLine(gl, bodyPos, rLegPos);
+            
+            //lArmPos = this.Skeleton.lArm.partPos;
+            //rArmPos = this.Skeleton.rArm.partPos;
+            //lLegPos = this.Skeleton.lLeg.partPos;
+            //rLegPos = this.Skeleton.rLeg.partPos;
         
         }
         else
@@ -198,6 +224,14 @@ class Robot {
     {       
        // gl.glTranslatef((float)p1.x, (float)p1.y,(float)p1.z);
         gl.glScalef(sx, sy, sz);
+    }
+    
+    void drawLine (GL2 gl, Vector startPos, Vector endPos)
+    {
+        gl.glBegin(GL_LINES);
+           gl.glVertex3d(startPos.x, startPos.y, startPos.z);
+           gl.glVertex3d(endPos.x, endPos.y, endPos.z);
+        gl.glEnd();
     }
 
 }
