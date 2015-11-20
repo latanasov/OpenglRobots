@@ -1,6 +1,7 @@
 package robotrace;
 
 import javax.media.opengl.GL;
+import static javax.media.opengl.GL.GL_LINES;
 import static javax.media.opengl.GL2.*;
 
 /**
@@ -218,7 +219,7 @@ public class RobotRace extends Base {
         robots[0].direction = raceTracks[gs.trackNr].getLaneTangent(0, 0);
         
         // Draw the first robot.
-        robots[0].draw(gl, glu, glut, false, gs.tAnim);
+        robots[0].draw(gl, glu, glut, gs.showStick, gs.tAnim);
         
         // Draw the race track.
         raceTracks[gs.trackNr].draw(gl, glu, glut);
@@ -247,7 +248,50 @@ public class RobotRace extends Base {
      * and origin (yellow).
      */
     public void drawAxisFrame() {
-        // code goes here ...
+        // draw the origin with a yellow sphere
+        gl.glColor3f(1f, 1f, 0f);
+        glut.glutSolidSphere(0.05, 32, 16);
+        
+        // draw x-axis (red) with a block cone at the end
+        gl.glColor3f(1f, 0f, 0f);
+        gl.glBegin(GL_LINES);
+           gl.glVertex3d(0, 0, 0);
+           gl.glVertex3d(1, 0, 0);
+        gl.glEnd();
+        
+        // draw the cone, first move to location (1,0,0) and then roated 90
+        gl.glPushMatrix();
+            gl.glTranslatef(1f, 0f, 0f);
+            gl.glRotatef(90f, 0f, 1f, 0f);
+            glut.glutSolidCone(0.05, 0.1, 32, 16);  
+        gl.glPopMatrix();
+        
+        // draw y-axis (green) with a block cone at the end
+        gl.glColor3f(0f, 1f, 0f);
+        gl.glBegin(GL_LINES);
+           gl.glVertex3d(0, 0, 0);
+           gl.glVertex3d(0, 1, 0);
+        gl.glEnd();
+        
+        // draw the cone, first move to location (0,1,0) and then roated -90
+        gl.glPushMatrix();
+            gl.glTranslatef(0f, 1f, 0f);
+            gl.glRotatef(-90f, 1f, 0f, 0f);
+            glut.glutSolidCone(0.05, 0.1, 32, 16);  
+        gl.glPopMatrix();
+        
+        // draw z-axis (blue) with a block cone at the end
+        gl.glColor3f(0f, 0f, 1f);
+        gl.glBegin(GL_LINES);
+           gl.glVertex3d(0, 0, 0);
+           gl.glVertex3d(0, 0, 1);
+        gl.glEnd();
+
+        // draw the cone, first move to location (0,0,1)
+        gl.glPushMatrix();        
+           gl.glTranslatef(0f, 0f, 1f);
+           glut.glutSolidCone(0.05, 0.1, 32, 16);  
+        gl.glPopMatrix();
         
     }
  
