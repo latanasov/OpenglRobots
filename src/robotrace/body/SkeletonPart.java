@@ -30,6 +30,7 @@ SkeletonPart(pShape partShape,Vector oPos)
 }
 
 public abstract void calcInitPos();
-
+public abstract void setPos(Vector newPos);
     
 }
+

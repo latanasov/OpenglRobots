@@ -26,4 +26,9 @@ public class SkeletonLeg extends SkeletonPart {
     public void calcInitPos() {
     }
 
+    @Override
+    public void setPos(Vector newPos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
