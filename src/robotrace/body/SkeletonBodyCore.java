@@ -13,7 +13,7 @@ import robotrace.Vector;
  * @author lyuat
  */
 public class SkeletonBodyCore extends SkeletonPart {
-        final Vector partOffset=new Vector(0,0,0);
+        final Vector partOffset=new Vector(0,0,-1);
 
     
     public SkeletonBodyCore(pShape partShape, Vector oPos) {

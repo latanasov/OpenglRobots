@@ -6,6 +6,8 @@ import javafx.geometry.Point3D;
 import static javax.media.opengl.GL.GL_LINES;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
+import robotrace.body.SkeletonPart;
+import robotrace.body.pShape;
 
 /**
 * Represents a Robot, to be implemented according to the Assignments.
@@ -67,37 +69,43 @@ class Robot {
         
         
         // code goes here ...
-        /*
+      
         this.Skeleton.initSkeleton();
         
         for (int i=0; i < this.Skeleton.bodyComposition.size(); i++)
-        {
-           switch () {
+        { 
+             gl.glPushMatrix();
+           SkeletonPart tempPart;
+           tempPart=this.Skeleton.bodyComposition.get(i);
+            if (tempPart.isToBeScaled)
+            {
+             this.rotate3D(gl, this.position ,tempPart.partPos ,35);
+            }
+                  gl.glTranslatef((float)tempPart.partPos.x,(float) tempPart.partPos.y, (float) tempPart.partPos.z);
+
+           switch (tempPart.partShape) {
                
             // draw head
-            case 1:  
+            case Cube:  
+             
+      
+          glut.glutSolidCube(1);
                      break;
             
             // draw body
-            case 2:  
+            case Sphere:  
                      break;
             
             // draw arm    
-            case 3:  
+            case Conus:  
                      break;
             
-            // draw leg
-            case 4:  
-                     break;
-                
-            case 5:  monthString = "May";
-                     break;
-            case 6:  monthString = "June";
-                     break;
-            default: monthString = "Invalid month";
-                     break;
-        }*/
+         
+        }
+                   gl.glPopMatrix();
 
+        }
+/*
         // draw body
         
         //this.position.x = 0;
@@ -128,10 +136,7 @@ class Robot {
         
         
         //head
-        gl.glPushMatrix();
-            gl.glTranslatef(initPosX, initPosY, (float) (initPosZ+1));
-            glut.glutSolidCylinder(0.25, 0.2, 32, 32); 
-        gl.glPopMatrix();
+    
         
         gl.glPushMatrix();
             gl.glColor3f(0f, 0f, 1f);
@@ -169,21 +174,22 @@ class Robot {
             glut.glutSolidCylinder(0.25, 0.2, 32, 32); 
         gl.glPopMatrix();
 
-        
+        */
         
         
         
     }
+    }
     
-    void rotate3D (GL2 gl, Point3D p1, Point3D p2, float thetaDegree)
+    void rotate3D (GL2 gl, Vector p1, Vector p2, float thetaDegree)
     {
-         float vx = (float) (p2.getX() - p1.getX());
-        float vy = (float) (p2.getY() - p1.getY());
-        float vz = (float) (p2.getZ() - p1.getZ());
+         float vx = (float) (p2.x - p1.x);
+        float vy = (float) (p2.y - p1.y);
+        float vz = (float) (p2.z - p1.z);
             
-        gl.glTranslatef((float)p1.getX(), (float)p1.getY(),(float)p1.getZ());
+        gl.glTranslatef((float)p1.x, (float)p1.y,(float)p1.z);
         gl.glRotatef(thetaDegree, vx, vy, vz);
-        gl.glTranslatef((float) -p1.getX(), (float) -p1.getY(),(float) -p1.getZ());
+        gl.glTranslatef((float) -p1.x, (float) -p1.y,(float) -p1.z);
     }
        
 
