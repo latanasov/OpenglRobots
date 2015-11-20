@@ -20,6 +20,8 @@ public abstract class SkeletonPart  {
 public pShape partShape;
 public Vector partPos;
 public Vector oPos;
+public Vector partOffset;
+public boolean isToBeScaled;
 SkeletonPart(pShape partShape,Vector oPos)
 {
     this.partShape=partShape;

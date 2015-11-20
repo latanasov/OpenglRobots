@@ -14,10 +14,11 @@ import robotrace.Vector;
  */
 public class SkeletonHead extends SkeletonPart {
 
-    final Vector partOffset = new Vector(0, 0, 0);
+   
 
     public SkeletonHead(pShape partShape, Vector oPos) {
         super(partShape, oPos);
+        this.partOffset=new Vector(0,0,1);
         this.partPos = this.oPos.add(this.partOffset);
 
     }

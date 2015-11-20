@@ -36,7 +36,8 @@ public class RobotSkeleton {
        
           this.head = new SkeletonHead(pShape.Cube,oPos);
           bodyComposition.add(this.head);
-          this.bodyCore = new SkeletonHead(pShape.Cube, oPos);
+          this.head.isToBeScaled=true;
+          this.bodyCore = new SkeletonBodyCore(pShape.Cube, oPos);
           bodyComposition.add(this.bodyCore);
        
        
