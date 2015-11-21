@@ -3,11 +3,15 @@ package robotrace;
 import robotrace.body.RobotSkeleton;
 import com.jogamp.opengl.util.gl2.GLUT;
 import javafx.geometry.Point3D;
+import javafx.scene.paint.Color;
 import static javax.media.opengl.GL.GL_LINES;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 import robotrace.body.SkeletonPart;
-import robotrace.body.pShape;
+import robotrace.shape.ComplexShape;
+import robotrace.shape.Shape;
+import robotrace.shape.ShapeEnum;
+import static robotrace.shape.ShapeEnum.ComplexShape;
 
 /**
 * Represents a Robot, to be implemented according to the Assignments.
@@ -36,6 +40,8 @@ class Robot {
 
         // code goes here ...
         this.Skeleton=new RobotSkeleton(position);
+                this.Skeleton.initSkeleton();
+
     }
 
     /**
@@ -56,6 +62,7 @@ class Robot {
         
         if (stickFigure)
         {
+            /*
             // draw stcik robot
             Vector headPos = new Vector(0,0,0);
             Vector bodyPos = new Vector(0,0,0);
@@ -71,7 +78,8 @@ class Robot {
             rArmPos = this.Skeleton.rArm.partPos;
             lLegPos = this.Skeleton.lLeg.partPos;
             rLegPos = this.Skeleton.rLeg.partPos;
-            
+            */
+            /*
             // draw head, body, arm and leg
             gl.glPushMatrix();
                gl.glTranslatef((float)headPos.x, (float)headPos.y, (float)headPos.z);
@@ -87,6 +95,7 @@ class Robot {
             //rArmPos = this.Skeleton.rArm.partPos;
             //lLegPos = this.Skeleton.lLeg.partPos;
             //rLegPos = this.Skeleton.rLeg.partPos;
+            */
         
         }
         else
@@ -96,21 +105,42 @@ class Robot {
         
         // code goes here ...
       
-        this.Skeleton.initSkeleton();
         
         for (int i=0; i < this.Skeleton.bodyComposition.size(); i++)
         { 
              gl.glPushMatrix();
            SkeletonPart tempPart;
            tempPart=this.Skeleton.bodyComposition.get(i);
-            if (tempPart.isToBeScaled)
+           drawPart(gl,glut,tempPart.partShape);
+          
+              gl.glPopMatrix();
+
+        }
+
+        
+        
+    }
+    }
+    void drawPart(GL2 gl,GLUT glut, Shape partShape){
+                   
+    gl.glPushMatrix();
+
+            if (partShape.toBeRotated)
             {
-            this.rotate3D(gl, this.position ,tempPart.partPos ,35);
+            this.rotate3D(gl, this.position ,partShape.shapePos ,35);
                //this.scale3D(gl, 2, 1, 1, tempPart.partPos);
             }
-                  gl.glTranslatef((float)tempPart.partPos.x,(float) tempPart.partPos.y, (float) tempPart.partPos.z);
-
-           switch (tempPart.partShape) {
+            
+             if (partShape.toBeScaled)
+            {
+               this.scale3D(gl, (float)partShape.getScale().x, (float)partShape.getScale().y, (float)partShape.getScale().z);
+            }
+             if(partShape.ShapeType!=ComplexShape)
+             {
+                  gl.glColor3d(partShape.getColor().getRed(),partShape.getColor().getGreen(),partShape.getColor().getBlue());
+                  gl.glTranslatef((float)partShape.shapePos.x,(float) partShape.shapePos.y, (float) partShape.shapePos.z); 
+             }
+         switch (partShape.ShapeType) {
                
             // draw head
             case Cube:  
@@ -121,92 +151,23 @@ class Robot {
             
             // draw body
             case Sphere:  
-                    glut.glutSolidSphere(0.1, 32, 32);
+                    glut.glutSolidSphere(partShape.radius, 100, 100);
                      break;
             
             // draw arm    
-            case Conus:  
+            case Cyclinder:  
+             glut.glutSolidCylinder(partShape.radius, partShape.height, 100, 100);
                      break;
-            
-         
+             case ComplexShape:  
+              
+                  
+         for (int i=0; i<partShape.ShapeCollection.size();i++) {
+                drawPart(gl,glut,partShape.ShapeCollection.get(i));
+                            
+         }
+           break; 
         }
-                   gl.glPopMatrix();
-
-        }
-/*
-        // draw body
-        
-        //this.position.x = 0;
-        //this.position.y = 0;
-        //this.position.z = 0;
-        
-        float initPosX = (float) startPos.getX();
-        float initPosY = (float) startPos.getY();
-        float initPosZ = (float) startPos.getZ();
-       
-        //body
-        gl.glPushMatrix();
-            gl.glTranslatef(initPosX, initPosY, initPosZ);
-            gl.glScalef(1f, 1.5f, 2f);
-            glut.glutSolidCube(1);  
-        gl.glPopMatrix();
-        
-        gl.glPushMatrix();
-        
-            gl.glColor3f(1f, 0f, 0f);
-            gl.glTranslatef((float) (initPosX+0.5), initPosY, (float) (initPosZ+0.3));
-            glut.glutSolidSphere(0.1, 32, 32);
-            gl.glTranslatef(initPosX, initPosY, (float) (initPosZ-0.6));
-            glut.glutSolidSphere(0.1, 32, 32);
-            
-          
-        gl.glPopMatrix();
-        
-        
-        //head
-    
-        
-        gl.glPushMatrix();
-            gl.glColor3f(0f, 0f, 1f);
-            gl.glTranslatef(initPosX, initPosY, (float) (initPosZ+1.7));
-            gl.glScalef(0.5f, 1.2f, 1f);
-            glut.glutSolidCube(1);             
-        gl.glPopMatrix();
-        
-        gl.glPushMatrix();
-            gl.glColor3f(1f, 0f, 0f);
-            gl.glTranslatef((float) (initPosX+0.25), (float) (initPosY-0.2), (float) (initPosZ+1.7));
-            glut.glutSolidSphere(0.1, 32, 32);
-            gl.glTranslatef(initPosX, (float) (initPosY+0.4), initPosZ);
-            glut.glutSolidSphere(0.1, 32, 32);  
-        gl.glPopMatrix();
-       
-        gl.glPushMatrix();
-            gl.glColor3f(1f, 0f, 0f);
-            gl.glTranslatef((float) (initPosX+0.25), initPosY, (float) (initPosZ+1.4));
-            glut.glutSolidCone(0.1, 0.2, 32, 32);
-        gl.glPopMatrix();
-        }      
-        
-        Point3D p1 = new  Point3D(0.0,0.0,0.0);
-        Point3D p2 = new  Point3D(1.0,0.0,0.0);
-
-        float thetaDegree = 90;
-        
-        float vx = (float) (p2.getX() - p1.getX());
-        float vy = (float) (p2.getY() - p1.getY());
-        float vz = (float) (p2.getZ() - p1.getZ());
-         
-        gl.glPushMatrix();
-            this.rotate3D(gl, p1, p2, thetaDegree);
-            glut.glutSolidCylinder(0.25, 0.2, 32, 32); 
-        gl.glPopMatrix();
-
-        */
-        
-        
-        
-    }
+          gl.glPopMatrix();
     }
     
     void rotate3D (GL2 gl, Vector p1, Vector p2, float thetaDegree)
@@ -220,7 +181,7 @@ class Robot {
         gl.glTranslatef((float) -p1.x, (float) -p1.y,(float) -p1.z);
     }
        
-    void scale3D (GL2 gl, float sx, float sy, float sz, Vector p1)
+    void scale3D (GL2 gl, float sx, float sy, float sz)
     {       
        // gl.glTranslatef((float)p1.x, (float)p1.y,(float)p1.z);
         gl.glScalef(sx, sy, sz);

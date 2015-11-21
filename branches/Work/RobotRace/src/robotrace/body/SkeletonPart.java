@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package robotrace.body;
+import robotrace.shape.Shape;
 import com.jogamp.opengl.util.gl2.GLUT;
 
 import javax.media.opengl.GL2;
@@ -17,15 +18,12 @@ import robotrace.Vector;
 
 
 public abstract class SkeletonPart  {
-public pShape partShape;
-public Vector partPos;
-public Vector oPos;
-public Vector partOffset;
-public boolean isToBeScaled;
-SkeletonPart(pShape partShape,Vector oPos)
+public Shape partShape;
+
+
+SkeletonPart(Shape partShape)
 {
     this.partShape=partShape;
-    this.oPos=oPos;
    
 }
 

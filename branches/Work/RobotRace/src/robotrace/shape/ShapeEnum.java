@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package robotrace.body;
+package robotrace.shape;
 
 /**
  *
  * @author lyuat
  */
-public enum pShape {
+public enum ShapeEnum {
     Cube, 
     Conus, 
     Sphere,
+    Cyclinder,
     ComplexShape
 }
 

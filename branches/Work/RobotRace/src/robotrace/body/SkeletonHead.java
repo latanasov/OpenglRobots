@@ -5,6 +5,7 @@
  */
 package robotrace.body;
 
+import robotrace.shape.Shape;
 import javafx.geometry.Point3D;
 import robotrace.Vector;
 
@@ -16,10 +17,10 @@ public class SkeletonHead extends SkeletonPart {
 
    
 
-    public SkeletonHead(pShape partShape, Vector oPos) {
-        super(partShape, oPos);
-        this.partOffset=new Vector(0,0,1.75);
-        this.partPos = this.oPos.add(this.partOffset);
+    public SkeletonHead(Shape partShape) {
+        super(partShape);
+        
+      
 
     }
 

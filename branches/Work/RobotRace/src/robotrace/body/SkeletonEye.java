@@ -6,6 +6,7 @@
 package robotrace.body;
 
 import robotrace.Vector;
+import robotrace.shape.Shape;
 
 /**
  *
@@ -13,11 +14,10 @@ import robotrace.Vector;
  */
 public class SkeletonEye extends SkeletonPart{
 
-    final Vector partOffset = new Vector(0.7, 0.2, 1.5);
     
-    public SkeletonEye(pShape partShape, Vector oPos) {
-        super(partShape, oPos);
-        this.partPos = this.oPos.add(this.partOffset);
+    public SkeletonEye(Shape partShape) {
+        super(partShape);
+        
     }
 
     @Override
