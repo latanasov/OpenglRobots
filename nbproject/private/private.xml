@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/SkeletonArm.java</file>
             <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/RobotRace.java</file>
-            <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/SkeletonLeg.java</file>
+            <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/SkeletonPart.java</file>
+            <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/SkeletonEye.java</file>
             <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/Robot.java</file>
+            <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/SkeletonHead.java</file>
+            <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/pShape.java</file>
             <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/RobotSkeleton.java</file>
             <file>file:/C:/Users/s116525/Desktop/2iv60/branches/Work/RobotRace/src/robotrace/body/SkeletonBodyCore.java</file>
         </group>
