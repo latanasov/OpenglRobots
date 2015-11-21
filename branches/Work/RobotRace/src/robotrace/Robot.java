@@ -8,7 +8,6 @@ import static javax.media.opengl.GL.GL_LINES;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 import robotrace.body.SkeletonPart;
-import robotrace.shape.ComplexShape;
 import robotrace.shape.Shape;
 import robotrace.shape.ShapeEnum;
 import static robotrace.shape.ShapeEnum.ComplexShape;
@@ -62,7 +61,7 @@ class Robot {
         
         if (stickFigure)
         {
-            /*
+            
             // draw stcik robot
             Vector headPos = new Vector(0,0,0);
             Vector bodyPos = new Vector(0,0,0);
@@ -72,18 +71,18 @@ class Robot {
             Vector rLegPos = new Vector(0,0,0);
             
                     //, lArmPos, rArmPos, lLegPos, rLegPos;
-            headPos = this.Skeleton.head.partPos;
-            bodyPos = this.Skeleton.bodyCore.partPos;
-            lArmPos = this.Skeleton.lArm.partPos;
-            rArmPos = this.Skeleton.rArm.partPos;
-            lLegPos = this.Skeleton.lLeg.partPos;
-            rLegPos = this.Skeleton.rLeg.partPos;
-            */
-            /*
+            headPos =this.Skeleton.head.partShape.shapePos;
+            bodyPos = this.Skeleton.bodyCore.partShape.shapePos;
+           lArmPos = this.Skeleton.lArm.partShape.shapePos;
+            rArmPos = this.Skeleton.rArm.partShape.shapePos;
+            lLegPos = this.Skeleton.lLeg.partShape.shapePos;
+            rLegPos = this.Skeleton.rLeg.partShape.shapePos;
+            
+            
             // draw head, body, arm and leg
             gl.glPushMatrix();
                gl.glTranslatef((float)headPos.x, (float)headPos.y, (float)headPos.z);
-               glut.glutSolidSphere(0.4, 32, 32);
+              glut.glutSolidSphere(0.4, 32, 32);
             gl.glPopMatrix();
 
             this.drawLine(gl, headPos, bodyPos);
@@ -91,11 +90,11 @@ class Robot {
             this.drawLine(gl, bodyPos, lLegPos);
             this.drawLine(gl, bodyPos, rLegPos);
             
-            //lArmPos = this.Skeleton.lArm.partPos;
-            //rArmPos = this.Skeleton.rArm.partPos;
-            //lLegPos = this.Skeleton.lLeg.partPos;
+           // lArmPos = this.Skeleton.lArm.partPos;
+           // rArmPos = this.Skeleton.rArm.partPos;
+          //  lLegPos = this.Skeleton.lLeg.partPos;
             //rLegPos = this.Skeleton.rLeg.partPos;
-            */
+            
         
         }
         else

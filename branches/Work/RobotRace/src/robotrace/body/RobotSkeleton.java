@@ -42,8 +42,8 @@ public class RobotSkeleton {
       Vector headPosition= new Vector (0,0,1.2);
       Shape headShape= new Shape(ShapeEnum.Sphere,Color.YELLOW,headPosition);
       headShape.radius=1;
-      SkeletonHead robotHead=new SkeletonHead(headShape);
-      bodyComposition.add(robotHead);
+      this.head =new SkeletonHead(headShape);
+      bodyComposition.add(head);
       
       
       /***Build EYE***/
@@ -60,8 +60,8 @@ public class RobotSkeleton {
       Eye.ShapeCollection.add(eyep1);
       Eye.ShapeCollection.add(eyep2);
 
-      SkeletonEye robotEye=new SkeletonEye(Eye);
-      bodyComposition.add(robotEye);
+      this.lEye =new SkeletonEye(Eye);
+      bodyComposition.add(lEye);
       
       /***Build Body***/
       Vector bodyShap1Position= new Vector (0,0,0);
@@ -81,8 +81,8 @@ public class RobotSkeleton {
       robotBody.ShapeCollection.add(bodyShape1);
       robotBody.ShapeCollection.add(bodyShape2);
 
-      SkeletonBodyCore robotBodyCore=new SkeletonBodyCore(robotBody);
-      bodyComposition.add(robotBodyCore);
+      this.bodyCore =new SkeletonBodyCore(robotBody);
+      bodyComposition.add(bodyCore);
        
        
      /***Build leftLeg***/
@@ -109,7 +109,7 @@ public class RobotSkeleton {
       leftLeg.ShapeCollection.add(leftLegp2);
       leftLeg.ShapeCollection.add(leftLegp3);
       
-      SkeletonLeg lLeg=new SkeletonLeg(leftLeg);
+      this.lLeg=new SkeletonLeg(leftLeg);
       bodyComposition.add(lLeg);
        
 
@@ -136,14 +136,14 @@ public class RobotSkeleton {
       rleftLeg.ShapeCollection.add(rleftLegp1);
       rleftLeg.ShapeCollection.add(rleftLegp2);
       rleftLeg.ShapeCollection.add(rleftLegp3);
-      SkeletonLeg rLeg=new SkeletonLeg(rleftLeg);
+      this.rLeg =new SkeletonLeg(rleftLeg);
       bodyComposition.add(rLeg);
       
       // right arm
       Vector rArm1Position= new Vector (0,1.1,0.3);
       Vector rArm2Position= new Vector (0,1.1,-0.8);
       
-      Shape rArm= new Shape(ShapeEnum.ComplexShape,Color.BLUE,rArm1Position);
+      Shape srArm= new Shape(ShapeEnum.ComplexShape,Color.BLUE,rArm1Position);
       Shape rArm1= new Shape(ShapeEnum.Sphere,Color.GREEN,rArm1Position);
       Shape rArm2= new Shape(ShapeEnum.Cyclinder,Color.GREEN,rArm2Position);
            
@@ -151,17 +151,17 @@ public class RobotSkeleton {
       rArm2.radius=0.1;
       rArm2.height=1.1;      
      
-      rArm.ShapeCollection.add(rArm1);
-      rArm.ShapeCollection.add(rArm2);
+      srArm.ShapeCollection.add(rArm1);
+      srArm.ShapeCollection.add(rArm2);
    
-      SkeletonArm robotArm=new SkeletonArm(rArm);
-      bodyComposition.add(robotArm);
+      this.rArm =new SkeletonArm(srArm);
+      bodyComposition.add(rArm);
       
       // left arm
       Vector lArm1Position= new Vector (0,-1.1,0.3);
       Vector lArm2Position= new Vector (0,-1.1,-0.8);
       
-      Shape lArm= new Shape(ShapeEnum.ComplexShape,Color.BLUE,lArm1Position);
+      Shape slArm= new Shape(ShapeEnum.ComplexShape,Color.BLUE,lArm1Position);
       Shape lArm1= new Shape(ShapeEnum.Sphere,Color.GREEN,lArm1Position);
       Shape lArm2= new Shape(ShapeEnum.Cyclinder,Color.GREEN,lArm2Position);
            
@@ -169,11 +169,11 @@ public class RobotSkeleton {
       lArm2.radius=0.1;
       lArm2.height=1.1;      
      
-      lArm.ShapeCollection.add(lArm1);
-      lArm.ShapeCollection.add(lArm2);
+      slArm.ShapeCollection.add(lArm1);
+      slArm.ShapeCollection.add(lArm2);
    
-      SkeletonArm robotlArm=new SkeletonArm(lArm);
-      bodyComposition.add(robotlArm);
+      this.lArm =new SkeletonArm(slArm);
+      bodyComposition.add(lArm);
        
     }
 

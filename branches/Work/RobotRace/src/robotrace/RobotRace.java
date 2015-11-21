@@ -229,7 +229,7 @@ public class RobotRace extends Base {
         
         // Unit box around origin.
        // glut.glutWireCube(1f);
-
+/*
         // Move in x-direction.
         gl.glTranslatef(2f, 0f, 0f);
         
@@ -240,7 +240,7 @@ public class RobotRace extends Base {
         gl.glScalef(1f, 1f, 2f);
 
         // Translated, rotated, scaled box.
-       // glut.glutWireCube(1f);
+       // glut.glutWireCube(1f);*/
     }
     
     /**
