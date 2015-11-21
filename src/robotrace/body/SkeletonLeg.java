@@ -5,8 +5,10 @@
  */
 package robotrace.body;
 
+
 import javafx.geometry.Point3D;
 import robotrace.Vector;
+import robotrace.shape.Shape;
 
 /**
  *
@@ -16,9 +18,8 @@ public class SkeletonLeg extends SkeletonPart {
 
     final Vector partOffset = new Vector(0, 0.25, -1);
 
-    public SkeletonLeg(pShape partShape, Vector oPos) {
-        super(partShape, oPos);
-        this.partPos = this.oPos.add(this.partOffset);
+    public SkeletonLeg(Shape partShape) {
+        super(partShape);
 
     }
 
@@ -28,7 +29,6 @@ public class SkeletonLeg extends SkeletonPart {
 
     @Override
     public void setPos(Vector newPos) {
-        this.partPos=newPos;
     }
 
 }

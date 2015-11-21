@@ -7,6 +7,7 @@ package robotrace.body;
 
 
 import robotrace.Vector;
+import robotrace.shape.Shape;
 
 /**
  *
@@ -16,9 +17,9 @@ public class SkeletonBodyCore extends SkeletonPart {
         final Vector partOffset=new Vector(0,0,0);
 
     
-    public SkeletonBodyCore(pShape partShape, Vector oPos) {
-        super(partShape, oPos);
-                this.partPos=this.oPos.add(this.partOffset);
+    public SkeletonBodyCore(Shape partShape) {
+        super(partShape);
+               
 
     }
 
