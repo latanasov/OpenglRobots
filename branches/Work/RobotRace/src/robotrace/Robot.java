@@ -6,10 +6,14 @@ import java.nio.FloatBuffer;
 import javafx.geometry.Point3D;
 import javafx.scene.paint.Color;
 import static javax.media.opengl.GL.GL_FRONT;
+import static javax.media.opengl.GL.GL_FRONT_AND_BACK;
 import static javax.media.opengl.GL.GL_LINES;
 import javax.media.opengl.GL2;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_AMBIENT;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_DIFFUSE;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_LIGHT0;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_SHININESS;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_SPECULAR;
 import javax.media.opengl.glu.GLU;
 import robotrace.body.SkeletonPart;
 import robotrace.shape.Shape;
@@ -57,16 +61,18 @@ class Robot {
     
     public void draw(GL2 gl, GLU glu, GLUT glut, boolean stickFigure, float tAnim) {
         
-        gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, FloatBuffer.wrap(this.material.specular));
+        gl.glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, FloatBuffer.wrap(this.material.ambient));
+        gl.glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, FloatBuffer.wrap(this.material.diffuse));
+        gl.glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, FloatBuffer.wrap(this.material.specular));
+        gl.glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, this.material.shininess); 
+        
+        //gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, this.material.shininess);
+        
         Point3D startPos = new Point3D(this.position.x,this.position.y,this.position.z);
-        
-        
-        
+               
         // Get the start point of the robot
         startPos.add(this.position.x, this.position.y, this.position.z);
-        
-    
-        
+         
         if (stickFigure)
         {
             
@@ -78,10 +84,10 @@ class Robot {
             Vector lLegPos = new Vector(0,0,0);
             Vector rLegPos = new Vector(0,0,0);
             
-                    //, lArmPos, rArmPos, lLegPos, rLegPos;
+            //Get positions of different parts of robot
             headPos =this.Skeleton.head.partShape.shapePos;
             bodyPos = this.Skeleton.bodyCore.partShape.shapePos;
-           lArmPos = this.Skeleton.lArm.partShape.shapePos;
+            lArmPos = this.Skeleton.lArm.partShape.shapePos;
             rArmPos = this.Skeleton.rArm.partShape.shapePos;
             lLegPos = this.Skeleton.lLeg.partShape.shapePos;
             rLegPos = this.Skeleton.rLeg.partShape.shapePos;
@@ -90,64 +96,50 @@ class Robot {
             // draw head, body, arm and leg
             gl.glPushMatrix();
                gl.glTranslatef((float)headPos.x, (float)headPos.y, (float)headPos.z);
-              glut.glutSolidSphere(0.4, 32, 32);
+               glut.glutSolidSphere(0.4, 32, 32);
             gl.glPopMatrix();
 
             this.drawLine(gl, headPos, bodyPos);
             this.drawLine(gl, lArmPos, rArmPos);
             this.drawLine(gl, bodyPos, lLegPos);
-            this.drawLine(gl, bodyPos, rLegPos);
-            
-           // lArmPos = this.Skeleton.lArm.partPos;
-           // rArmPos = this.Skeleton.rArm.partPos;
-          //  lLegPos = this.Skeleton.lLeg.partPos;
-            //rLegPos = this.Skeleton.rLeg.partPos;
-            
+            this.drawLine(gl, bodyPos, rLegPos);           
         
         }
         else
         {
-            // draw robot
-        
-        
-        // code goes here ...
-      
-        
-        for (int i=0; i < this.Skeleton.bodyComposition.size(); i++)
-        { 
-             gl.glPushMatrix();
-           SkeletonPart tempPart;
-           tempPart=this.Skeleton.bodyComposition.get(i);
-           drawPart(gl,glut,tempPart.partShape);
-          
-              gl.glPopMatrix();
-
-        }
-
-        
-        
+           // draw robot
+           for (int i=0; i < this.Skeleton.bodyComposition.size(); i++)
+           { 
+                gl.glPushMatrix();
+                   SkeletonPart tempPart;
+                   tempPart=this.Skeleton.bodyComposition.get(i);
+                   drawPart(gl,glut,tempPart.partShape);
+                gl.glPopMatrix();
+        }       
     }
     }
+    
     void drawPart(GL2 gl,GLUT glut, Shape partShape){
                    
     gl.glPushMatrix();
 
             if (partShape.toBeRotated)
             {
-            this.rotate3D(gl, this.position ,partShape.shapePos ,35);
-               //this.scale3D(gl, 2, 1, 1, tempPart.partPos);
+                this.rotate3D(gl, this.position ,partShape.shapePos ,35);
             }
             
-             if (partShape.toBeScaled)
+            if (partShape.toBeScaled)
             {
                this.scale3D(gl, (float)partShape.getScale().x, (float)partShape.getScale().y, (float)partShape.getScale().z);
             }
-             if(partShape.ShapeType!=ComplexShape)
-             {
-                  gl.glColor3d(partShape.getColor().getRed(),partShape.getColor().getGreen(),partShape.getColor().getBlue());
-                  gl.glTranslatef((float)partShape.shapePos.x,(float) partShape.shapePos.y, (float) partShape.shapePos.z); 
-             }
-         switch (partShape.ShapeType) {
+            
+            if(partShape.ShapeType!=ComplexShape)
+            {
+                gl.glColor3d(partShape.getColor().getRed(),partShape.getColor().getGreen(),partShape.getColor().getBlue());
+                gl.glTranslatef((float)partShape.shapePos.x,(float) partShape.shapePos.y, (float) partShape.shapePos.z); 
+            }
+         
+            switch (partShape.ShapeType) {
                
             // draw head
             case Cube:  
