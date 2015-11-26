@@ -2,10 +2,14 @@ package robotrace;
 
 import robotrace.body.RobotSkeleton;
 import com.jogamp.opengl.util.gl2.GLUT;
+import java.nio.FloatBuffer;
 import javafx.geometry.Point3D;
 import javafx.scene.paint.Color;
+import static javax.media.opengl.GL.GL_FRONT;
 import static javax.media.opengl.GL.GL_LINES;
 import javax.media.opengl.GL2;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_DIFFUSE;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_LIGHT0;
 import javax.media.opengl.glu.GLU;
 import robotrace.body.SkeletonPart;
 import robotrace.shape.Shape;
@@ -43,13 +47,17 @@ class Robot {
 
     }
 
+    Robot(float[] diffuse) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     
     public void draw(GL2 gl, GLU glu, GLUT glut, boolean stickFigure, float tAnim) {
         
-        
+        gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, FloatBuffer.wrap(this.material.diffuse));
         Point3D startPos = new Point3D(this.position.x,this.position.y,this.position.z);
         
         
