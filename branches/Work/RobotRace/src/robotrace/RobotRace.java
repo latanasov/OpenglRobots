@@ -99,6 +99,8 @@ public class RobotRace extends Base {
         robots[1] = new Robot(Material.SILVER
             /* add other parameters that characterize this robot */);
         
+   
+        
         // Initialize robot 2
         robots[2] = new Robot(Material.WOOD
             /* add other parameters that characterize this robot */);
