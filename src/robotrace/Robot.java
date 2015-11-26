@@ -57,7 +57,7 @@ class Robot {
     
     public void draw(GL2 gl, GLU glu, GLUT glut, boolean stickFigure, float tAnim) {
         
-        gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, FloatBuffer.wrap(this.material.diffuse));
+        gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, FloatBuffer.wrap(this.material.specular));
         Point3D startPos = new Point3D(this.position.x,this.position.y,this.position.z);
         
         
