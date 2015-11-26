@@ -1,8 +1,17 @@
 package robotrace;
 
+import com.jogamp.common.nio.Buffers;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import javax.media.opengl.GL;
+import static javax.media.opengl.GL.GL_FLOAT;
 import static javax.media.opengl.GL.GL_LINES;
 import static javax.media.opengl.GL2.*;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_DIFFUSE;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_LIGHT0;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_LIGHTING;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_POSITION;
+import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_SMOOTH;
 
 /**
  * Handles all of the RobotRace graphics functionality,
@@ -76,14 +85,16 @@ public class RobotRace extends Base {
      * camera, track, and terrain.
      */
     public RobotRace() {
-        
+     
         // Create a new array of four robots
         robots = new Robot[4];
-        
+       
         // Initialize robot 0
         robots[0] = new Robot(Material.GOLD
             /* add other parameters that characterize this robot */);
-        
+       
+         
+
         // Initialize robot 1
         robots[1] = new Robot(Material.SILVER
             /* add other parameters that characterize this robot */);
@@ -130,6 +141,8 @@ public class RobotRace extends Base {
         
         // Initialize the terrain
         terrain = new Terrain();
+        
+        
     }
     
     /**
@@ -138,7 +151,7 @@ public class RobotRace extends Base {
      */
     @Override
     public void initialize() {
-		
+
         // Enable blending.
         gl.glEnable(GL_BLEND);
         gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -241,6 +254,17 @@ public class RobotRace extends Base {
 
         // Translated, rotated, scaled box.
        // glut.glutWireCube(1f);*/
+        float lightPos[] = {(float) (camera.eye.x()+0.1),(float) camera.eye.y(),(float) camera.eye.z(),0};
+        float pinkColor[] = {1,(float) 0.5, (float)0.5, 1};
+        float ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+        
+        gl.glShadeModel(GL_SMOOTH);
+        gl.glEnable(GL_LIGHTING);
+        gl.glEnable(GL_LIGHT0);
+                
+        gl.glLightfv(GL_LIGHT0, GL_AMBIENT, FloatBuffer.wrap(ambient));        
+        gl.glLightfv(GL_LIGHT0, GL_POSITION,FloatBuffer.wrap(lightPos));
+
     }
     
     /**
@@ -294,6 +318,11 @@ public class RobotRace extends Base {
         gl.glPopMatrix();
         
         gl.glColor3f(1f, 0f, 1f);
+        
+     
+        
+
+        
     }
  
     /**
@@ -303,5 +332,7 @@ public class RobotRace extends Base {
     public static void main(String args[]) {
         RobotRace robotRace = new RobotRace();
         robotRace.run();
+        
+        
     } 
 }

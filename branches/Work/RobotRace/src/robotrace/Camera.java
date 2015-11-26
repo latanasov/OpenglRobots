@@ -63,6 +63,8 @@ class Camera {
                             gs.vDist * Math.sin(gs.phi)
                            ); 
           eye.add(center); 
+          
+
 
 
     }
