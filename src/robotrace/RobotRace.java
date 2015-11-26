@@ -256,16 +256,19 @@ public class RobotRace extends Base {
 
         // Translated, rotated, scaled box.
        // glut.glutWireCube(1f);*/
-        float lightPos[] = {(float) (camera.eye.x()+0.1),(float) camera.eye.y(),(float) camera.eye.z(),0};
-        float pinkColor[] = {1,(float) 0.5, (float)0.5, 1};
-        float ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
         
+        
+        float lightPos[] = {(float) (camera.eye.x()+0.1),(float) camera.eye.y(),(float) camera.eye.z(),0};
+        
+        // use smooth shading
         gl.glShadeModel(GL_SMOOTH);
+        // Enable lighting
         gl.glEnable(GL_LIGHTING);
+        // Enable light sources #0
         gl.glEnable(GL_LIGHT0);
-                
-        gl.glLightfv(GL_LIGHT0, GL_AMBIENT, FloatBuffer.wrap(ambient));        
+                       
         gl.glLightfv(GL_LIGHT0, GL_POSITION,FloatBuffer.wrap(lightPos));
+        
 
     }
     
@@ -317,14 +320,7 @@ public class RobotRace extends Base {
         gl.glPushMatrix();        
            gl.glTranslatef(0f, 0f, 1f);
            glut.glutSolidCone(0.05, 0.1, 32, 16);  
-        gl.glPopMatrix();
-        
-        gl.glColor3f(1f, 0f, 1f);
-        
-     
-        
-
-        
+        gl.glPopMatrix();    
     }
  
     /**
