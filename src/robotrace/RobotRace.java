@@ -85,30 +85,21 @@ public class RobotRace extends Base {
      * camera, track, and terrain.
      */
     public RobotRace() {
-     
-  
+
         // Create a new array of four robots
         robots = new Robot[4];
        
         // Initialize robot 0
-        robots[0] = new Robot(Material.GOLD,new Vector(0,0,0)
-            /* add other parameters that characterize this robot */);
-       
-         
+        robots[0] = new Robot(Material.GOLD,new Vector(0,-3,0));
 
         // Initialize robot 1
-        robots[1] = new Robot(Material.SILVER,new Vector(0,-3,0)
-            /* add other parameters that characterize this robot */);
-        
-   
-        
+        robots[1] = new Robot(Material.SILVER,new Vector(0,0,0));
+
         // Initialize robot 2
-        robots[2] = new Robot(Material.WOOD,new Vector(0,3,0)
-            /* add other parameters that characterize this robot */);
+        robots[2] = new Robot(Material.WOOD,new Vector(0,3,0));
 
         // Initialize robot 3
-        robots[3] = new Robot(Material.ORANGE,new Vector(0,6,0)
-            /* add other parameters that characterize this robot */);
+        robots[3] = new Robot(Material.ORANGE,new Vector(0,6,0));
         
         // Initialize the camera
         camera = new Camera();
@@ -144,8 +135,7 @@ public class RobotRace extends Base {
         
         // Initialize the terrain
         terrain = new Terrain();
-        
-        
+    
     }
     
     /**
@@ -163,7 +153,7 @@ public class RobotRace extends Base {
         gl.glEnable(GL_DEPTH_TEST);
         gl.glDepthFunc(GL_LESS);
 		
-	    // Normalize normals.
+	// Normalize normals.
         gl.glEnable(GL_NORMALIZE);
         
         // Enable textures. 
@@ -171,7 +161,7 @@ public class RobotRace extends Base {
         gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
         gl.glBindTexture(GL_TEXTURE_2D, 0);
 		
-	    // Try to load four textures, add more if you like.
+	// Try to load four textures, add more if you like.
         track = loadTexture("track.jpg");
         brick = loadTexture("brick.jpg");
         head = loadTexture("head.jpg");
@@ -190,11 +180,15 @@ public class RobotRace extends Base {
         gl.glMatrixMode(GL_PROJECTION);
         gl.glLoadIdentity();
 
-        // Set the perspective.
-        //// Modify this to meet the requirements in the assignment.
+        // Set the perspective.       
+        // Calculate the correct value for aspect_ratio
+        double aspect_ratio = (float)gs.w / (float)gs.h;
         
-        // fill in correct parameters for gluPerspective
-        glu.gluPerspective(40 , (float)gs.w / (float)gs.h, 0.1*gs.vDist, 10*gs.vDist);
+        // Calculate the correct value for fovy
+        double fovy = Math.toDegrees(2 * Math.atan( (gs.vWidth / (2 * gs.vDist))) / aspect_ratio);
+        
+        // Set correct parameters for gluPerspective
+        glu.gluPerspective(fovy, aspect_ratio, 0.1*gs.vDist, 10*gs.vDist);
     
         // Set camera.
         gl.glMatrixMode(GL_MODELVIEW);
@@ -238,11 +232,14 @@ public class RobotRace extends Base {
         
         // Draw the first robot.
         robots[0].draw(gl, glu, glut, gs.showStick, gs.tAnim);
-         // Draw the second robot.
+        
+        // Draw the second robot.
         robots[1].draw(gl, glu, glut, gs.showStick, gs.tAnim);
-           // Draw the third robot.
+        
+        // Draw the third robot.
         robots[2].draw(gl, glu, glut, gs.showStick, gs.tAnim);
-           // Draw the forth robot.
+        
+        // Draw the forth robot.
         robots[3].draw(gl, glu, glut, gs.showStick, gs.tAnim);
         
         // Draw the race track.
@@ -265,26 +262,32 @@ public class RobotRace extends Base {
 
         // Translated, rotated, scaled box.
        // glut.glutWireCube(1f);*/
+        
+        // Endable light source
         enableLight();
-        
-        
+              
     }
 
+    /* This function is used to endable light source*/
     private void enableLight() {
 
+        // Set correct position for light source
         float lightPos[] = {(float) (gs.vDist * Math.cos(gs.theta -10) * Math.cos(gs.phi + 10)), 
                             (float) (gs.vDist * Math.sin(gs.theta -10) * Math.cos(gs.phi + 10)),
                             (float) (gs.vDist * Math.sin(gs.phi + 10))};
         
-
-        // use smooth shading
-        //gl.glShadeModel(GL_SMOOTH);
+        // Use smooth shading
+        gl.glShadeModel(GL_SMOOTH);
+        
         // Enable lighting
         gl.glEnable(GL_LIGHTING);
-        // Enable light sources #0
+        
+        // Enable light source #0
         gl.glEnable(GL_LIGHT0);
         
+        // Position light source 0
         gl.glLightfv(GL_LIGHT0, GL_POSITION,FloatBuffer.wrap(lightPos));
+
     }
     
     /**
@@ -303,7 +306,7 @@ public class RobotRace extends Base {
            gl.glVertex3d(1, 0, 0);
         gl.glEnd();
         
-        // draw the cone, first move to location (1,0,0) and then roated 90
+        // first move to location (1,0,0) and then roated 90 and then draw the cone
         gl.glPushMatrix();
             gl.glTranslatef(1f, 0f, 0f);
             gl.glRotatef(90f, 0f, 1f, 0f);
@@ -317,7 +320,7 @@ public class RobotRace extends Base {
            gl.glVertex3d(0, 1, 0);
         gl.glEnd();
         
-        // draw the cone, first move to location (0,1,0) and then roated -90
+        // first move to location (0,1,0) and then roated -90 and then draw the cone
         gl.glPushMatrix();
             gl.glTranslatef(0f, 1f, 0f);
             gl.glRotatef(-90f, 1f, 0f, 0f);
@@ -331,7 +334,7 @@ public class RobotRace extends Base {
            gl.glVertex3d(0, 0, 1);
         gl.glEnd();
 
-        // draw the cone, first move to location (0,0,1)
+        // first move to location (0,0,1) and then draw the cone
         gl.glPushMatrix();        
            gl.glTranslatef(0f, 0f, 1f);
            glut.glutSolidCone(0.05, 0.1, 32, 16);  
@@ -344,8 +347,6 @@ public class RobotRace extends Base {
      */
     public static void main(String args[]) {
         RobotRace robotRace = new RobotRace();
-        robotRace.run();
-        
-        
+        robotRace.run();    
     } 
 }
