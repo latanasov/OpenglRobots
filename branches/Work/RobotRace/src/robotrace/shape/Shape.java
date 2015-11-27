@@ -15,84 +15,177 @@ import robotrace.Vector;
  * @author lyuat
  */
 public class Shape {
-public ShapeEnum ShapeType;
-private Color shapeColor;
-private float angleOfRotation;
-private Vector vScale;
-public boolean toBeRotated;
-public boolean toBeScaled;
-public Vector shapePos;
-public List<Shape> ShapeCollection=new ArrayList<Shape>();
-public double radius;
-public double height;
+
+    private ShapeEnum ShapeType;
+    private Color shapeColor;
+    private float angleOfRotation;
+    private Vector vScale;
+    private boolean toBeRotated;
+    private boolean toBeScaled;
+    private Vector shapePos;
+    private Vector originPos;
+    private List<Shape> ShapeCollection = new ArrayList<Shape>();
+    private double radius;
+    private double height;
+
+    public Shape(ShapeEnum shapeType, Color shapeColor, Vector pos,Vector opos) {
+        this.ShapeType = shapeType;
+        this.shapeColor = shapeColor;
+        toBeRotated = false;
+        toBeScaled = false;
+        this.originPos=opos;
+        this.shapePos = opos.add(pos);
+    }
 
 
-public Shape(ShapeEnum shapeType,Color shapeColor,Vector pos)
-{
-   this.ShapeType=shapeType;
-   this.shapeColor=shapeColor;
-   toBeRotated=false;
-   toBeScaled=false;
-  this.shapePos=pos;
-}
-public Shape(ShapeEnum shapeType,Color shapeColor,float angleOfRotation,Vector pos)
-{
-   this.ShapeType=shapeType;
-   this.angleOfRotation=angleOfRotation;
-   toBeRotated=true;
-   toBeScaled=false;
-   this.shapePos=pos;
+    public void setColor(Color newColor) {
+        this.shapeColor = newColor;
+    }
 
-}
+    public Color getColor() {
+        return this.shapeColor;
+    }
 
-public Shape(ShapeEnum shapeType,Color shapeColor,Vector vScale,Vector pos)
-{
-   this.ShapeType=shapeType;
-   this.vScale=vScale;
-   toBeRotated=false;
-   toBeScaled=true;
-     this.shapePos=pos;
+    public void setAngleOfRotation(float newAngle) {
+        this.angleOfRotation = newAngle;
+    }
 
-}
-public Shape(ShapeEnum shapeType,Color shapeColor,float angleOfRotation,Vector vScale,Vector pos)
-{
-   this.angleOfRotation=angleOfRotation;
-   this.ShapeType=shapeType;
-   this.vScale=vScale;
-   toBeRotated=true;
-   toBeScaled=true;
-     this.shapePos=pos;
+    public float getAngleOfRotation() {
+        return this.angleOfRotation;
+    }
 
-}
+    public void setScale(Vector newVector) {
+        this.setvScale(newVector);
+    }
 
-public void setColor(Color newColor)
-{
-    this.shapeColor=newColor;
-}
+    public Vector getScale() {
+        return this.getvScale();
+    }
 
-public Color getColor()
-{
-    return this.shapeColor;
-}
+    /**
+     * @return the shapePos
+     */
+    public Vector getShapePos() {
+        return shapePos;
+    }
 
-public void setAngleOfRotation(float newAngle)
-{
-    this.angleOfRotation=newAngle;
-}
+    /**
+     * @param shapePos the shapePos to set
+     */
+    public void setShapePos(Vector shapePos) {
+        this.shapePos = shapePos;
+    }
 
-public float getAngleOfRotation()
-{
-    return this.angleOfRotation;
-}
+    /**
+     * @return the originPos
+     */
+    public Vector getOriginPos() {
+        return originPos;
+    }
 
-public void setScale(Vector newVector)
-{
-    this.vScale=newVector;
-}
+    /**
+     * @param originPos the originPos to set
+     */
+    public void setOriginPos(Vector originPos) {
+        this.originPos = originPos;
+    }
 
-public Vector getScale()
-{
-    return this.vScale;
-}
+    /**
+     * @return the vScale
+     */
+    public Vector getvScale() {
+        return vScale;
+    }
+
+    /**
+     * @param vScale the vScale to set
+     */
+    public void setvScale(Vector vScale) {
+        this.vScale = vScale;
+    }
+
+    /**
+     * @return the toBeRotated
+     */
+    public boolean isToBeRotated() {
+        return toBeRotated;
+    }
+
+    /**
+     * @param toBeRotated the toBeRotated to set
+     */
+    public void setToBeRotated(boolean toBeRotated) {
+        this.toBeRotated = toBeRotated;
+    }
+
+    /**
+     * @return the toBeScaled
+     */
+    public boolean isToBeScaled() {
+        return toBeScaled;
+    }
+
+    /**
+     * @param toBeScaled the toBeScaled to set
+     */
+    public void setToBeScaled(boolean toBeScaled) {
+        this.toBeScaled = toBeScaled;
+    }
+
+    /**
+     * @return the radius
+     */
+    public double getRadius() {
+        return radius;
+    }
+
+    /**
+     * @param radius the radius to set
+     */
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    /**
+     * @return the height
+     */
+    public double getHeight() {
+        return height;
+    }
+
+    /**
+     * @param height the height to set
+     */
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    /**
+     * @return the ShapeType
+     */
+    public ShapeEnum getShapeType() {
+        return ShapeType;
+    }
+
+    /**
+     * @param ShapeType the ShapeType to set
+     */
+    public void setShapeType(ShapeEnum ShapeType) {
+        this.ShapeType = ShapeType;
+    }
+
+    /**
+     * @return the ShapeCollection
+     */
+    public List<Shape> getShapeCollection() {
+        return ShapeCollection;
+    }
+
+    /**
+     * @param ShapeCollection the ShapeCollection to set
+     */
+    public void setShapeCollection(List<Shape> ShapeCollection) {
+        this.ShapeCollection = ShapeCollection;
+    }
 
 }
