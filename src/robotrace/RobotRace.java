@@ -86,27 +86,28 @@ public class RobotRace extends Base {
      */
     public RobotRace() {
      
+  
         // Create a new array of four robots
         robots = new Robot[4];
        
         // Initialize robot 0
-        robots[0] = new Robot(Material.GOLD
+        robots[0] = new Robot(Material.GOLD,new Vector(0,0,0)
             /* add other parameters that characterize this robot */);
        
          
 
         // Initialize robot 1
-        robots[1] = new Robot(Material.SILVER
+        robots[1] = new Robot(Material.SILVER,new Vector(0,-3,0)
             /* add other parameters that characterize this robot */);
         
    
         
         // Initialize robot 2
-        robots[2] = new Robot(Material.WOOD
+        robots[2] = new Robot(Material.WOOD,new Vector(0,3,0)
             /* add other parameters that characterize this robot */);
 
         // Initialize robot 3
-        robots[3] = new Robot(Material.ORANGE
+        robots[3] = new Robot(Material.ORANGE,new Vector(0,6,0)
             /* add other parameters that characterize this robot */);
         
         // Initialize the camera
@@ -235,6 +236,12 @@ public class RobotRace extends Base {
         
         // Draw the first robot.
         robots[0].draw(gl, glu, glut, gs.showStick, gs.tAnim);
+         // Draw the second robot.
+        robots[1].draw(gl, glu, glut, gs.showStick, gs.tAnim);
+           // Draw the third robot.
+        robots[2].draw(gl, glu, glut, gs.showStick, gs.tAnim);
+           // Draw the forth robot.
+        robots[3].draw(gl, glu, glut, gs.showStick, gs.tAnim);
         
         // Draw the race track.
         raceTracks[gs.trackNr].draw(gl, glu, glut);

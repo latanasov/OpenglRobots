@@ -15,12 +15,8 @@ import robotrace.Vector;
  */
 public class SkeletonHead extends SkeletonPart {
 
-   
-
     public SkeletonHead(Shape partShape) {
         super(partShape);
-        
-      
 
     }
 
