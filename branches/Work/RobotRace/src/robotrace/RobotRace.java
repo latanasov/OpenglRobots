@@ -191,9 +191,11 @@ public class RobotRace extends Base {
         gl.glLoadIdentity();
 
         // Set the perspective.
-        // Modify this to meet the requirements in the assignment.
-        glu.gluPerspective(40, (float)gs.w / (float)gs.h, 0.1, 100);
+        //// Modify this to meet the requirements in the assignment.
         
+        // fill in correct parameters for gluPerspective
+        glu.gluPerspective(40 , (float)gs.w / (float)gs.h, 0.1*gs.vDist, 10*gs.vDist);
+    
         // Set camera.
         gl.glMatrixMode(GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -263,20 +265,26 @@ public class RobotRace extends Base {
 
         // Translated, rotated, scaled box.
        // glut.glutWireCube(1f);*/
+        enableLight();
         
         
-        float lightPos[] = {(float) (camera.eye.x()+0.1),(float) camera.eye.y(),(float) camera.eye.z(),0};
+    }
+
+    private void enableLight() {
+
+        float lightPos[] = {(float) (gs.vDist * Math.cos(gs.theta -10) * Math.cos(gs.phi + 10)), 
+                            (float) (gs.vDist * Math.sin(gs.theta -10) * Math.cos(gs.phi + 10)),
+                            (float) (gs.vDist * Math.sin(gs.phi + 10))};
         
+
         // use smooth shading
-        gl.glShadeModel(GL_SMOOTH);
+        //gl.glShadeModel(GL_SMOOTH);
         // Enable lighting
         gl.glEnable(GL_LIGHTING);
         // Enable light sources #0
         gl.glEnable(GL_LIGHT0);
-                       
-        gl.glLightfv(GL_LIGHT0, GL_POSITION,FloatBuffer.wrap(lightPos));
         
-
+        gl.glLightfv(GL_LIGHT0, GL_POSITION,FloatBuffer.wrap(lightPos));
     }
     
     /**

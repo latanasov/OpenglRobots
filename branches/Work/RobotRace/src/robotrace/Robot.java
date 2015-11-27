@@ -78,38 +78,42 @@ class Robot {
 
         if (stickFigure) {
 
-            // draw stcik robot
-            Vector headPos = new Vector(0, 0, 0);
-            Vector bodyPos = new Vector(0, 0, 0);
-            Vector lArmPos = new Vector(0, 0, 0);
-            Vector rArmPos = new Vector(0, 0, 0);
-            Vector lLegPos = new Vector(0, 0, 0);
-            Vector rLegPos = new Vector(0, 0, 0);
-
-            //Get positions of different parts of robot
-            headPos = this.Skeleton.head.partShape.getShapePos();
-            bodyPos = this.Skeleton.bodyCore.partShape.getShapePos();
-            lArmPos = this.Skeleton.lArm.partShape.getShapePos();
-            rArmPos = this.Skeleton.rArm.partShape.getShapePos();
-            lLegPos = this.Skeleton.lLeg.partShape.getShapePos();
-            rLegPos = this.Skeleton.rLeg.partShape.getShapePos();
-
-            // draw head, body, arm and leg
-            gl.glPushMatrix();
-            gl.glTranslatef((float) headPos.x, (float) headPos.y, (float) headPos.z);
-            glut.glutSolidSphere(0.4, 32, 32);
-            gl.glPopMatrix();
-
-            this.drawLine(gl, headPos, bodyPos);
-            this.drawLine(gl, lArmPos, rArmPos);
-            this.drawLine(gl, bodyPos, lLegPos);
-            this.drawLine(gl, bodyPos, rLegPos);
+            drawStickRobot(gl, glut);
 
         } else {
             
             drawRobot(gl,glut);
             
         }
+    }
+
+    private void drawStickRobot(GL2 gl, GLUT glut) {
+        // draw stcik robot
+        Vector headPos = new Vector(0, 0, 0);
+        Vector bodyPos = new Vector(0, 0, 0);
+        Vector lArmPos = new Vector(0, 0, 0);
+        Vector rArmPos = new Vector(0, 0, 0);
+        Vector lLegPos = new Vector(0, 0, 0);
+        Vector rLegPos = new Vector(0, 0, 0);
+        
+        //Get positions of different parts of robot
+        headPos = this.Skeleton.head.partShape.getShapePos();
+        bodyPos = this.Skeleton.bodyCore.partShape.getShapePos();
+        lArmPos = this.Skeleton.lArm.partShape.getShapePos();
+        rArmPos = this.Skeleton.rArm.partShape.getShapePos();
+        lLegPos = this.Skeleton.lLeg.partShape.getShapePos();
+        rLegPos = this.Skeleton.rLeg.partShape.getShapePos();
+        
+        // draw head, body, arm and leg
+        gl.glPushMatrix();
+        gl.glTranslatef((float) headPos.x, (float) headPos.y, (float) headPos.z);
+        glut.glutSolidSphere(0.4, 32, 32);
+        gl.glPopMatrix();
+        
+        this.drawLine(gl, headPos, bodyPos);
+        this.drawLine(gl, lArmPos, rArmPos);
+        this.drawLine(gl, bodyPos, lLegPos);
+        this.drawLine(gl, bodyPos, rLegPos);
     }
 
     void drawRobot(GL2 gl, GLUT glut)
