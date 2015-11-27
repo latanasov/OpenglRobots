@@ -54,17 +54,17 @@ class Camera {
      */
     private void setDefaultMode(GlobalState gs) {
         // Set position for camera
-          center = gs.cnt; 
-          up = Vector.Z; 
+        center = gs.cnt; 
+        up = Vector.Z; 
         
-          //Calculate Eye x y z
-          eye = new Vector(
-                            gs.vDist * Math.cos(gs.theta) * Math.cos(gs.phi), 
-                            gs.vDist * Math.sin(gs.theta) * Math.cos(gs.phi), 
-                            gs.vDist * Math.sin(gs.phi)
-                           ); 
-          eye.add(center); 
-
+        //Calculate Eye x y z
+        eye = new Vector(
+                         gs.vDist * Math.cos(gs.theta) * Math.cos(gs.phi), 
+                         gs.vDist * Math.sin(gs.theta) * Math.cos(gs.phi), 
+                         gs.vDist * Math.sin(gs.phi)
+                        ); 
+        
+        eye.add(center); 
     }
 
     /**
