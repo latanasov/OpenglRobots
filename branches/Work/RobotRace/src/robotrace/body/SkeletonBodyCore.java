@@ -5,7 +5,6 @@
  */
 package robotrace.body;
 
-
 import robotrace.Vector;
 import robotrace.shape.Shape;
 
@@ -13,24 +12,22 @@ import robotrace.shape.Shape;
  *
  * @author lyuat
  */
+/**
+ * Class representation of BodyCore*
+ */
 public class SkeletonBodyCore extends SkeletonPart {
-        final Vector partOffset=new Vector(0,0,0);
 
-    
     public SkeletonBodyCore(Shape partShape) {
         super(partShape);
-               
 
     }
 
+    /**
+     * TODO provide own implementation of animation *
+     */
     @Override
-    public void calcInitPos( ) {
+    public void Animate(Vector newPos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setPos(Vector newPos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

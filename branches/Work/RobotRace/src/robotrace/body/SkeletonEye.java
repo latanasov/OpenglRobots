@@ -12,22 +12,22 @@ import robotrace.shape.Shape;
  *
  * @author s116525
  */
-public class SkeletonEye extends SkeletonPart{
+/**
+ * Class representation of eye*
+ */
+public class SkeletonEye extends SkeletonPart {
 
-    
     public SkeletonEye(Shape partShape) {
         super(partShape);
-        
+
     }
 
+    /**
+     * TODO provide own implementation of animation *
+     */
     @Override
-    public void calcInitPos() {
+    public void Animate(Vector newPos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setPos(Vector newPos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
