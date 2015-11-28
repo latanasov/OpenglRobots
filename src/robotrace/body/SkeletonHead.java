@@ -13,6 +13,9 @@ import robotrace.Vector;
  *
  * @author lyuat
  */
+/**
+ * Class representation of head*
+ */
 public class SkeletonHead extends SkeletonPart {
 
     public SkeletonHead(Shape partShape) {
@@ -20,13 +23,11 @@ public class SkeletonHead extends SkeletonPart {
 
     }
 
+    /**
+     * TODO provide own implementation of animation *
+     */
     @Override
-    public void calcInitPos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setPos(Vector newPos) {
+    public void Animate(Vector newPos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

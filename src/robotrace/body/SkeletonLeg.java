@@ -5,7 +5,6 @@
  */
 package robotrace.body;
 
-
 import javafx.geometry.Point3D;
 import robotrace.Vector;
 import robotrace.shape.Shape;
@@ -13,6 +12,9 @@ import robotrace.shape.Shape;
 /**
  *
  * @author lyuat
+ */
+/**
+ * Class Representation of leg*
  */
 public class SkeletonLeg extends SkeletonPart {
 
@@ -23,12 +25,12 @@ public class SkeletonLeg extends SkeletonPart {
 
     }
 
+    /**
+     * TODO provide own implementation of animation *
+     */
     @Override
-    public void calcInitPos() {
-    }
-
-    @Override
-    public void setPos(Vector newPos) {
+    public void Animate(Vector newPos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

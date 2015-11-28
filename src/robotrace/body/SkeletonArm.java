@@ -12,22 +12,22 @@ import robotrace.shape.Shape;
  *
  * @author lyuat
  */
+/**
+ * Class representation of Arm*
+ */
 public class SkeletonArm extends SkeletonPart {
-
-    final Vector partOffset = new Vector(0, 1, 0.5);
 
     public SkeletonArm(Shape partShape) {
         super(partShape);
-       
 
     }
 
+    /**
+     * TODO provide own implementation of animation *
+     */
     @Override
-    public void calcInitPos() {
+    public void Animate(Vector newPos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-   public void setPos(Vector newPos) {
-    }
 }

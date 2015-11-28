@@ -9,11 +9,14 @@ package robotrace.shape;
  *
  * @author lyuat
  */
+/**
+ * Enumeration which defines different types of shapes ComplexShape is a
+ * collection of multiple shapes*
+ */
 public enum ShapeEnum {
-    Cube, 
-    Conus, 
+    Cube,
+    Conus,
     Sphere,
     Cyclinder,
     ComplexShape
 }
-
