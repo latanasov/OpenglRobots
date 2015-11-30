@@ -38,7 +38,7 @@ class Robot {
     private final Material material;
 
     /**
-     * The material from which this robot is built.
+     * The robot skeleton.
      */
     private final RobotSkeleton Skeleton;
 
@@ -52,25 +52,24 @@ class Robot {
 
         // code goes here ...
         this.Skeleton = new RobotSkeleton(position);
+        //Initialize the robot skeleton
         this.Skeleton.initSkeleton();
 
     }
 
-    Robot(float[] diffuse) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     /**
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, boolean stickFigure, float tAnim) {
 
+        //Apply the matterials 
         gl.glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, FloatBuffer.wrap(this.material.ambient));
         gl.glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, FloatBuffer.wrap(this.material.diffuse));
         gl.glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, FloatBuffer.wrap(this.material.specular));
         gl.glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, this.material.shininess);
 
-        //gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, this.material.shininess);
         Point3D startPos = new Point3D(this.position.x, this.position.y, this.position.z);
 
         // Get the start point of the robot
@@ -118,19 +117,21 @@ class Robot {
 
     void drawRobot(GL2 gl, GLUT glut)
     {
-        // draw robot
+        //Iterate through robot parts
             for (int i = 0; i < this.Skeleton.bodyComposition.size(); i++) {
 
                 SkeletonPart tempPart;
                 tempPart = this.Skeleton.bodyComposition.get(i);
-
+                 //If the part has shapes of type ComplexShape iterate through each shape
                 if (tempPart.partShape.getShapeType() == ComplexShape) {
                     for (int j = 0; j < tempPart.partShape.getShapeCollection().size(); j++) {
+                        //Draw the part
                         drawPart(gl, glut, tempPart.partShape.getShapeCollection().get(j));
 
                     }
 
                 } else {
+                    //Draw the part
                     drawPart(gl, glut, tempPart.partShape);
                 }
 
@@ -140,15 +141,15 @@ class Robot {
         
 
         gl.glPushMatrix();
-
+        //Check if the shape has to be rotated and if yes apply rotation
         if (partShape.isToBeRotated()) {
             this.rotate3D(gl, this.position, partShape.getShapePos(), partShape.getAngleOfRotation());
         }
-
+         //Check if the shape has to be rotated and if yes apply rotation
         if (partShape.isToBeScaled()) {
             this.scale3D(gl, (float) partShape.getScale().x, (float) partShape.getScale().y, (float) partShape.getScale().z);
         }
-
+        
         if (partShape.getShapeType() != ComplexShape) {
             gl.glColor3d(partShape.getColor().getRed(), partShape.getColor().getGreen(), partShape.getColor().getBlue());
             gl.glTranslatef((float) partShape.getShapePos().x, (float) partShape.getShapePos().y, (float) partShape.getShapePos().z);
@@ -156,20 +157,20 @@ class Robot {
 
         switch (partShape.getShapeType()) {
 
-            // draw head
+            //If shape is cube draw cube
             case Cube:
 
                 glut.glutSolidCube(1);
                 break;
 
-            // draw body
+            //If shape is sphere draw sphere
             case Sphere:
-                glut.glutSolidSphere(partShape.getRadius(), 100, 100);
+                glut.glutSolidSphere(partShape.getRadius(), 60, 60);
                 break;
 
-            // draw arm    
+            //If shape is cylynder draw cylinder   
             case Cyclinder:
-                glut.glutSolidCylinder(partShape.getRadius(), partShape.getHeight(), 100, 100);
+                glut.glutSolidCylinder(partShape.getRadius(), partShape.getHeight(), 60, 60);
                 break;
           //  case ComplexShape:
 
@@ -189,7 +190,6 @@ class Robot {
     }
 
     void scale3D(GL2 gl, float sx, float sy, float sz) {
-        // gl.glTranslatef((float)p1.x, (float)p1.y,(float)p1.z);
         gl.glScalef(sx, sy, sz);
     }
 
