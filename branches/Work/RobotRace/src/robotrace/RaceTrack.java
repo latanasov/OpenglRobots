@@ -1,7 +1,10 @@
 package robotrace;
 
 import com.jogamp.opengl.util.gl2.GLUT;
+import static javax.media.opengl.GL.GL_TRIANGLES;
 import javax.media.opengl.GL2;
+import static javax.media.opengl.GL2.GL_QUAD_STRIP;
+import static javax.media.opengl.GL2GL3.GL_QUADS;
 import javax.media.opengl.glu.GLU;
 
 /**
@@ -34,6 +37,48 @@ class RaceTrack {
     public void draw(GL2 gl, GLU glu, GLUT glut) {
         if (null == controlPoints) {
             // draw the test track
+            int NU = 12;
+            int NV = 12;
+            int i,j;
+            
+            int maxdu = 1;
+            int mindu = 0;
+            int maxdv = 1;
+            int mindv = 0;
+            
+            float du = (maxdu - mindu)/NU;
+            float dv = (maxdv - mindv)/NV;
+            
+            for (j=0; j< NV; j++)
+            {
+                gl.glBegin(GL_TRIANGLES);
+                for (i = 0; i<= NU; i++)
+                    
+                {
+                    Vector point=this.getPoint(mindu+i*du);
+                    
+                    Vector direction =this.getTangent(i);
+                    Vector direction2 =this.getTangent(i+1);
+                    //gl.glVertex3f((float)point.x, (float)point.y, (float)point.z);
+                   // gl.glVertex3f((float)point.x+j, (float)point.y+j, (float)point.z);
+                     gl.glVertex3f(i,1,5);
+                     gl.glVertex3f(j,4,3);
+  
+              
+                }
+             gl.glEnd();
+            // gl.glBegin(GL_QUAD_STRIP);
+
+ 
+                    //gl.glVertex3f((float)point.x, (float)point.y, (float)point.z);
+                   // gl.glVertex3f((float)point.x+j, (float)point.y+j, (float)point.z);
+                    //gl.glVertex3f(0,0,0);
+                   
+  
+             //  gl.glEnd();
+            
+            }
+            
         } else {
             // draw the spline track
         }
@@ -66,15 +111,22 @@ class RaceTrack {
     /**
      * Returns a point on the test track at 0 <= t < 1.
      */
-    private Vector getPoint(double t) {
-        return Vector.O; // <- code goes here
+    private Vector getPoint(double t) {   
+        Vector points = this.getDefaultPos(t);
+        return points; 
     }
 
     /**
      * Returns a tangent on the test track at 0 <= t < 1.
      */
     private Vector getTangent(double t) {
-        return Vector.O; // <- code goes here
+        double pi = Math.PI;
+        double x = -20*pi*Math.sin(2*pi*t);
+        double y = 28*pi*Math.cos(2*pi*t);
+        double z = 0;
+        
+        Vector points = new Vector(x,y,z);
+        return points; 
     }
     
     /**
@@ -93,5 +145,15 @@ class RaceTrack {
     private Vector getCubicBezierTangent(double t, Vector P0, Vector P1,
                                                    Vector P2, Vector P3) {
         return Vector.O; // <- code goes here
+    }
+    
+    private Vector getDefaultPos(double t)
+    {
+        double x = 10*Math.cos(2*Math.PI*t);
+        double y = 14*Math.sin(2*Math.PI*t);
+        double z = 1;
+        
+        Vector points = new Vector(x,y,z);
+        return points; 
     }
 }
