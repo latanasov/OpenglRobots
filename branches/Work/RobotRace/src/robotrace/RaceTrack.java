@@ -37,47 +37,61 @@ class RaceTrack {
     public void draw(GL2 gl, GLU glu, GLUT glut) {
         if (null == controlPoints) {
             // draw the test track
-            int NU = 12;
-            int NV = 12;
-            int i,j;
             
-            int maxdu = 1;
-            int mindu = 0;
-            int maxdv = 1;
-            int mindv = 0;
-            
-            float du = (maxdu - mindu)/NU;
-            float dv = (maxdv - mindv)/NV;
-            
-            for (j=0; j< NV; j++)
-            {
-                gl.glBegin(GL_TRIANGLES);
-                for (i = 0; i<= NU; i++)
-                    
-                {
-                    Vector point=this.getPoint(mindu+i*du);
-                    
-                    Vector direction =this.getTangent(i);
-                    Vector direction2 =this.getTangent(i+1);
-                    //gl.glVertex3f((float)point.x, (float)point.y, (float)point.z);
-                   // gl.glVertex3f((float)point.x+j, (float)point.y+j, (float)point.z);
-                     gl.glVertex3f(i,1,5);
-                     gl.glVertex3f(j,4,3);
-  
-              
-                }
-             gl.glEnd();
-            // gl.glBegin(GL_QUAD_STRIP);
+            Vector upperNormal = new Vector(0,0,0);
+            Vector lowerNormal = new Vector(0,0,0);
+            Vector innerNormal = new Vector(0,0,0);
+            Vector outerNormal = new Vector(0,0,0);
 
- 
-                    //gl.glVertex3f((float)point.x, (float)point.y, (float)point.z);
-                   // gl.glVertex3f((float)point.x+j, (float)point.y+j, (float)point.z);
-                    //gl.glVertex3f(0,0,0);
-                   
-  
-             //  gl.glEnd();
+            Vector upperRelectioPoint = new Vector(0,0,1);
+            Vector lowerRelectioPoint = new Vector(0,0,1);
+            int lane = 1;
             
-            }
+            // calculate upper parameters
+            upperNormal.z = 1;
+            upperRelectioPoint.z = 1;
+            
+            // calculate lower parameters
+            lowerNormal.z = -1;
+            lowerRelectioPoint.z = -1;
+            
+            // calculate inner normal
+           
+            // calculate outer normal
+       
+            // lane 1
+            gl.glColor3f(0f, 0f, 0f);
+            drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
+            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+            
+            // lane 2
+            lane = 2;
+            gl.glColor3f(1f, 0f, 0f);
+            drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
+            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+            
+            
+            // lane 3
+            lane = 3;
+            gl.glColor3f(1f, 1f, 0f);
+            drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
+            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+           
+            // lane 4
+            lane = 4;
+            gl.glColor3f(1f, 0f, 1f);
+            drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
+            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+            
+
+           // drawInsideOutsideSurface(gl,normal);
+          gl.glColor3f(1f, 0.5f, 1f);
+          drawInsideOutsideSurface(gl,innerNormal,true,upperRelectioPoint,lowerRelectioPoint);
+          gl.glColor3f(0.5f, 0.5f, 1f);
+          drawInsideOutsideSurface(gl,outerNormal,false,upperRelectioPoint,lowerRelectioPoint);
+        
+             
+       
             
         } else {
             // draw the spline track
@@ -111,8 +125,8 @@ class RaceTrack {
     /**
      * Returns a point on the test track at 0 <= t < 1.
      */
-    private Vector getPoint(double t) {   
-        Vector points = this.getDefaultPos(t);
+    private Vector getPoint(double t, boolean upper) {   
+        Vector points = this.getDefaultPos(t,upper);
         return points; 
     }
 
@@ -147,11 +161,184 @@ class RaceTrack {
         return Vector.O; // <- code goes here
     }
     
-    private Vector getDefaultPos(double t)
+    private Vector getDefaultPos(double t, boolean upper)
     {
-        double x = 10*Math.cos(2*Math.PI*t);
-        double y = 14*Math.sin(2*Math.PI*t);
-        double z = 1;
+        double x,y,z;
+        if (upper)
+        {    
+           x = 10*Math.cos(2*Math.PI*t);
+           y = 14*Math.sin(2*Math.PI*t);
+           z = 1;
+        }   
+        else
+        {
+           x = 10*Math.cos(2*Math.PI*t);
+           y = 14*Math.sin(2*Math.PI*t);
+           z = -1;    
+        }   
+        
+        Vector points = new Vector(x,y,z);
+        return points; 
+    }
+    
+    private Vector calcuateReflectionPoint(Vector P0, Vector P1, int lane)
+    {
+     
+        double distance = 1.22;
+        Vector P2 = new Vector(0,0,0); 
+        
+        P2.x = P1.x-P0.x;
+        P2.y = P1.y-P0.y;
+        P2.z = P1.z-P0.z;
+        
+        double x = P1.x + P2.normalized().x*distance*lane;
+        double y = P1.y + P2.normalized().y*distance*lane;
+        double z = P1.z + P2.normalized().z*distance*lane;
+        
+        Vector points = new Vector(x,y,z);
+        return points; 
+    }
+    
+    private void drawUpperLowerSurface(GL2 gl,Vector normal, boolean upper, Vector relectioPoint, int lane )
+    {
+        int i,j;
+  
+        double NU = 50;
+        double NV = 50;
+        double du = 1/NU;
+        double dv = 1/NV;
+        double number = 0;
+        
+        Vector point1 = new Vector(0,0,0);
+        Vector point2 = new Vector(0,0,0);
+        Vector point3 = new Vector(0,0,0);
+        Vector point4 = new Vector(0,0,0);
+        Vector basePoint1 = new Vector(0,0,0);
+        Vector basePoint2 = new Vector(0,0,0);
+                
+        for (i = 0; i< NU; i++)
+        {
+            number = number + i*du;
+            
+            gl.glBegin(GL_TRIANGLES);  
+            for (j=0; j< NV; j++)
+            {
+                if (lane ==1 )
+                {
+                    point1 = this.getPoint(number+ dv*j,upper);
+                    point2 = this.getPoint(number + dv*(j+1),upper);
+                    point3 = this.calcuateReflectionPoint(relectioPoint,point1,lane);
+                    point4 = this.calcuateReflectionPoint(relectioPoint,point2,lane);
+                    drawTriangles(gl, normal,point1,point2, point3,point4);
+                }
+                else
+                {
+                    basePoint1 = this.getPoint(number+ dv*j,upper);
+                    basePoint2 = this.getPoint(number + dv*(j+1),upper);
+                    point1 = this.calcuateReflectionPoint(relectioPoint,basePoint1,lane-1);
+                    point2 = this.calcuateReflectionPoint(relectioPoint,basePoint2,lane-1);
+                    point3 = this.calcuateReflectionPoint(relectioPoint,basePoint1,lane);
+                    point4 = this.calcuateReflectionPoint(relectioPoint,basePoint2,lane);
+                    drawTriangles(gl, normal,point1,point2, point3,point4);    
+                }                                  
+            }
+  
+            gl.glEnd(); 
+        }
+    }
+    
+    private void drawTriangles (GL2 gl, Vector normal,Vector point1,Vector point2,Vector point3,Vector point4)
+    {
+                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glVertex3f((float)point1.x, (float)point1.y, (float)point1.z);
+                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glVertex3f((float)point2.x, (float)point2.y, (float)point2.z);
+                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glVertex3f((float)point3.x, (float)point3.y, (float)point3.z);
+                gl.glNormal3d(normal.x,normal.y,normal.z);
+      
+                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glVertex3f((float)point3.x, (float)point3.y, (float)point3.z);
+                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glVertex3f((float)point2.x, (float)point2.y, (float)point2.z);
+                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glVertex3f((float)point4.x, (float)point4.y, (float)point4.z);
+    }
+    
+     private void drawInsideOutsideSurface(GL2 gl,Vector normal, boolean inner, Vector UpperRelectioPoint, Vector LowerRelectioPoint)
+    {
+       int i,j;
+  
+        double NU = 50;
+        double NV = 50;
+        double du = 1/NU;
+        double dv = 1/NV;
+        double number = 0;
+        
+        Vector point1 = new Vector(0,0,0);
+        Vector point2 = new Vector(0,0,0);
+        Vector point3 = new Vector(0,0,0);
+        Vector point4 = new Vector(0,0,0);
+        Vector basePoint1 = new Vector(0,0,0);
+        Vector basePoint2 = new Vector(0,0,0);
+        Vector basePoint3 = new Vector(0,0,0);
+        Vector basePoint4 = new Vector(0,0,0);
+                
+        for (i = 0; i< NU; i++)
+        {
+            number = number + i*du;
+            
+            gl.glBegin(GL_TRIANGLES);  
+            for (j=0; j< NV; j++)
+            {
+                if (inner)
+                {    
+                   point1 = this.getDefaultPos1(number+ dv*j);
+                   point2 = this.getDefaultPos1(number + dv*(j+1));
+                   point3 = this.getDefaultPos2(number+ dv*j);
+                   point4 = this.getDefaultPos2(number + dv*(j+1));
+                   drawTriangles(gl, normal,point1,point2, point3,point4);  
+                }
+                else
+                {
+                   basePoint1 = this.getDefaultPos1(number+ dv*j);
+                   basePoint2 = this.getDefaultPos1(number + dv*(j+1));
+                   basePoint3 = this.getDefaultPos2(number+ dv*j);
+                   basePoint4 = this.getDefaultPos2(number + dv*(j+1));
+                  
+                   point1 = this.calcuateReflectionPoint(UpperRelectioPoint,basePoint1,4);
+                   point2 = this.calcuateReflectionPoint(UpperRelectioPoint,basePoint2,4);
+                   point3 = this.calcuateReflectionPoint(LowerRelectioPoint,basePoint3,4);
+                   point4 = this.calcuateReflectionPoint(LowerRelectioPoint,basePoint4,4);
+                   drawTriangles(gl, normal,point1,point2, point3,point4);
+                }    
+                    
+                
+            }
+  
+            gl.glEnd(); 
+        }     
+    }
+     
+     private Vector getDefaultPos1(double t)
+    {
+
+           double x = 10*Math.cos(2*Math.PI*t);
+           double y = 14*Math.sin(2*Math.PI*t);
+           double z = 1;    
+
+        
+        Vector points = new Vector(x,y,z);
+        return points; 
+    }
+     
+          private Vector getDefaultPos2(double t)
+    {
+
+           double x = 10*Math.cos(2*Math.PI*t);
+           double y = 14*Math.sin(2*Math.PI*t);
+           double z = -1;    
+
         
         Vector points = new Vector(x,y,z);
         return points; 

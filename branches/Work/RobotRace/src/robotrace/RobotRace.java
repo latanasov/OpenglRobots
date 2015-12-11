@@ -167,7 +167,8 @@ public class RobotRace extends Base {
         double fovy = Math.toDegrees(2 * Math.atan((gs.vWidth / (2 * gs.vDist))) / aspect_ratio);
 
         // Set correct parameters for gluPerspective
-        glu.gluPerspective(fovy, aspect_ratio, 0.1 * gs.vDist, 10 * gs.vDist);
+       //glu.gluPerspective(fovy, aspect_ratio, 0.1 * gs.vDist, 10 * gs.vDist);
+       glu.gluPerspective(30, aspect_ratio, 0.1 * gs.vDist, 10 * gs.vDist);
 
         // Set camera.
         gl.glMatrixMode(GL_MODELVIEW);
@@ -181,7 +182,7 @@ public class RobotRace extends Base {
                 camera.up.x(), camera.up.y(), camera.up.z());
 
         // Endable light source
-        enableLight();
+        //enableLight();
     }
 
     /**
