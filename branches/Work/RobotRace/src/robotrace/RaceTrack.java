@@ -17,7 +17,8 @@ class RaceTrack {
 
     /** Array with 3N control points, where N is the number of segments. */
     private Vector[] controlPoints = null;
-    
+    private Vector[] lanesStatPoints = new Vector[4];
+
     /**
      * Constructor for the default track.
      */
@@ -104,7 +105,19 @@ class RaceTrack {
      */
     public Vector getLanePoint(int lane, double t) {
         if (null == controlPoints) {
-            return Vector.O; // <- code goes here
+            Vector point1 = new Vector(0,0,0);
+            Vector point2 = new Vector(0,0,0);
+            Vector point3 = new Vector(0,0,0);
+            Vector upperRelectioPoint = new Vector(0,0,1);
+            
+            point1 = this.getPoint(t,true);
+            point2 = calcuateReflectionPoint(upperRelectioPoint, point1, lane);
+            
+            point3.x = point1.x + (point2.x - point1.x)/2;
+            point3.y = point1.y + (point2.y - point1.y)/2;
+            point3.z = point1.z + (point2.z - point1.z)/2;
+            
+            return point3; // <- code goes here
         } else {
             return Vector.O; // <- code goes here
         }
@@ -116,7 +129,9 @@ class RaceTrack {
      */
     public Vector getLaneTangent(int lane, double t) {
         if (null == controlPoints) {
-            return Vector.O; // <- code goes here
+            Vector tagentVector  = new Vector(0,0,0);
+            tagentVector = this.getTangent(t);
+            return tagentVector; 
         } else {
             return Vector.O; // <- code goes here
         }
@@ -183,17 +198,15 @@ class RaceTrack {
     
     private Vector calcuateReflectionPoint(Vector P0, Vector P1, int lane)
     {
-     
-        double distance = 1.22;
         Vector P2 = new Vector(0,0,0); 
         
         P2.x = P1.x-P0.x;
         P2.y = P1.y-P0.y;
         P2.z = P1.z-P0.z;
         
-        double x = P1.x + P2.normalized().x*distance*lane;
-        double y = P1.y + P2.normalized().y*distance*lane;
-        double z = P1.z + P2.normalized().z*distance*lane;
+        double x = P1.x + P2.normalized().x*laneWidth*lane;
+        double y = P1.y + P2.normalized().y*laneWidth*lane;
+        double z = P1.z + P2.normalized().z*laneWidth*lane;
         
         Vector points = new Vector(x,y,z);
         return points; 
