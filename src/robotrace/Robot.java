@@ -118,6 +118,9 @@ class Robot {
     void drawRobot(GL2 gl, GLUT glut)
     {
         //Iterate through robot parts
+          gl.glPushMatrix();
+                                gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z));
+
             for (int i = 0; i < this.Skeleton.bodyComposition.size(); i++) {
 
                 SkeletonPart tempPart;
@@ -136,6 +139,10 @@ class Robot {
                 }
 
             }
+                     
+                      //  gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z));
+                          
+gl.glPopMatrix();
     }
     void drawPart(GL2 gl, GLUT glut, Shape partShape) {
         
