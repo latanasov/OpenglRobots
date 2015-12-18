@@ -77,16 +77,16 @@ public class RobotRace extends Base {
         robots = new Robot[4];
 
         // Initialize robot 0
-        robots[0] = new Robot(Material.GOLD, new Vector(0, -3, 0));
+        robots[0] = new Robot(Material.GOLD, new Vector(0, 0, 0));
 
         // Initialize robot 1
-        robots[1] = new Robot(Material.SILVER, new Vector(0, 0, 0));
+        robots[1] = new Robot(Material.SILVER, new Vector(0, 3, 0));
 
         // Initialize robot 2
-        robots[2] = new Robot(Material.WOOD, new Vector(0, 3, 0));
+        robots[2] = new Robot(Material.WOOD, new Vector(0, 6, 0));
 
         // Initialize robot 3
-        robots[3] = new Robot(Material.ORANGE, new Vector(0, 6, 0));
+        robots[3] = new Robot(Material.ORANGE, new Vector(0, 9, 0));
 
         // Initialize the camera
         camera = new Camera();
@@ -210,25 +210,25 @@ public class RobotRace extends Base {
         }
 
         // Get the position and direction of the first robot.
-        Vector a = raceTracks[gs.trackNr].getLanePoint(1, gs.tAnim);
-        robots[0].position = raceTracks[gs.trackNr].getLanePoint(1, 0.05*gs.tAnim);
-        robots[0].direction = raceTracks[gs.trackNr].getLaneTangent(1, 0.05*gs.tAnim);
+        Vector a = raceTracks[gs.trackNr].getLanePoint(1, 0);
+        robots[0].position = raceTracks[gs.trackNr].getLanePoint(1, 0);
+        robots[0].direction = raceTracks[gs.trackNr].getLaneTangent(1, 0);
         
         // move object
         
         //gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z+0.75));
-       /*
+       
         Vector b = raceTracks[gs.trackNr].getLanePoint(2, 0);
-        robots[1].position = raceTracks[gs.trackNr].getLanePoint(2,0.05*gs.tAnim);
-        robots[1].direction = raceTracks[gs.trackNr].getLaneTangent(2, 0.05*gs.tAnim);*/
+        robots[1].position = raceTracks[gs.trackNr].getLanePoint(2,0);
+        robots[1].direction = raceTracks[gs.trackNr].getLaneTangent(2, 0);
         
         Vector c = raceTracks[gs.trackNr].getLanePoint(3, 0);
         robots[2].position = raceTracks[gs.trackNr].getLanePoint(3, 0);
         robots[2].direction = raceTracks[gs.trackNr].getLaneTangent(3, 0);
- /*       
+        
         Vector d = raceTracks[gs.trackNr].getLanePoint(4, 0);
         robots[3].position = raceTracks[gs.trackNr].getLanePoint(4, 0);
-        robots[3].direction = raceTracks[gs.trackNr].getLaneTangent(4, 0);*/
+        robots[3].direction = raceTracks[gs.trackNr].getLaneTangent(4, 0);
 
         // Draw the first robot.
        
