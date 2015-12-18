@@ -1,6 +1,9 @@
 package robotrace;
 
 import com.jogamp.opengl.util.gl2.GLUT;
+import java.lang.reflect.Array;
+import static javax.media.opengl.GL.GL_LINE_LOOP;
+import static javax.media.opengl.GL.GL_POINTS;
 import static javax.media.opengl.GL.GL_TRIANGLES;
 import javax.media.opengl.GL2;
 import static javax.media.opengl.GL2.GL_QUAD_STRIP;
@@ -18,6 +21,7 @@ class RaceTrack {
     /** Array with 3N control points, where N is the number of segments. */
     private Vector[] controlPoints = null;
     private Vector[] lanesStatPoints = new Vector[4];
+    float[][] upperpoint=new float[5555][2];
 
     /**
      * Constructor for the default track.
@@ -36,6 +40,21 @@ class RaceTrack {
      * Draws this track, based on the control points.
      */
     public void draw(GL2 gl, GLU glu, GLUT glut) {
+        double t;
+       
+            for (t=0;t<10;t++) {
+                Vector a = this.getPoint(t, true);
+                int c=5;
+                        
+gl.glPushMatrix();
+            gl.glTranslated(a.x, a.y,a.z);
+            glut.glutSolidCube(2);
+            gl.glPopMatrix();
+            }
+        
+            
+        
+          
         if (null == controlPoints) {
             // draw the test track
             
@@ -61,19 +80,21 @@ class RaceTrack {
             // calculate outer normal
        
             // lane 1
-            gl.glColor3f(0f, 0f, 0f);
-            drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
-            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+           // gl.glColor3f(0f, 0f, 0f);
+            //drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
+            //drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+            
+            
             
             // lane 2
-            lane = 2;
-            gl.glColor3f(1f, 0f, 0f);
-            drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
-            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+            //lane = 2;
+            //gl.glColor3f(1f, 0f, 0f);
+            //drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
+            //drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
             
             
             // lane 3
-            lane = 3;
+         /*   lane = 3;
             gl.glColor3f(1f, 1f, 0f);
             drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
             drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
@@ -82,14 +103,14 @@ class RaceTrack {
             lane = 4;
             gl.glColor3f(1f, 0f, 1f);
             drawUpperLowerSurface(gl,upperNormal,true,upperRelectioPoint,lane);
-            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);
+            drawUpperLowerSurface(gl,lowerNormal,false,lowerRelectioPoint,lane);*/
             
 
            // drawInsideOutsideSurface(gl,normal);
-          gl.glColor3f(1f, 0.5f, 1f);
-          drawInsideOutsideSurface(gl,innerNormal,true,upperRelectioPoint,lowerRelectioPoint);
-          gl.glColor3f(0.5f, 0.5f, 1f);
-          drawInsideOutsideSurface(gl,outerNormal,false,upperRelectioPoint,lowerRelectioPoint);
+         // gl.glColor3f(1f, 0.5f, 1f);
+          //drawInsideOutsideSurface(gl,innerNormal,true,upperRelectioPoint,lowerRelectioPoint);
+          //gl.glColor3f(0.5f, 0.5f, 1f);
+          //drawInsideOutsideSurface(gl,outerNormal,false,upperRelectioPoint,lowerRelectioPoint);
         
              
        
@@ -115,9 +136,10 @@ class RaceTrack {
             
             point3.x = point1.x + (point2.x - point1.x)/2;
             point3.y = point1.y + (point2.y - point1.y)/2;
-            point3.z = point1.z + (point2.z - point1.z)/2;
+           // point3.z = point1.z + (point2.z - point1.z)/2;
+            point3.z = point1.z;
             
-            return point3; // <- code goes here
+            return point1; // <- code goes here
         } else {
             return Vector.O; // <- code goes here
         }
@@ -216,8 +238,8 @@ class RaceTrack {
     {
         int i,j;
   
-        double NU = 50;
-        double NV = 50;
+        double NU = 12;
+        double NV = 12;
         double du = 1/NU;
         double dv = 1/NV;
         double number = 0;
@@ -282,8 +304,8 @@ class RaceTrack {
     {
        int i,j;
   
-        double NU = 50;
-        double NV = 50;
+        double NU = 12;
+        double NV = 12;
         double du = 1/NU;
         double dv = 1/NV;
         double number = 0;
