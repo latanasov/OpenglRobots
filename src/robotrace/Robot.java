@@ -117,15 +117,20 @@ class Robot {
 
     void drawRobot(GL2 gl, GLUT glut)
     {
+ 
+         
         //Iterate through robot parts
           gl.glPushMatrix();
-           Vector a = new Vector (0,0,0);
-           a.z = this.position.z;
-            //gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z+1.5));
-            //gl.glRotatef(90, (float)this.position.x, (float) ( this.position.y), (float) ( this.position.z+1.5));
-          // gl.glRotatef(90, 0, 0, (float) ( this.position.z+1.5));
-           this.rotate3D(gl, this.position, a, 90);
-           gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z+1.5));
+        
+          // this.rotate3D(gl, this.position, a, -90);
+      gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z+0.75));
+           //gl.glTranslatef((float) ( this.position.x + 0.1*this.direction.x), (float) ( this.position.y+ 0.1*this.direction.y), (float) ( this.position.z+0.75));
+           //gl.glRotatef(-90, 0, 0, 1);
+           //gl.glTranslatef((float) -( this.position.x), (float) -( this.position.y), (float) -( this.position.z-0.25));
+          
+           //this.rotate3D(gl, this.position, a, -90);
+                       this.scale3D(gl,(float)0.3 , (float)0.3,(float) 0.3);
+
             //gl.glTranslatef((float) -( this.position.x), (float) -( this.position.y), (float) -( this.position.z+1.5));
 
             for (int i = 0; i < this.Skeleton.bodyComposition.size(); i++) {
@@ -148,6 +153,7 @@ class Robot {
             }
 
         gl.glPopMatrix();
+          
     }
     void drawPart(GL2 gl, GLUT glut, Shape partShape) {
         
