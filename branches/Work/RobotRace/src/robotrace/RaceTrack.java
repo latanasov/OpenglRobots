@@ -101,25 +101,35 @@ class RaceTrack {
         if (null == controlPoints) {
             Vector point1 = new Vector(0,0,0);
             Vector point2 = new Vector(0,0,0);
-            Vector point3 = new Vector(0,0,0);
-            Vector upperRelectioPoint = this.getTangent(t);
+            Vector point3 = new Vector(0,0,1);
+            Vector tagent = this.getTangent(t);
             
             point1 = this.getPoint(t,true);
-            point2 = calcuateReflectionPoint(upperRelectioPoint, point1, lane);
+            point2 = this.getTangent(t).cross(point3);
             
-            if (t == 0)
-            {
-                point3.x = point1.x + laneWidth*(lane-1) + (point2.x - point1.x + laneWidth*(lane-1) )/2;
-                point3.y = point1.y + (point2.y - point1.y)/2;
-                point3.z = point1.z;
-            }
+            double a = point2.normalized().x*laneWidth*0.5;
+            double b = point2.normalized().x*laneWidth*(lane-1)*1;
+        
+            point3.x = point1.x + point2.normalized().x*laneWidth*0.5 + point2.normalized().x*laneWidth*(lane-1)*1;
+            point3.y = point1.y - 3*(lane-1) + point2.normalized().y*laneWidth*lane*0.5+ point2.normalized().y*laneWidth*(lane-1)*1;
+            point3.z = point1.z + point2.normalized().z*laneWidth*lane*0.5;
+            
+  
+            //point2 = calcuateReflectionPoint(tagent, point1, lane);
+            
+            /*if (t == 0)
+            {*/
+                /*point3.x = point1.x + laneWidth*(lane-1) + (point2.x - point1.x + laneWidth*(lane-1) )/2;
+                point3.y = point1.y + laneWidth*(lane-1) + (point2.y - point1.y)/2;
+                point3.z = point1.z;*/
+            /*}
             else
             {
             point3.x = point1.x + laneWidth*(lane-1) + (point2.x - point1.x)/2;
             point3.y = point1.y + laneWidth*(lane-1) + (point2.y - point1.y)/2;
            // point3.z = point1.z + (point2.z - point1.z)/2;
             point3.z = point1.z;
-            }
+            }*/
             return point3; // <- code goes here
         } else {
             return Vector.O; // <- code goes here
@@ -358,25 +368,16 @@ class RaceTrack {
         return points; 
     }
           
-    private Vector calcuateReflectionPoint(Vector P0, Vector P1, int lane)
+    private Vector calcuateReflectionPoint(Vector tangent, Vector startPos, int lane)
     {
         Vector P2 = new Vector(0,0,0); 
-        Vector P3 = new Vector(0,0,0);
         Vector P4 = new Vector(0,0,1);
         
-       // P3 = this.getTangent(lane)
-        P2 = P0.cross(P4);
-       
+        P2 = tangent.cross(P4);
         
-        
-        
-        //P2.x = P1.x-P0.x;
-        //P2.y = P1.y-P0.y;
-        //P2.z = P1.z-P0.z;
-        
-        double x = P1.x + P2.normalized().x*laneWidth*lane;
-        double y = P1.y + P2.normalized().y*laneWidth*lane;
-        double z = P1.z + P2.normalized().z*laneWidth*lane;
+        double x = startPos.x + P2.normalized().x*laneWidth*lane;
+        double y = startPos.y + P2.normalized().y*laneWidth*lane;
+        double z = startPos.z + P2.normalized().z*laneWidth*lane;
         
         Vector points = new Vector(x,y,z);
         return points; 

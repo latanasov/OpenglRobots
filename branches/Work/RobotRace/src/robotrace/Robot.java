@@ -129,7 +129,7 @@ class Robot {
            //gl.glTranslatef((float) -( this.position.x), (float) -( this.position.y), (float) -( this.position.z-0.25));
           
            //this.rotate3D(gl, this.position, a, -90);
-               //        this.scale3D(gl,(float)0.3 , (float)0.3,(float) 0.3);
+               //       this.scale3D(gl,(float)0.3 , (float)0.3,(float) 0.3);
 
             //gl.glTranslatef((float) -( this.position.x), (float) -( this.position.y), (float) -( this.position.z+1.5));
 
