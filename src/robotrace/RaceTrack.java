@@ -93,7 +93,8 @@ class RaceTrack {
         } else {
             // draw the spline track   
             
-            Vector normal = new Vector(0,0,1);
+            Vector normal1 = new Vector(0,0,0);
+            Vector normal2 = new Vector(0,0,0);            
              
             Vector P0 = new Vector(0,0,0);
             Vector P1 = new Vector(0,0,0);
@@ -107,14 +108,14 @@ class RaceTrack {
             int NU = 20;
             int NV = 20;
             //control points
-            gl.glPointSize(8);
+            /*gl.glPointSize(8);
             gl.glBegin(GL_POINTS); 
             gl.glColor3f(1f, 0f, 0f); 
             for (int i =0; i< (this.controlPoints.length); i++)
             { 
                 gl.glVertex3f((float)this.controlPoints[i].x,(float)this.controlPoints[i].y,(float)this.controlPoints[i].z); 
             }
-            gl.glEnd(); 
+            gl.glEnd(); */
             
             
             // Loop the control points
@@ -137,16 +138,7 @@ class RaceTrack {
                       P11 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+4], this.controlPoints[i*15+i+5], this.controlPoints[i*15+i+6], this.controlPoints[i*15+i+7]);
                       P22 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+8], this.controlPoints[i*15+i+9], this.controlPoints[i*15+i+10], this.controlPoints[i*15+i+11]);
                       P33 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+12], this.controlPoints[i*15+i+13], this.controlPoints[i*15+i+14], this.controlPoints[i*15+i+15]);
-                      
-                      /* P0 = this.getCubicBezierPoint((float)u/NU, this.controlPoints[i], this.controlPoints[i+1], this.controlPoints[i+2], this.controlPoints[i+3]);
-                      P1 = this.getCubicBezierPoint((float)u/NU, this.controlPoints[i+4], this.controlPoints[i+5], this.controlPoints[i+6], this.controlPoints[i+7]);
-                      P2 = this.getCubicBezierPoint((float)u/NU, this.controlPoints[i+8], this.controlPoints[i+9], this.controlPoints[i+10], this.controlPoints[i+11]);
-                      P3 = this.getCubicBezierPoint((float)u/NU, this.controlPoints[i+12], this.controlPoints[i+13], this.controlPoints[i+14], this.controlPoints[i+15]);
-               
-                      P00 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i], this.controlPoints[i+1], this.controlPoints[i+2], this.controlPoints[i+3]);
-                      P11 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i+4], this.controlPoints[i+5], this.controlPoints[i+6], this.controlPoints[i+7]);
-                      P22 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i+8], this.controlPoints[i+9], this.controlPoints[i+10], this.controlPoints[i+11]);
-                      P33 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i+12], this.controlPoints[i+13], this.controlPoints[i+14], this.controlPoints[i+15]);*/
+
                    }
                    else if (a==1)
                    {
@@ -186,34 +178,21 @@ class RaceTrack {
                       P11 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+7],updateInnerControlPoints1(this.controlPoints[i*15+i+7]),updateInnerControlPoints2(this.controlPoints[i*15+i+7]),updateInnerControlPoints3(this.controlPoints[i*15+i+7]));
                       P22 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+11],updateInnerControlPoints1(this.controlPoints[i*15+i+11]),updateInnerControlPoints2(this.controlPoints[i*15+i+11]),updateInnerControlPoints3(this.controlPoints[i*15+i+11]));
                       P33 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+15],updateInnerControlPoints1(this.controlPoints[i*15+i+15]),updateInnerControlPoints2(this.controlPoints[i*15+i+15]),updateInnerControlPoints3(this.controlPoints[i*15+i+15]));
-                      
-                      
-                      
-                     /* P0 = this.getCubicBezierPoint((float)u/NU, updateOuterControlPoints1(this.controlPoints[i*15+i]),updateOuterControlPoints2(this.controlPoints[i*15+i]),updateOuterControlPoints3(this.controlPoints[i*15+i]),updateOuterControlPoints4(this.controlPoints[i*15+i]));
-                      P1 = this.getCubicBezierPoint((float)u/NU, updateOuterControlPoints1(this.controlPoints[i*15+i+4]),updateOuterControlPoints2(this.controlPoints[i*15+i+4]),updateOuterControlPoints3(this.controlPoints[i*15+i+4]),updateOuterControlPoints4(this.controlPoints[i*15+i+4]));
-                      P2 = this.getCubicBezierPoint((float)u/NU, updateOuterControlPoints1(this.controlPoints[i*15+i+8]),updateOuterControlPoints2(this.controlPoints[i*15+i+8]),updateOuterControlPoints3(this.controlPoints[i*15+i+8]),updateOuterControlPoints4(this.controlPoints[i*15+i+8]));
-                      P3 = this.getCubicBezierPoint((float)u/NU, updateOuterControlPoints1(this.controlPoints[i*15+i+12]),updateOuterControlPoints2(this.controlPoints[i*15+i+12]),updateOuterControlPoints3(this.controlPoints[i*15+i+12]),updateOuterControlPoints4(this.controlPoints[i*15+i+12]));
-                      
-                      P00 = this.getCubicBezierPoint((float)(u+1)/NU, updateOuterControlPoints1(this.controlPoints[i*15+i]),updateOuterControlPoints2(this.controlPoints[i*15+i]),updateOuterControlPoints3(this.controlPoints[i*15+i]),updateOuterControlPoints4(this.controlPoints[i*15+i]));
-                      P11 = this.getCubicBezierPoint((float)(u+1)/NU, updateOuterControlPoints1(this.controlPoints[i*15+i+4]),updateOuterControlPoints2(this.controlPoints[i*15+i+4]),updateOuterControlPoints3(this.controlPoints[i*15+i+4]),updateOuterControlPoints4(this.controlPoints[i*15+i+4]));
-                      P22 = this.getCubicBezierPoint((float)(u+1)/NU, updateOuterControlPoints1(this.controlPoints[i*15+i+8]),updateOuterControlPoints2(this.controlPoints[i*15+i+8]),updateOuterControlPoints3(this.controlPoints[i*15+i+8]),updateOuterControlPoints4(this.controlPoints[i*15+i+8]));
-                      P33 = this.getCubicBezierPoint((float)(u+1)/NU, updateOuterControlPoints1(this.controlPoints[i*15+i+12]),updateOuterControlPoints2(this.controlPoints[i*15+i+12]),updateOuterControlPoints3(this.controlPoints[i*15+i+12]),updateOuterControlPoints4(this.controlPoints[i*15+i+12]));*/
+
                    }
 
                 // divided the surface into four tracks and draw the lane with different coolor
                 if (a==0){
                  if (u == NU/4 || u == 2*NU/4 || u == 3*NU/4 )
                  {
-                    gl.glColor3f(0f, 0f, 0f);  
-                  //drawTriangles(gl, normal,P41,P42, P43,P44); 
+                    gl.glColor3f(0f, 0f, 0f);
                  }
                  else
                  {  
                     gl.glColor3f(1f, 0f, 1f);
-                   //drawTriangles(gl, normal,P41,P42, P43,P44); 
                  }}
                 else{
-                 gl.glColor3f(0.5f, 0f, 0.5f);
+                    gl.glColor3f(0.5f, 0f, 0.5f);
                 }
                 
                 // draw the surface through drawing trangles
@@ -227,17 +206,43 @@ class RaceTrack {
                    Vector P43 = new Vector(0,0,0);
                    Vector P44 = new Vector(0,0,0);
                    
+                   Vector V1 = new Vector(0,0,0);
+                   Vector V2 = new Vector(0,0,0);
+                   Vector V3 = new Vector(0,0,0);
+                   Vector V4 = new Vector(0,0,0);
+                   
+                   
                    P41 = this.getCubicBezierPoint((float)v/NV, P0, P1, P2, P3);
                    P42 = this.getCubicBezierPoint((float)v/NV, P00, P11, P22, P33);
                    P43 = this.getCubicBezierPoint((float)(v+1)/NV, P0, P1, P2, P3);
                    P44 = this.getCubicBezierPoint((float)(v+1)/NV, P00, P11, P22, P33);
                    //gl.glColor3f(1f, 1f, 0f);  
-                   drawTriangles(gl, normal,P41,P42, P43,P44); 
+                   
+                   V1.x = P41.x - P42.x;
+                   V1.y = P41.y - P42.y;
+                   V1.z = P41.z - P42.z;
+                   
+                   V2.x = P43.x - P42.x;
+                   V2.y = P43.y - P42.y;
+                   V2.z = P43.z - P42.z;
+                   
+                   normal1 = V1.cross(V2);
+                   
+                   V3.x = P41.x - P44.x;
+                   V3.y = P41.y - P44.y;
+                   V3.z = P41.z - P44.z;
+                   
+                   V4.x = P43.x - P44.x;
+                   V4.y = P43.y - P44.y;
+                   V4.z = P43.z - P44.z;
+                   normal2 = V1.cross(V2);
+                   
+                   
+                   drawTriangles(gl, normal1, normal2,P41,P42, P43,P44); 
                  // gl.glVertex3f((float)P41.x,(float)P41.y,(float)P41.z);   
                 }
                 gl.glEnd();
-                }
-               
+                }   
             }
         }
     }
@@ -403,7 +408,7 @@ class RaceTrack {
                     point2 = this.getPoint(number + dv*(j+1),upper);
                     point3 = this.calcuateReflectionPoint(tagent1,point1,lane);
                     point4 = this.calcuateReflectionPoint(tagent2,point2,lane);
-                    drawTriangles(gl, normal,point1,point2, point3,point4);
+                    drawTriangles(gl, normal,normal,point1,point2, point3,point4);
                 }
                 else
                 {
@@ -415,7 +420,7 @@ class RaceTrack {
                     point2 = this.calcuateReflectionPoint(tagent2,basePoint2,lane-1);
                     point3 = this.calcuateReflectionPoint(tagent1,basePoint1,lane);
                     point4 = this.calcuateReflectionPoint(tagent2,basePoint2,lane);
-                    drawTriangles(gl, normal,point1,point2, point3,point4);    
+                    drawTriangles(gl, normal,normal,point1,point2, point3,point4);    
                 }                                  
             }
   
@@ -423,21 +428,20 @@ class RaceTrack {
         }
     }
     
-    private void drawTriangles (GL2 gl, Vector normal,Vector point1,Vector point2,Vector point3,Vector point4)
+    private void drawTriangles (GL2 gl, Vector normal1,Vector normal2,Vector point1,Vector point2,Vector point3,Vector point4)
     {
-                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glNormal3d(normal1.x,normal1.y,normal1.z);
                 gl.glVertex3f((float)point1.x, (float)point1.y, (float)point1.z);
-                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glNormal3d(normal1.x,normal1.y,normal1.z);
                 gl.glVertex3f((float)point2.x, (float)point2.y, (float)point2.z);
-                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glNormal3d(normal1.x,normal1.y,normal1.z);
                 gl.glVertex3f((float)point3.x, (float)point3.y, (float)point3.z);
-                gl.glNormal3d(normal.x,normal.y,normal.z);
       
-                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glNormal3d(normal2.x,normal2.y,normal2.z);
                 gl.glVertex3f((float)point3.x, (float)point3.y, (float)point3.z);
-                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glNormal3d(normal2.x,normal2.y,normal2.z);
                 gl.glVertex3f((float)point2.x, (float)point2.y, (float)point2.z);
-                gl.glNormal3d(normal.x,normal.y,normal.z);
+                gl.glNormal3d(normal2.x,normal2.y,normal2.z);
                 gl.glVertex3f((float)point4.x, (float)point4.y, (float)point4.z);
     }
     
@@ -476,7 +480,7 @@ class RaceTrack {
                    point2 = this.getDefaultPos1(number + dv*(j+1));
                    point3 = this.getDefaultPos2(number+ dv*j);
                    point4 = this.getDefaultPos2(number + dv*(j+1));
-                   drawTriangles(gl, normal,point1,point2, point3,point4);  
+                   drawTriangles(gl, normal,normal,point1,point2, point3,point4);  
                 }
                 else
                 {
@@ -491,7 +495,7 @@ class RaceTrack {
                    point2 = this.calcuateReflectionPoint(tagent2,basePoint2,4);
                    point3 = this.calcuateReflectionPoint(tagent1,basePoint3,4);
                    point4 = this.calcuateReflectionPoint(tagent2,basePoint4,4);
-                   drawTriangles(gl, normal,point1,point2, point3,point4);
+                   drawTriangles(gl, normal,normal,point1,point2, point3,point4);
                 }                                      
             }
   
