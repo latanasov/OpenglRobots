@@ -288,13 +288,13 @@ public class RobotRace extends Base {
         raceTracks[4] = new RaceTrack(new Vector[]{
         /* add control points */          
             //8
-            new Vector(4, 0+6, 0),new Vector(4+4.0/3, 0+6, 0), new Vector(4+8.0/3, 0+6, 0),new Vector(4+12.0/3, 0+6, 0),
-            new Vector(4, 4.0*4.0*(Math.sqrt(2)-1)/3+6, 0),new Vector(4+4.0/3, (4+4.0/3)*4*(Math.sqrt(2)-1)/3+6, 0), new Vector(4+8.0/3, (4+8.0/3)*4*(Math.sqrt(2)-1)/3+6, 0), new Vector(8, 8.0*4.0*(Math.sqrt(2)-1)/3+6, 0),
+            new Vector(4, 0+6, 2),new Vector(4+4.0/3, 0+6, 2), new Vector(4+8.0/3, 0+6, 2),new Vector(4+12.0/3, 0+6, 2),
+            new Vector(4, 4.0*4.0*(Math.sqrt(2)-1)/3+6, 2),new Vector(4+4.0/3, (4+4.0/3)*4*(Math.sqrt(2)-1)/3+6, 2), new Vector(4+8.0/3, (4+8.0/3)*4*(Math.sqrt(2)-1)/3+6, 2), new Vector(8, 8.0*4.0*(Math.sqrt(2)-1)/3+6, 2),
             new Vector(4.0*4.0*(Math.sqrt(2)-1)/3, 4+6, 0),new Vector((4+4.0/3)*4*(Math.sqrt(2)-1)/3, (4+4.0/3)+6, 0), new Vector((4+8.0/3)*4*(Math.sqrt(2)-1)/3, (4+8.0/3)+6, 0), new Vector(8.0*4.0*(Math.sqrt(2)-1)/3, 8+6, 0),
             new Vector(0, (4.0)+6, 0),new Vector(0, (4+4.0/3)+6, 0), new Vector(0, (4+8.0/3)+6, 0),new Vector(0, (8)+6, 0),
             
-            new Vector(4, 0+6, 0),new Vector(4+4.0/3, 0+6, 0), new Vector(4+8.0/3, 0+6, 0),new Vector(4+12.0/3, 0+6, 0),
-            new Vector(4, -4.0*4.0*(Math.sqrt(2)-1)/3+6, 0),new Vector(4+4.0/3, -(4+4.0/3)*4*(Math.sqrt(2)-1)/3+6, 0), new Vector(4+8.0/3, -(4+8.0/3)*4*(Math.sqrt(2)-1)/3+6, 0), new Vector(8, -8.0*4.0*(Math.sqrt(2)-1)/3+6, 0),
+            new Vector(4, 0+6, 2),new Vector(4+4.0/3, 0+6, 2), new Vector(4+8.0/3, 0+6, 2),new Vector(4+12.0/3, 0+6, 2),
+            new Vector(4, -4.0*4.0*(Math.sqrt(2)-1)/3+6, 2),new Vector(4+4.0/3, -(4+4.0/3)*4*(Math.sqrt(2)-1)/3+6, 2), new Vector(4+8.0/3, -(4+8.0/3)*4*(Math.sqrt(2)-1)/3+6, 2), new Vector(8, -8.0*4.0*(Math.sqrt(2)-1)/3+6, 2),
             new Vector(4.0*4.0*(Math.sqrt(2)-1)/3, -4+6, 3),new Vector((4+4.0/3)*4*(Math.sqrt(2)-1)/3, -(4+4.0/3)+6, 3), new Vector((4+8.0/3)*4*(Math.sqrt(2)-1)/3, -(4+8.0/3)+6, 3), new Vector(8.0*4.0*(Math.sqrt(2)-1)/3, -(4+12.0/3)+6, 3),
             new Vector(0, -(4.0)+6, 3),new Vector(0, -(4+4.0/3)+6, 3), new Vector(0, -(4+8.0/3)+6, 3),new Vector(0, -(8)+6, 3),
             
@@ -328,25 +328,25 @@ public class RobotRace extends Base {
             new Vector(-8.0*4.0*(Math.sqrt(2)-1)/3, -8-12.2+6, 0),new Vector(-(4+8.0/3)*4*(Math.sqrt(2)-1)/3, -(4+8.0/3)-12.2+6, 0), new Vector(-(4+4.0/3)*4*(Math.sqrt(2)-1)/3, -(4+4.0/3)-12.2+6, 0), new Vector(-4.0*4.0*(Math.sqrt(2)-1)/3, -4-12.2+6, 0),
             new Vector(0, -(8)-12.2+6, 0),new Vector(0, -(4+8.0/3)-12.2+6, 0),new Vector(0, -(4+4.0/3)-12.2+6, 0), new Vector(0, -(4.0)-12.2+6, 0),
             
-            new Vector(-(10+12.0/3), 0, 3),new Vector(-(10+8.0/3), 0, 3),new Vector(-(10+4.0/3), 0, 3), new Vector(-10, 0, 3),
-            new Vector(-(10+12.0/3), -(10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 3),new Vector(-(10+8.0/3), -(10+8.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector(-(10+4.0/3), -(10+4.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector(-10, -(10)*4.0*(Math.sqrt(2)-1)/3, 3),
+            new Vector(-(10+12.0/3), 0, 5),new Vector(-(10+8.0/3), 0, 5),new Vector(-(10+4.0/3), 0, 5), new Vector(-10, 0, 5),
+            new Vector(-(10+12.0/3), -(10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 5),new Vector(-(10+8.0/3), -(10+8.0/3)*4*(Math.sqrt(2)-1)/3, 5), new Vector(-(10+4.0/3), -(10+4.0/3)*4*(Math.sqrt(2)-1)/3, 5), new Vector(-10, -(10)*4.0*(Math.sqrt(2)-1)/3, 5),
             new Vector(-(10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, -(10+12.0/3), 3),new Vector(-(10+8.0/3)*4*(Math.sqrt(2)-1)/3, -(10+8.0/3), 3), new Vector(-(10+4.0/3)*4*(Math.sqrt(2)-1)/3, -(10+4.0/3), 3), new Vector(-10.0*4.0*(Math.sqrt(2)-1)/3, -10, 3),
             new Vector(0, -(10+12.0/3+0.2), 3),new Vector(0, -(10+8.0/3+0.2), 3),new Vector(0, -(10+4.0/3+0.2), 3), new Vector(0, -(10.0+0.2), 3),
 
-            new Vector((10+12.0/3), 0, 3),new Vector((10+8.0/3), 0, 3),new Vector((10+4.0/3), 0, 3), new Vector(10, 0, 3),
-            new Vector((10+12.0/3), -(10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 3),new Vector((10+8.0/3), -(10+8.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector((10+4.0/3), -(10+4.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector(10, -(10)*4.0*(Math.sqrt(2)-1)/3, 3),
+            new Vector((10+12.0/3), 0, 2),new Vector((10+8.0/3), 0, 2),new Vector((10+4.0/3), 0, 2), new Vector(10, 0, 2),
+            new Vector((10+12.0/3), -(10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 2),new Vector((10+8.0/3), -(10+8.0/3)*4*(Math.sqrt(2)-1)/3, 2), new Vector((10+4.0/3), -(10+4.0/3)*4*(Math.sqrt(2)-1)/3, 2), new Vector(10, -(10)*4.0*(Math.sqrt(2)-1)/3, 2),
             new Vector((10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, -(10+12.0/3), 0),new Vector((10+8.0/3)*4*(Math.sqrt(2)-1)/3, -(10+8.0/3), 0), new Vector((10+4.0/3)*4*(Math.sqrt(2)-1)/3, -(10+4.0/3), 0), new Vector(10.0*4.0*(Math.sqrt(2)-1)/3, -10, 0),
             new Vector(0, -(10+12.0/3+0.2), 0),new Vector(0, -(10+8.0/3+0.2), 0),new Vector(0, -(10+4.0/3+0.2), 0), new Vector(0, -(10.0+0.2), 0),
             
-            new Vector(-(10+12.0/3), 0, 3),new Vector(-(10+8.0/3), 0, 3),new Vector(-(10+4.0/3), 0, 3), new Vector(-10, 0, 3),
-            new Vector(-(10+12.0/3), (10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 3),new Vector(-(10+8.0/3), (10+8.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector(-(10+4.0/3), (10+4.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector(-10, (10)*4.0*(Math.sqrt(2)-1)/3, 3),
-            new Vector(-(10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, (10+12.0/3), 3),new Vector(-(10+8.0/3)*4*(Math.sqrt(2)-1)/3, (10+8.0/3), 3), new Vector(-(10+4.0/3)*4*(Math.sqrt(2)-1)/3, (10+4.0/3), 3), new Vector(-10.0*4.0*(Math.sqrt(2)-1)/3, 10, 3),
-            new Vector(0, (10+12.0/3), 3),new Vector(0, (10+8.0/3), 3),new Vector(0, (10+4.0/3), 3), new Vector(0, (10.0), 3),
+            new Vector(-(10+12.0/3), 0, 5),new Vector(-(10+8.0/3), 0, 5),new Vector(-(10+4.0/3), 0, 5), new Vector(-10, 0, 5),
+            new Vector(-(10+12.0/3), (10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 5),new Vector(-(10+8.0/3), (10+8.0/3)*4*(Math.sqrt(2)-1)/3, 5), new Vector(-(10+4.0/3), (10+4.0/3)*4*(Math.sqrt(2)-1)/3, 5), new Vector(-10, (10)*4.0*(Math.sqrt(2)-1)/3, 5),
+            new Vector(-(10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, (10+12.0/3), 7),new Vector(-(10+8.0/3)*4*(Math.sqrt(2)-1)/3, (10+8.0/3), 7), new Vector(-(10+4.0/3)*4*(Math.sqrt(2)-1)/3, (10+4.0/3), 7), new Vector(-10.0*4.0*(Math.sqrt(2)-1)/3, 10, 7),
+            new Vector(0, (10+12.0/3), 7),new Vector(0, (10+8.0/3), 7),new Vector(0, (10+4.0/3), 7), new Vector(0, (10.0), 7),
             
-            new Vector((10+12.0/3), 0, 3),new Vector((10+8.0/3), 0, 3),new Vector((10+4.0/3), 0, 3), new Vector(10, 0, 3),
-            new Vector((10+12.0/3), (10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 3),new Vector((10+8.0/3), (10+8.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector((10+4.0/3), (10+4.0/3)*4*(Math.sqrt(2)-1)/3, 3), new Vector(10, (10)*4.0*(Math.sqrt(2)-1)/3, 3),
-            new Vector((10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, (10+12.0/3), 3),new Vector((10+8.0/3)*4*(Math.sqrt(2)-1)/3, (10+8.0/3), 3), new Vector((10+4.0/3)*4*(Math.sqrt(2)-1)/3, (10+4.0/3), 3), new Vector(10.0*4.0*(Math.sqrt(2)-1)/3, 10, 3),
-            new Vector(0, (10+12.0/3), 3),new Vector(0, (10+8.0/3), 3),new Vector(0, (10+4.0/3), 3), new Vector(0, (10.0), 3),
+            new Vector((10+12.0/3), 0, 2),new Vector((10+8.0/3), 0, 2),new Vector((10+4.0/3), 0, 2), new Vector(10, 0, 2),
+            new Vector((10+12.0/3), (10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, 2),new Vector((10+8.0/3), (10+8.0/3)*4*(Math.sqrt(2)-1)/3, 2), new Vector((10+4.0/3), (10+4.0/3)*4*(Math.sqrt(2)-1)/3, 2), new Vector(10, (10)*4.0*(Math.sqrt(2)-1)/3, 2),
+            new Vector((10+12.0/3)*4.0*(Math.sqrt(2)-1)/3, (10+12.0/3), 7),new Vector((10+8.0/3)*4*(Math.sqrt(2)-1)/3, (10+8.0/3), 7), new Vector((10+4.0/3)*4*(Math.sqrt(2)-1)/3, (10+4.0/3), 7), new Vector(10.0*4.0*(Math.sqrt(2)-1)/3, 10, 7),
+            new Vector(0, (10+12.0/3), 7),new Vector(0, (10+8.0/3), 7),new Vector(0, (10+4.0/3), 7), new Vector(0, (10.0), 7),
         });
 
         // Initialize the terrain
