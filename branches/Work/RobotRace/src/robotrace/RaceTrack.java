@@ -108,14 +108,14 @@ class RaceTrack {
             int NU = 20;
             int NV = 20;
             //control points
-            /*gl.glPointSize(8);
+            gl.glPointSize(8);
             gl.glBegin(GL_POINTS); 
             gl.glColor3f(1f, 0f, 0f); 
             for (int i =0; i< (this.controlPoints.length); i++)
             { 
                 gl.glVertex3f((float)this.controlPoints[i].x,(float)this.controlPoints[i].y,(float)this.controlPoints[i].z); 
             }
-            gl.glEnd(); */
+            gl.glEnd(); 
             
             
             // Loop the control points
