@@ -6,7 +6,9 @@ import java.nio.FloatBuffer;
 import javax.media.opengl.GL;
 import static javax.media.opengl.GL.GL_FLOAT;
 import static javax.media.opengl.GL.GL_LINES;
+import static javax.media.opengl.GL.GL_TEXTURE_2D;
 import static javax.media.opengl.GL2.*;
+import static javax.media.opengl.GL2GL3.GL_QUADS;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_AMBIENT;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_DIFFUSE;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_LIGHT0;
@@ -466,27 +468,28 @@ public class RobotRace extends Base {
         robots[3].direction = raceTracks[gs.trackNr].getLaneTangent(4, 0.05*gs.tAnim);*/
         
         // Get the position and direction of the first robot.
-        
+        System.out.print(gs.tAnim);
+        System.out.print(";");
         // test track
-        Vector a = raceTracks[gs.trackNr].getLanePoint(1, 0.25);
-        robots[0].position = raceTracks[gs.trackNr].getLanePoint(1, 0.25);
-        robots[0].direction = raceTracks[gs.trackNr].getLaneTangent(1, 0.25);
+        Vector a = raceTracks[gs.trackNr].getLanePoint(1, 0.25*gs.tAnim);
+        robots[0].position = raceTracks[gs.trackNr].getLanePoint(1, 0.25*gs.tAnim);
+        robots[0].direction = raceTracks[gs.trackNr].getLaneTangent(1, 0.25*gs.tAnim);
         
         // move object
         
         //gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z+0.75));
        
        Vector b = raceTracks[gs.trackNr].getLanePoint(2, 0.25);
-        robots[1].position = raceTracks[gs.trackNr].getLanePoint(2,0.25);
-        robots[1].direction = raceTracks[gs.trackNr].getLaneTangent(2, 0.25);
+        /*robots[1].position = raceTracks[gs.trackNr].getLanePoint(2,0.25*gs.tAnim);
+        robots[1].direction = raceTracks[gs.trackNr].getLaneTangent(2, 0.25*gs.tAnim);
         
         Vector c = raceTracks[gs.trackNr].getLanePoint(3, 0.25);
-        robots[2].position = raceTracks[gs.trackNr].getLanePoint(3, 0.25);
-        robots[2].direction = raceTracks[gs.trackNr].getLaneTangent(3, 0.25);
+        robots[2].position = raceTracks[gs.trackNr].getLanePoint(3, 0.25*gs.tAnim);
+        robots[2].direction = raceTracks[gs.trackNr].getLaneTangent(3, 0.25*gs.tAnim);
         
         Vector d = raceTracks[gs.trackNr].getLanePoint(4, 0.25);
-        robots[3].position = raceTracks[gs.trackNr].getLanePoint(4, 0.25);
-        robots[3].direction = raceTracks[gs.trackNr].getLaneTangent(4, 0.25);
+        robots[3].position = raceTracks[gs.trackNr].getLanePoint(4, 0.25*gs.tAnim);
+        robots[3].direction = raceTracks[gs.trackNr].getLaneTangent(4, 0.25*gs.tAnim);*/
 
         // O track
         
@@ -527,6 +530,7 @@ public class RobotRace extends Base {
 
         // Translated, rotated, scaled box.
        // glut.glutWireCube(1f);*/
+
     }
 
     /* This function is used to endable light source*/

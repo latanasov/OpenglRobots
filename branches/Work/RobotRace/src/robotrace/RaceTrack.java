@@ -2,14 +2,18 @@ package robotrace;
 
 import com.jogamp.opengl.util.gl2.GLUT;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import static javax.media.opengl.GL.GL_LINE_LOOP;
 import static javax.media.opengl.GL.GL_LINE_STRIP;
 import static javax.media.opengl.GL.GL_POINTS;
+import static javax.media.opengl.GL.GL_TEXTURE_2D;
 import static javax.media.opengl.GL.GL_TRIANGLES;
 import javax.media.opengl.GL2;
 import static javax.media.opengl.GL2.GL_QUAD_STRIP;
 import static javax.media.opengl.GL2GL3.GL_QUADS;
 import javax.media.opengl.glu.GLU;
+import static robotrace.Base.track;
 
 /**
  * Implementation of a race track that is made from Bezier segments.
@@ -22,7 +26,15 @@ class RaceTrack {
     /** Array with 3N control points, where N is the number of segments. */
     private Vector[] controlPoints = null;
     private Vector[] lanesStatPoints = new Vector[4];
-
+    
+    /*List to save */
+    List<Vector> listLanePos1 = new ArrayList<>();
+    List<Vector> listLanePos2 = new ArrayList<>();
+    List<Vector> listLanePos3 = new ArrayList<>();
+    List<Vector> listLanePos4 = new ArrayList<>();
+    List<Vector> listLaneInner = new ArrayList<>();
+    List<Vector> listLaneOutter = new ArrayList<>();
+ 
     /**
      * Constructor for the default track.
      */
@@ -105,17 +117,17 @@ class RaceTrack {
             Vector P22 = new Vector(0,0,0);
             Vector P33 = new Vector(0,0,0);
              
-            int NU = 20;
-            int NV = 20;
+            int NU = 25;
+            int NV = 25;
             //control points
-            gl.glPointSize(8);
+           /* gl.glPointSize(8);
             gl.glBegin(GL_POINTS); 
             gl.glColor3f(1f, 0f, 0f); 
             for (int i =0; i< (this.controlPoints.length); i++)
             { 
                 gl.glVertex3f((float)this.controlPoints[i].x,(float)this.controlPoints[i].y,(float)this.controlPoints[i].z); 
             }
-            gl.glEnd(); 
+            gl.glEnd();*/
             
             
             // Loop the control points
@@ -125,6 +137,7 @@ class RaceTrack {
             { 
                 // according to 16 control points, calculate 32 Cubic Bezier Points for upper, lower, inner and outer surface
                 for (int a=0; a<4; a++)
+                //for (int a=0; a<1; a++)
                 {
                    if (a==0)
                    {    
@@ -183,22 +196,29 @@ class RaceTrack {
 
                 // divided the surface into four tracks and draw the lane with different coolor
                 if (a==0){
-                 if (u == NU/4 || u == 2*NU/4 || u == 3*NU/4 )
+                 if (u == 0 || u == NU/4 || u == 2*NU/4 || u == 3*NU/4 || u == NU-1)
                  {
                     gl.glColor3f(0f, 0f, 0f);
                  }
+                /* else  if (u == NU/8 || u == 3*NU/8 || u == 5*NU/8 || u == 7*NU/8)
+                 {
+                    gl.glColor3f(0f, 0f, 1f);
+                 }*/ 
                  else
                  {  
                     gl.glColor3f(1f, 0f, 1f);
-                 }}
+                 }
+                
+                 
+                 }
                 else{
                     gl.glColor3f(0.5f, 0f, 0.5f);
                 }
                 
                 // draw the surface through drawing trangles
                 gl.glBegin(GL_TRIANGLES); 
-               //gl.glPointSize(3);
-               //gl.glBegin(GL_POINTS);  
+                //gl.glPointSize(3);
+                //gl.glBegin(GL_POINTS);  
                 for (int v = 0; v < NV; v++)
                 {
                    Vector P41 = new Vector(0,0,0);
@@ -237,14 +257,65 @@ class RaceTrack {
                    V4.z = P43.z - P44.z;
                    normal2 = V1.cross(V2);
                    
-                   
+                   /* save the positions into lists*/
+                   if (a==0)
+                   {
+                       if ( u == 0 )
+                       {
+                          // save the 
+                          listLaneInner.add(P41);
+                       }
+                       else if ( u == NU/8 )
+                       {
+                          listLanePos1.add(P41);
+                       }
+                       else if ( u == 3*NU/8 )
+                       {
+                          listLanePos2.add(P41);
+                       }
+                       else if ( u == 5*NU/8 )
+                       {
+                          listLanePos3.add(P41);
+                       }
+                       else if ( u == 7*NU/8 )
+                       {
+                          listLanePos4.add(P41);
+                       }
+                       else if ( u == NU-1 )
+                       {
+                          listLanePos4.add(P41);
+                       }
+                       
+                   }
+
                    drawTriangles(gl, normal1, normal2,P41,P42, P43,P44); 
-                 // gl.glVertex3f((float)P41.x,(float)P41.y,(float)P41.z);   
+                   // gl.glVertex3f((float)P41.x,(float)P41.y,(float)P41.z);  
+                    
                 }
                 gl.glEnd();
                 }   
             }
         }
+            
+        // ADD TEXTURE
+                    
+        gl.glEnable(GL_TEXTURE_2D);
+            
+            gl.glColor3f(1f, 1f, 1f); 
+            track.bind(gl); 
+            
+            gl.glBegin(GL_QUADS);
+               gl.glTexCoord2d(0, 0); 
+               gl.glVertex3d(0, 0, 0); 
+               gl.glTexCoord2d(1, 0);
+               gl.glVertex3d(1, 0, 0); 
+               gl.glTexCoord2d(1, 1); 
+               gl.glVertex3d(1, 1, 0);
+               gl.glTexCoord2d(0, 1); 
+               gl.glVertex3d(0, 1, 0);
+            gl.glEnd();
+            
+        gl.glDisable(GL_TEXTURE_2D);
     }
     }
     
@@ -271,6 +342,7 @@ class RaceTrack {
 
             return point3; // <- code goes here
         } else {
+                
             return Vector.O; // <- code goes here
         }
     }
