@@ -65,7 +65,7 @@ class Robot {
     public void draw(GL2 gl, GLU glu, GLUT glut, boolean stickFigure, float tAnim) {
 
         //Apply the matterials 
-        /*gl.glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, FloatBuffer.wrap(this.material.ambient));
+        gl.glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, FloatBuffer.wrap(this.material.ambient));
         gl.glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, FloatBuffer.wrap(this.material.diffuse));
         gl.glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, FloatBuffer.wrap(this.material.specular));
         gl.glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, this.material.shininess);
@@ -83,7 +83,7 @@ class Robot {
             
             drawRobot(gl,glut);
             
-        }*/
+        }
     }
 
     private void drawStickRobot(GL2 gl, GLUT glut) {
