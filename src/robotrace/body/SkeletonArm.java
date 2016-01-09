@@ -22,18 +22,35 @@ public class SkeletonArm extends SkeletonPart {
 
     }
 
+    boolean goBack=false;
     /**
      * TODO provide own implementation of animation *
      */
     @Override
     public void Animate(float time) {
         
-        for (Shape shape : this.partShape.getShapeCollection()) {
-         
-          Vector newPost=new Vector (shape.getShapePos().x()+time*0.0025,shape.getShapePos().y(),shape.getShapePos().z());
+       for (Shape shape : this.partShape.getShapeCollection()) {
+
             
-           shape.setShapePos(newPost);
-          
+            shape.setToBeAnimated(true);
+            float angle = shape.getAngleOfRotation();
+            if ((angle >= -55) && (goBack == false)) {
+                 angle=angle-5;
+                 if (angle==-55)
+                 {
+                     goBack=true;
+                 }
+ 
+  
+            }
+             if ((angle <= 55) && (goBack == true)) {
+                 if (angle==55) {
+                     goBack=false;
+                 }
+                    angle=angle+5;
+            }
+
+            shape.setAngleOfRotation(angle);
         }
     }
 

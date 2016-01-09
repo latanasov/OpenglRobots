@@ -23,6 +23,7 @@ public class SkeletonLeg extends SkeletonPart {
         super(partShape);
 
     }
+            boolean goBack = false;
 
     /**
      * TODO provide own implementation of animation *
@@ -31,18 +32,30 @@ public class SkeletonLeg extends SkeletonPart {
     public void Animate(float time) {
 
         for (Shape shape : this.partShape.getShapeCollection()) {
-         
-          Vector newPost=new Vector (shape.getShapePos().x()+time*0.0025,shape.getShapePos().y(),shape.getShapePos().z());
-            
-           shape.setShapePos(newPost);
-           // shape.setToBeAnimated(true);
-           //shape.setAngleOfRotation(time);
-          // shape.setToBeRotated(true);
-          
-        }
-     
 
+            // Vector newPost=new Vector (shape.getShapePos().x()+time*0.0025,shape.getShapePos().y(),shape.getShapePos().z());
+            //shape.setShapePos(newPost);
+            shape.setToBeAnimated(true);
+            float angle = shape.getAngleOfRotation();
+            if ((angle >= -75) && (goBack == false)) {
+                 angle=angle-5;
+                 if (angle==-75)
+                 {
+                     goBack=true;
+                 }
+ 
+  
+            }
+             if ((angle <= 55) && (goBack == true)) {
+                 if (angle==55) {
+                     goBack=false;
+                 }
+                    angle=angle+5;
+            }
+
+            shape.setAngleOfRotation(angle);
         }
 
-    
+    }
+
 }
