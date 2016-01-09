@@ -6,8 +6,6 @@
 package robotrace.body;
 
 import robotrace.shape.Shape;
-import javafx.geometry.Point3D;
-import robotrace.Vector;
 
 /**
  *
@@ -27,7 +25,7 @@ public class SkeletonHead extends SkeletonPart {
      * TODO provide own implementation of animation *
      */
     @Override
-    public void Animate(Vector newPos) {
+    public void Animate(float time) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

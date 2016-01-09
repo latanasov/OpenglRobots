@@ -5,7 +5,6 @@
  */
 package robotrace.body;
 
-import robotrace.Vector;
 import robotrace.shape.Shape;
 
 /**
@@ -26,7 +25,7 @@ public class SkeletonEye extends SkeletonPart {
      * TODO provide own implementation of animation *
      */
     @Override
-    public void Animate(Vector newPos) {
+    public void Animate(float time) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

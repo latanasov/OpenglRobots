@@ -6,12 +6,6 @@
 package robotrace.body;
 
 import robotrace.shape.Shape;
-import com.jogamp.opengl.util.gl2.GLUT;
-
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.GLU;
-import robotrace.Base;
-import robotrace.Vector;
 
 /**
  *
@@ -33,5 +27,5 @@ public abstract class SkeletonPart {
 
     }
 
-    public abstract void Animate(Vector newPos);
+    public abstract void Animate(float time);
 }

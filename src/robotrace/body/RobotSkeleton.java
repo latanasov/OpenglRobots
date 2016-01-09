@@ -263,4 +263,11 @@ public class RobotSkeleton {
         bodyComposition.add(lArm);
     }
 
+    private void updateRobotPos() {
+        for (SkeletonPart part : this.bodyComposition) {
+            part.partShape.updateShapePos();
+
+        }
+
+    }
 }
