@@ -4,6 +4,7 @@ import com.jogamp.opengl.util.gl2.GLUT;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.paint.Color;
 import static javax.media.opengl.GL.GL_LINE_LOOP;
 import static javax.media.opengl.GL.GL_LINE_STRIP;
 import static javax.media.opengl.GL.GL_POINTS;
@@ -195,28 +196,28 @@ class RaceTrack {
                    }
 
                 // divided the surface into four tracks and draw the lane with different coolor
-                if (a==0){
-                 if (u == 0 || u == NU/4 || u == 2*NU/4 || u == 3*NU/4 || u == NU-1)
-                 {
-                    gl.glColor3f(0f, 0f, 0f);
-                 }
+                if (a==0)
+                {
+                    if (u == 0 || u == NU/4 || u == 2*NU/4 || u == 3*NU/4 || u == NU-1)
+                    {
+                        gl.glColor3f(0f, 0f, 0f);
+                    }
                 /* else  if (u == NU/8 || u == 3*NU/8 || u == 5*NU/8 || u == 7*NU/8)
                  {
                     gl.glColor3f(0f, 0f, 1f);
-                 }*/ 
-                 else
-                 {  
-                    gl.glColor3f(1f, 0f, 1f);
-                 }
-                
-                 
-                 }
+                 } */
+                    else
+                    { 
+                        gl.glColor3d(Color.BROWN.getRed(), Color.BROWN.getGreen(), Color.BROWN.getBlue());
+                    //gl.glColor3f(133f, 94f, 66f);
+                    } 
+                }
                 else{
                     gl.glColor3f(0.5f, 0f, 0.5f);
                 }
                 
                 // draw the surface through drawing trangles
-                gl.glBegin(GL_TRIANGLES); 
+               gl.glBegin(GL_TRIANGLES); 
                 //gl.glPointSize(3);
                 //gl.glBegin(GL_POINTS);  
                 for (int v = 0; v < NV; v++)
@@ -262,62 +263,106 @@ class RaceTrack {
                    {
                        if ( u == 0 )
                        {
-                          // save the 
-                          listLaneInner.add(P41);
+                           // save the inner position of the track
+                           listLaneInner.add(P41);
                        }
                        else if ( u == NU/8 )
                        {
-                          listLanePos1.add(P41);
+                           // save the center position of first lane
+                           listLanePos1.add(P41);
                        }
                        else if ( u == 3*NU/8 )
                        {
-                          listLanePos2.add(P41);
+                           // save the center position of second lane
+                           listLanePos2.add(P41);
                        }
                        else if ( u == 5*NU/8 )
                        {
-                          listLanePos3.add(P41);
+                           // save the center position of third lane
+                           listLanePos3.add(P41);
                        }
                        else if ( u == 7*NU/8 )
                        {
-                          listLanePos4.add(P41);
+                           // save the center position of forth lane
+                           listLanePos4.add(P41);
                        }
                        else if ( u == NU-1 )
                        {
-                          listLanePos4.add(P41);
+                           // save the outter position of the track
+                           listLaneOutter.add(P41);
                        }
                        
                    }
-
+                   
                    drawTriangles(gl, normal1, normal2,P41,P42, P43,P44); 
-                   // gl.glVertex3f((float)P41.x,(float)P41.y,(float)P41.z);  
+                  //  gl.glVertex3f((float)P41.x,(float)P41.y,(float)P41.z);  
                     
                 }
                 gl.glEnd();
                 }   
             }
         }
+        
+        // Add texturing for the outter track
+        //addTextureForTrack(gl, listLaneOutter, listLaneInner,0.3);
+        
+        // Add texturing for the inner track
+        //addTextureForTrack(gl, listLaneInner, listLaneOutter,0.1);
+        // Add texturing for the lower track
+        //for (int i=0 ; i<= listLaneOutter.size(); i++)
+        //{    
+        
+       // }
             
-        // ADD TEXTURE
-                    
+        
+    }
+    }
+    
+    public void addTextureForTrack(GL2 gl,List<Vector> listLaneOutter,List<Vector> listLaneInner, double offsetConst)
+    {
         gl.glEnable(GL_TEXTURE_2D);
             
-            gl.glColor3f(1f, 1f, 1f); 
-            track.bind(gl); 
-            
-            gl.glBegin(GL_QUADS);
+        gl.glColor3f(1f, 1f, 1f); 
+        track.bind(gl); 
+           
+        gl.glBegin(GL_QUADS);
+        
+            Vector offset1 = new Vector (0,0,0);
+            Vector direction1 = new Vector (0,0,0);
+            Vector offset2 = new Vector (0,0,0);
+            Vector direction2 = new Vector (0,0,0);
+           
+            for (int i=0; i<listLaneOutter.size() -1; i++)
+            {  
+                   
+                   
+                   direction1.x = listLaneOutter.get(i).x - listLaneInner.get(i).x;
+                   direction1.y = listLaneOutter.get(i).y - listLaneInner.get(i).y;
+                   
+                   direction2.x = listLaneOutter.get(i+1).x - listLaneInner.get(i+1).x;
+                   direction2.y = listLaneOutter.get(i+1).y - listLaneInner.get(i+1).y;
+                   //direction.x = listLaneOutter.get(i).z - listLanePos4.get(i).z;
+                   
+                   offset1.x = offsetConst*direction1.normalized().x;
+                   offset1.y = offsetConst*direction1.normalized().y;
+                   offset2.x = offsetConst*direction2.normalized().x;
+                   offset2.y = offsetConst*direction2.normalized().y;
+                  //offset.z = 0.1*direction.normalized().z +listLaneOutter.get(i).z;
+                   
                gl.glTexCoord2d(0, 0); 
-               gl.glVertex3d(0, 0, 0); 
-               gl.glTexCoord2d(1, 0);
-               gl.glVertex3d(1, 0, 0); 
+               gl.glVertex3d(listLaneOutter.get(i).x + offset1.x, listLaneOutter.get(i).y+ offset1.y, listLaneOutter.get(i).z-0.75); 
+               gl.glTexCoord2d(0, 1);
+               gl.glVertex3d(listLaneOutter.get(i).x+ offset1.x, listLaneOutter.get(i).y+ offset1.y, listLaneOutter.get(i).z);
                gl.glTexCoord2d(1, 1); 
-               gl.glVertex3d(1, 1, 0);
-               gl.glTexCoord2d(0, 1); 
-               gl.glVertex3d(0, 1, 0);
+               gl.glVertex3d(listLaneOutter.get(i+1).x+ offset2.x, listLaneOutter.get(i+1).y+ offset2.y, listLaneOutter.get(i+1).z);
+               gl.glTexCoord2d(1, 0); 
+               gl.glVertex3d(listLaneOutter.get(i+1).x+ offset2.x, listLaneOutter.get(i+1).y+ offset2.y, listLaneOutter.get(i+1).z-0.75);
+               }
+   
             gl.glEnd();
             
         gl.glDisable(GL_TEXTURE_2D);
-    }
-    }
+    }        
     
     /**
      * Returns the center of a lane at 0 <= t < 1.
@@ -500,7 +545,7 @@ class RaceTrack {
         }
     }
     
-    private void drawTriangles (GL2 gl, Vector normal1,Vector normal2,Vector point1,Vector point2,Vector point3,Vector point4)
+    public void drawTriangles (GL2 gl, Vector normal1,Vector normal2,Vector point1,Vector point2,Vector point3,Vector point4)
     {
                 gl.glNormal3d(normal1.x,normal1.y,normal1.z);
                 gl.glVertex3f((float)point1.x, (float)point1.y, (float)point1.z);
