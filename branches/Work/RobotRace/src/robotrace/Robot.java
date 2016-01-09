@@ -4,6 +4,8 @@ import robotrace.body.RobotSkeleton;
 import com.jogamp.opengl.util.gl2.GLUT;
 import java.nio.FloatBuffer;
 import javafx.geometry.Point3D;
+import static javax.media.opengl.GL.GL_COLOR_BUFFER_BIT;
+import static javax.media.opengl.GL.GL_DEPTH_BUFFER_BIT;
 import static javax.media.opengl.GL.GL_FRONT_AND_BACK;
 import static javax.media.opengl.GL.GL_LINES;
 import javax.media.opengl.GL2;
@@ -73,17 +75,15 @@ class Robot {
         gl.glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, FloatBuffer.wrap(this.material.specular));
         gl.glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, this.material.shininess);
 
-        Point3D startPos = new Point3D(this.position.x, this.position.y, this.position.z);
-
-        // Get the start point of the robot
-        startPos.add(this.position.x, this.position.y, this.position.z);
         if (stickFigure) {
 
             drawStickRobot(gl, glut);
 
         } else {
 
+            gl.glPushMatrix();
             drawRobot(gl, glut);
+            gl.glPopMatrix();
 
         }
     }
@@ -118,15 +118,13 @@ class Robot {
     }
 
     void drawRobot(GL2 gl, GLUT glut) {
-
         //Iterate through robot parts
-        gl.glPushMatrix();
 
-        gl.glTranslatef((float) (this.position.x), (float) (this.position.y), (float) (this.position.z + 0.4));
-        this.robotAngle = (float) (Math.PI - Math.atan2(direction.x(), direction.y()));
+        gl.glTranslatef((float) (this.position.x), (float) (this.position.y), (float) (this.position.z + 0.8));
+        this.robotAngle = (float) (Math.PI - Math.atan2(direction.x(), direction.y())+5);
         double rAngle = this.robotAngle * (180.0 / Math.PI);
         gl.glRotated(rAngle, 0, 0, 1);
-        gl.glScaled(0.8, 0.8, 0.8);
+        gl.glScaled(0.5, 0.5, 0.5);
 
         for (int i = 0; i < this.Skeleton.bodyComposition.size(); i++) {
 
@@ -134,10 +132,11 @@ class Robot {
             tempPart = this.Skeleton.bodyComposition.get(i);
 
             //Draw the part
+            gl.glPushMatrix();
             drawPart(gl, glut, tempPart.partShape);
+            gl.glPopMatrix();
         }
 
-        gl.glPopMatrix();
     }
 
     public void walk(float time) {
@@ -149,21 +148,23 @@ class Robot {
     }
 
     void drawPart(GL2 gl, GLUT glut, Shape partShape) {
-
-        gl.glPushMatrix();
-
+    gl.glPushMatrix();
         if (partShape.getShapeType() != ComplexShape) {
             gl.glColor3d(partShape.getColor().getRed(), partShape.getColor().getGreen(), partShape.getColor().getBlue());
             gl.glTranslatef((float) partShape.getShapePos().x, (float) partShape.getShapePos().y, (float) partShape.getShapePos().z);
         }
-        //Check if the shape has to be rotated and if yes apply rotation
-        if (partShape.isToBeRotated()) {
-            this.rotate3D(gl, this.position, partShape.getShapePos(), partShape.getAngleOfRotation());
+        //Check if the shape has to be animated and if yes apply rotation
+
+        if (partShape.isToBeAnimated()) {
+            gl.glTranslatef((float) -partShape.getShapePos().x, (float) -partShape.getShapePos().y, (float) -partShape.getShapePos().z);
+            gl.glRotated(partShape.getAngleOfRotation(), 0, 1, 0);
+            gl.glTranslatef((float) partShape.getShapePos().x, (float) partShape.getShapePos().y, (float) partShape.getShapePos().z);
+
         }
 
         //Check if the shape has to be rotated and if yes apply rotation
         if (partShape.isToBeScaled()) {
-            this.scale3D(gl, (float) partShape.getScale().x, (float) partShape.getScale().y, (float) partShape.getScale().z);
+            //this.scale3D(gl, (float) partShape.getScale().x, (float) partShape.getScale().y, (float) partShape.getScale().z);
         }
 
         switch (partShape.getShapeType()) {
@@ -185,12 +186,15 @@ class Robot {
             case ComplexShape:
                 for (int j = 0; j < partShape.getShapeCollection().size(); j++) {
                     //Draw the part
+           //         gl.glPushMatrix();
                     drawPart(gl, glut, partShape.getShapeCollection().get(j));
+             //       gl.glPopMatrix();
 
                 }
                 break;
         }
-        gl.glPopMatrix();
+    gl.glPopMatrix();
+
     }
 
     void rotate3D(GL2 gl, Vector p1, Vector p2, float thetaDegree
