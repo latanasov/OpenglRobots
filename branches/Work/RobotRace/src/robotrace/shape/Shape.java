@@ -16,18 +16,13 @@ import robotrace.Vector;
  */
 /**
  * Class representation of a shape.A shape is defined by the following
- * properties: 
- * ShapeType- defines the type of the shape(cube,sphere etc)
- * angleOfRotation-the rotation angle of the shape 
- * vScale- scale vector which
- * determines the scale factor 
- * toBeRotated-true/false based on whether the shapes
- * needs to be rotated 
- * toBeScaled-true/false based on whether the shapes needs
- * to be scaled 
- * shapePos- the (relative) position of the shape 
- * originPos-the origin from which the shapePos is determined ShapeCollection-in case the
- * shape is of type ComplexShape, it consists of multiple shapes
+ * properties: ShapeType- defines the type of the shape(cube,sphere etc)
+ * angleOfRotation-the rotation angle of the shape vScale- scale vector which
+ * determines the scale factor toBeRotated-true/false based on whether the
+ * shapes needs to be rotated toBeScaled-true/false based on whether the shapes
+ * needs to be scaled shapePos- the (relative) position of the shape
+ * originPos-the origin from which the shapePos is determined ShapeCollection-in
+ * case the shape is of type ComplexShape, it consists of multiple shapes
  * radius-in case the shape is of type sphere or cylinder radius is required
  * height- in case the shape is of type cylinder height is required
  *
@@ -41,13 +36,18 @@ public class Shape {
     private Vector vScale;
     private boolean toBeRotated;
     private boolean toBeScaled;
+    private boolean toBeAnimated;
     private Vector shapePos;
     private Vector originPos;
     private List<Shape> ShapeCollection = new ArrayList<Shape>();
     private double radius;
     private double height;
+   
 
-    /**Constructor for shape, sets the shapetype,color,shape position, and originin position**/
+    /**
+     * Constructor for shape, sets the shapetype,color,shape position, and
+     * originin position*
+     */
     public Shape(ShapeEnum shapeType, Color shapeColor, Vector pos, Vector opos) {
         this.ShapeType = shapeType;
         this.shapeColor = shapeColor;
@@ -57,42 +57,42 @@ public class Shape {
         this.shapePos = opos.add(pos);
     }
 
-     /**
+    /**
      * Set color method
      */
     public void setColor(Color newColor) {
         this.shapeColor = newColor;
     }
 
-     /**
+    /**
      * get color method
      */
     public Color getColor() {
         return this.shapeColor;
     }
 
-     /**
+    /**
      * Set angle of rotation method
      */
     public void setAngleOfRotation(float newAngle) {
         this.angleOfRotation = newAngle;
     }
 
-     /**
-     * get angle of rotation  method
+    /**
+     * get angle of rotation method
      */
     public float getAngleOfRotation() {
         return this.angleOfRotation;
     }
 
-     /**
+    /**
      * Set scale method
      */
     public void setScale(Vector newVector) {
         this.setvScale(newVector);
     }
 
-     /**
+    /**
      * get scale method
      */
     public Vector getScale() {
@@ -225,4 +225,21 @@ public class Shape {
         this.ShapeCollection = ShapeCollection;
     }
 
+    public void updateShapePos() {
+        this.shapePos.add(this.originPos);
+    }
+
+    /**
+     * @return the toBeAnimated
+     */
+    public boolean isToBeAnimated() {
+        return toBeAnimated;
+    }
+
+    /**
+     * @param toBeAnimated the toBeAnimated to set
+     */
+    public void setToBeAnimated(boolean toBeAnimated) {
+        this.toBeAnimated = toBeAnimated;
+    }
 }

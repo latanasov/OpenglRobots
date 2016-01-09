@@ -26,8 +26,15 @@ public class SkeletonArm extends SkeletonPart {
      * TODO provide own implementation of animation *
      */
     @Override
-    public void Animate(Vector newPos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Animate(float time) {
+        
+        for (Shape shape : this.partShape.getShapeCollection()) {
+         
+          Vector newPost=new Vector (shape.getShapePos().x()+time*0.0025,shape.getShapePos().y(),shape.getShapePos().z());
+            
+           shape.setShapePos(newPost);
+          
+        }
     }
 
 }
