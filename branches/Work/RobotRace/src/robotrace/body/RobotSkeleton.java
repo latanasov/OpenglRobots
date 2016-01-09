@@ -70,7 +70,7 @@ public class RobotSkeleton {
          */
         this.oPos = oPos;
 
-        this.initSkeleton();
+        //this.initSkeleton();
 
     }
 
