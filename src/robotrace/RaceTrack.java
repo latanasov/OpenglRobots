@@ -445,7 +445,13 @@ class RaceTrack {
             tagentVector = this.getTangent(t);
             return tagentVector; 
         } else {
-            return Vector.O; // <- code goes here
+            Vector tagentVector = new Vector(0, 0, 0);
+
+            tagentVector.x = 2 * listLanePos1.get(lane1Index + 1).x - listLanePos1.get(lane1Index).x;
+            tagentVector.y = 2 * listLanePos1.get(lane1Index + 1).y - listLanePos1.get(lane1Index).y;
+            tagentVector.z = 2 * listLanePos1.get(lane1Index + 1).z - listLanePos1.get(lane1Index).z;
+
+            return tagentVector;
         }
     }
 
