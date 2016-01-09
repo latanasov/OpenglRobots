@@ -368,30 +368,73 @@ class RaceTrack {
      * Returns the center of a lane at 0 <= t < 1.
      * Use this method to find the position of a robot on the track.
      */
+   
+    /**
+     * Returns the center of a lane at 0 <= t < 1. Use this method to find the
+     * position of a robot on the track.
+     */
+    int lane1Index = 0;
+    int lane2Index = 0;
+    int lane3Index = 0;
+    int lane4Index = 0;
+
     public Vector getLanePoint(int lane, double t) {
         if (null == controlPoints) {
-            Vector point1 = new Vector(0,0,0);
-            Vector point2 = new Vector(0,0,0);
-            Vector point3 = new Vector(0,0,1);
+            Vector point1 = new Vector(0, 0, 0);
+            Vector point2 = new Vector(0, 0, 0);
+            Vector point3 = new Vector(0, 0, 1);
             Vector tagent = this.getTangent(t);
-            
-            point1 = this.getPoint(t,true);
+
+            point1 = this.getPoint(t, true);
             point2 = this.getTangent(t).cross(point3);
-            
-            double a = point2.normalized().y*laneWidth*0.5;
-            double b = point2.normalized().y*laneWidth*(lane-1)*1;
-        
-            point3.x = point1.x + point2.normalized().x*laneWidth*0.5 + point2.normalized().x*laneWidth*(lane-1)*1;
-            point3.y = point1.y - 3.0*(lane-1) + point2.normalized().y*laneWidth*lane*0.5+ point2.normalized().y*laneWidth*(lane-1)*1;
-            point3.z = point1.z + point2.normalized().z*laneWidth*lane*0.5;
+
+            double a = point2.normalized().y * laneWidth * 0.5;
+            double b = point2.normalized().y * laneWidth * (lane - 1) * 1;
+
+            point3.x = point1.x + point2.normalized().x * laneWidth * (lane - 1) * 1;
+            point3.y = point1.y + point2.normalized().y * laneWidth * (lane - 1) * 1;
+            point3.z = point1.z;
 
             return point3; // <- code goes here
         } else {
-                
-            return Vector.O; // <- code goes here
+            Vector result = null;
+            if (lane == 1) {
+                if (this.listLanePos1.size() - 1 < this.lane1Index) {
+                    this.lane1Index = 0;
+                }
+                result = this.listLanePos1.get(lane1Index); // <- code goes here
+
+                lane1Index++;
+            }
+            if (lane == 2) {
+                if (this.listLanePos2.size() - 1 < this.lane2Index) {
+                    this.lane2Index = 0;
+                }
+                result = this.listLanePos2.get(lane2Index); // <- code goes here
+
+                lane2Index++;
+            }
+            if (lane == 3) {
+                if (this.listLanePos3.size() - 1 < this.lane3Index) {
+                    this.lane3Index = 0;
+                }
+                result = this.listLanePos3.get(lane3Index); // <- code goes here
+
+                lane3Index++;
+            }
+            if (lane == 4) {
+                if (this.listLanePos4.size() - 1 < this.lane4Index) {
+                    this.lane4Index = 0;
+                }
+                result = this.listLanePos4.get(lane4Index); // <- code goes here
+
+                lane4Index++;
+            }
+
+            return result; // <- code goes here
+            // <- code goes here
         }
     }
-    
     /**
      * Returns the tangent of a lane at 0 <= t < 1.
      * Use this method to find the orientation of a robot on the track.
