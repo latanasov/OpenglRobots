@@ -391,9 +391,13 @@ class RaceTrack {
             double a = point2.normalized().y * laneWidth * 0.5;
             double b = point2.normalized().y * laneWidth * (lane - 1) * 1;
 
-            point3.x = point1.x + point2.normalized().x * laneWidth * (lane - 1) * 1;
+            /*point3.x = point1.x + point2.normalized().x * laneWidth * (lane - 1) * 1;
             point3.y = point1.y + point2.normalized().y * laneWidth * (lane - 1) * 1;
-            point3.z = point1.z;
+            point3.z = point1.z;*/
+            point3.x = point1.x + point2.normalized().x*laneWidth*0.5 + point2.normalized().x*laneWidth*(lane-1)*1;
+            point3.y = point1.y + point2.normalized().y*laneWidth*lane*0.5+ point2.normalized().y*laneWidth*(lane-1)*1;
+            point3.z = point1.z + point2.normalized().z*laneWidth*lane*0.5;
+
 
             return point3; // <- code goes here
         } else {
@@ -447,9 +451,9 @@ class RaceTrack {
         } else {
             Vector tagentVector = new Vector(0, 0, 0);
 
-            tagentVector.x = 2 * listLanePos1.get(lane1Index + 1).x - listLanePos1.get(lane1Index).x;
-            tagentVector.y = 2 * listLanePos1.get(lane1Index + 1).y - listLanePos1.get(lane1Index).y;
-            tagentVector.z = 2 * listLanePos1.get(lane1Index + 1).z - listLanePos1.get(lane1Index).z;
+            tagentVector.x = listLanePos1.get(lane1Index + 1).x - listLanePos1.get(lane1Index).x;
+            tagentVector.y = listLanePos1.get(lane1Index + 1).y - listLanePos1.get(lane1Index).y;
+            tagentVector.z = listLanePos1.get(lane1Index + 1).z - listLanePos1.get(lane1Index).z;
 
             return tagentVector;
         }
