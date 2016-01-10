@@ -1,8 +1,10 @@
 package robotrace;
 
 import com.jogamp.opengl.util.gl2.GLUT;
+import java.awt.Color;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import static javax.media.opengl.GL.GL_LINEAR;
 import static javax.media.opengl.GL.GL_LINES;
 import static javax.media.opengl.GL.GL_RGBA;
@@ -22,13 +24,27 @@ import javax.media.opengl.glu.GLU;
  */
 class Terrain {
     private Object gl;
+    
+    /*array list all color*/
+    private final Color[] texture;
 
     /**
      * Can be used to set up a display list.
      */
     public Terrain() { 
         // code goes here ...
+        texture = new Color[3];
+
+        // Water
+        texture[0] = new Color(0, 0, 200, 255);
+        //texture[1] = new Color(255, 255, 255, 255);
         
+
+        // Sand
+        texture[1] = new Color(201, 153, 4, 255);
+
+        // Grass 
+        texture[2] = new Color(0, 200, 0, 255);        
         
     }
 
@@ -37,19 +53,8 @@ class Terrain {
      */
     public void draw(GL2 gl, GLU glu, GLUT glut) {
         // code goes here ..
-        byte textLine[]=new byte[16];
-        textLine = calculateTextureColor(2);
-        Buffer buf=ByteBuffer.wrap(textLine);
         
-        gl.glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        gl.glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        
-        //gl.glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-     
-        
-        gl.glDisable(GL_TEXTURE_2D);
-        gl.glEnable(GL_TEXTURE_1D);
-        gl.glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+        initTerrainTexture(gl,texture);
         
         //gl.glBegin(GL_TRIANGLES);
             float x1 = 0;
@@ -57,87 +62,83 @@ class Terrain {
             float y1 = 0;
             float y2 = 0;
             
-            int NU = 50;
-            int NV = 50;
+            int NU = 100;
+            int NV = 100;
             
-            for (int i = -50; i< 50; i++ )
+            for (int i = -100; i< 100; i++ )
             {
-                for (int j = -50; j< 50; j++ )
+                for (int j = -100; j< 100; j++ )
                 {
                    //y1 = i;
                    //y2 = i+1;
-                   if (heightAt(20*i/NV, 20*j/NV) >0){
-                   gl.glBegin(GL_TRIANGLES);
-                   gl.glTexCoord1f(0.1f);
-                   gl.glVertex3f(20*i/NV, 20*j/NV, heightAt(20*i/NV, 20*j/NV));
-                   gl.glTexCoord1f(0.1f);
-                   gl.glVertex3f(20*i/NV, 20*(j+1)/NV, heightAt(20*i/NV, 20*(j+1)/NV));
-                   gl.glTexCoord1f(0.1f);
-                   gl.glVertex3f(20*(i+1)/NV, 20*(j+1)/NV, heightAt(20*(i+1)/NV, 20*(j+1)/NV));
-                
-                   gl.glTexCoord1f(0.1f);
-                   gl.glVertex3f(20*i/NV, 20*j/NV, heightAt(20*i/NV, 20*j/NV));
-                   gl.glTexCoord1f(0.1f);
-                   gl.glVertex3f(20*(i+1)/NV, 20*j/NV, heightAt(20*(i+1)/NV, 20*j/NV));
-                   gl.glTexCoord1f(0.1f);
-                   gl.glVertex3f(20*(i+1)/NV, 20*(j+1)/NV, heightAt(20*(i+1)/NV, 20*(j+1)/NV));
-                   gl.glEnd();}
+                   //if (heightAt(20*i/NV, 20*j/NV) >0){
+                    float a = (float) (0.8*(heightAt(20*i/NV, 20*j/NV)+1)/2+0.1) ;
+                    float b =  (float) (0.8*(heightAt(20*i/NV, 20*(j+1)/NV)+1)/2+0.1);
+                    float c  =(float) (0.8*(heightAt(20*(i+1)/NV, 20*(j+1)/NV)+1)/2+0.1);
+                    float d =(float) (0.8* (heightAt(20*(i+1)/NV, 20*j/NV)+1)/2+0.1);
+                    
+                    gl.glBegin(GL_QUADS);
+           gl.glTexCoord1f(a);
+           gl.glVertex3f(20*i/NV, 20*j/NV, heightAt(20*i/NV, 20*j/NV));
+           gl.glTexCoord1f(b);
+           gl.glVertex3f(20*i/NV, 20*(j+1)/NV, heightAt(20*i/NV, 20*(j+1)/NV));
+           gl.glTexCoord1f(c);
+           gl.glVertex3f(20*(i+1)/NV, 20*(j+1)/NV, heightAt(20*(i+1)/NV, 20*(j+1)/NV));
+           gl.glTexCoord1f(d);
+           gl.glVertex3f(20*(i+1)/NV, 20*j/NV, heightAt(20*(i+1)/NV, 20*j/NV));
+        gl.glEnd();
+                   
+                  
+ 
                 }
 
             }        
         gl.glEnd();
-        gl.glDisable(GL_TEXTURE_1D);
         
-       /* int k =0;
-        byte textLine[]=new byte[16];
-        
-        for (k=0; k<=2; k+=2)
-        {
-            textLine[4*k] = (byte) 0;
-            textLine[4*k+1] = (byte) 0;
-            textLine[4*k+2] = (byte) 255;
-            textLine[4*k+3] = (byte) 255;   
-        }
-        
-        for (k=0; k<=3; k+=2)
-        {
-            textLine[4*k] = (byte) 0;
-            textLine[4*k+1] = (byte) 255;
-            textLine[4*k+2] = (byte) 0;
-            textLine[4*k+3] = (byte) 255;   
-        }
-        
-        
-        
-        Buffer buf=ByteBuffer.wrap(textLine);
-        
-        gl.glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        gl.glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
-        
-        //gl.glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-     
-        
-        /*gl.glDisable(GL_TEXTURE_2D);
-        gl.glEnable(GL_TEXTURE_1D);
-        gl.glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-        
-        gl.glBegin(GL_QUADS);
+        /*gl.glBegin(GL_QUADS);
            gl.glTexCoord1f(0f);
            gl.glVertex3f(0.0f,0.0f,0.0f);
-           gl.glTexCoord1f(0.1f);
+           gl.glTexCoord1f(0.9f);
            gl.glVertex3f(5.0f,0.0f,0.0f);
-           gl.glTexCoord1f(0.1f);
+           gl.glTexCoord1f(0.9f);
            gl.glVertex3f(5.0f,5.0f,0.0f);
            gl.glTexCoord1f(0f);
            gl.glVertex3f(0f,5.0f,0.0f);
-        gl.glEnd();
+        gl.glEnd();*/
         
-        gl.glDisable(GL_TEXTURE_1D);*/
+        gl.glDisable(GL_TEXTURE_1D);
         
         
         drawTress(gl,glut);
         
     }
+    public double getTextureCoordinateFromHeight(double height) {
+            height = (height+1)/4+0.25;
+            height = (height<0.25)?0.25:height;
+            height = (height>0.75)?0.75:height;
+            return height;
+        }
+    
+    private void initTerrainTexture(GL2 gl, Color[] colors)
+    {
+        ByteBuffer textLine = ByteBuffer.allocateDirect(colors.length * 4).order(ByteOrder.nativeOrder());
+        for (Color color : colors) {
+            int pixel = color.getRGB();
+            textLine.put((byte) ((pixel >> 16) & 0xFF)); // Red component
+            textLine.put((byte) ((pixel >> 8) & 0xFF));  // Green component
+            textLine.put((byte) (pixel & 0xFF));         // Blue component
+            textLine.put((byte) ((pixel >> 24) & 0xFF)); // Alpha component
+        }
+        textLine.flip();
+        
+        
+        gl.glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        gl.glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+ 
+        gl.glDisable(GL_TEXTURE_2D);
+        gl.glEnable(GL_TEXTURE_1D);
+        gl.glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 3, 0, GL_RGBA, GL_UNSIGNED_BYTE, textLine);
+    }        
     
     private byte[] calculateTextureColor(int color)
     {
