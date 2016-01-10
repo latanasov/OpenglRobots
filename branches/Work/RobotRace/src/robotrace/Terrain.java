@@ -56,18 +56,14 @@ class Terrain {
         
         initTerrainTexture(gl,texture);
         
-        //gl.glBegin(GL_TRIANGLES);
-            float x1 = 0;
-            float x2 = 0;
-            float y1 = 0;
-            float y2 = 0;
+
             
             int NU = 100;
             int NV = 100;
             
-            for (int i = -100; i< 100; i++ )
+            for (int i = -100; i<= 100; i++ )
             {
-                for (int j = -100; j< 100; j++ )
+                for (int j = -100; j<= 100; j++ )
                 {
                    //y1 = i;
                    //y2 = i+1;
@@ -94,17 +90,7 @@ class Terrain {
 
             }        
         gl.glEnd();
-        
-        /*gl.glBegin(GL_QUADS);
-           gl.glTexCoord1f(0f);
-           gl.glVertex3f(0.0f,0.0f,0.0f);
-           gl.glTexCoord1f(0.9f);
-           gl.glVertex3f(5.0f,0.0f,0.0f);
-           gl.glTexCoord1f(0.9f);
-           gl.glVertex3f(5.0f,5.0f,0.0f);
-           gl.glTexCoord1f(0f);
-           gl.glVertex3f(0f,5.0f,0.0f);
-        gl.glEnd();*/
+
         
         gl.glDisable(GL_TEXTURE_1D);
         

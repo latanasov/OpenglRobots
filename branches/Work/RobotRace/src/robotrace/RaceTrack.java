@@ -14,6 +14,7 @@ import javax.media.opengl.GL2;
 import static javax.media.opengl.GL2.GL_QUAD_STRIP;
 import static javax.media.opengl.GL2GL3.GL_QUADS;
 import javax.media.opengl.glu.GLU;
+import static robotrace.Base.brick;
 import static robotrace.Base.track;
 
 /**
@@ -129,8 +130,13 @@ class RaceTrack {
                 gl.glVertex3f((float)this.controlPoints[i].x,(float)this.controlPoints[i].y,(float)this.controlPoints[i].z); 
             }
             gl.glEnd();*/
+           // gl.glEnable(GL_TEXTURE_2D);
+  
+        //track.bind(gl); 
+            gl.glEnable(GL_TEXTURE_2D);
             
-            
+        
+        //track.bind(gl); 
             // Loop the control points
             for (int i =0; i< (this.controlPoints.length/16); i++)
             {    
@@ -152,7 +158,9 @@ class RaceTrack {
                       P11 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+4], this.controlPoints[i*15+i+5], this.controlPoints[i*15+i+6], this.controlPoints[i*15+i+7]);
                       P22 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+8], this.controlPoints[i*15+i+9], this.controlPoints[i*15+i+10], this.controlPoints[i*15+i+11]);
                       P33 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+12], this.controlPoints[i*15+i+13], this.controlPoints[i*15+i+14], this.controlPoints[i*15+i+15]);
-
+                      
+                      // Do texturing for the track
+                      track.bind(gl); 
                    }
                    else if (a==1)
                    {
@@ -166,6 +174,9 @@ class RaceTrack {
                       P11 = this.getCubicBezierPoint((float)(u+1)/NU, updateLowerControlPoints(this.controlPoints[i*15+i+4]), updateLowerControlPoints(this.controlPoints[i*15+i+5]), updateLowerControlPoints(this.controlPoints[i*15+i+6]), updateLowerControlPoints(this.controlPoints[i*15+i+7]));
                       P22 = this.getCubicBezierPoint((float)(u+1)/NU, updateLowerControlPoints(this.controlPoints[i*15+i+8]), updateLowerControlPoints(this.controlPoints[i*15+i+9]), updateLowerControlPoints(this.controlPoints[i*15+i+10]), updateLowerControlPoints(this.controlPoints[i*15+i+11]));
                       P33 = this.getCubicBezierPoint((float)(u+1)/NU, updateLowerControlPoints(this.controlPoints[i*15+i+12]), updateLowerControlPoints(this.controlPoints[i*15+i+13]), updateLowerControlPoints(this.controlPoints[i*15+i+14]), updateLowerControlPoints(this.controlPoints[i*15+i+15]));
+                      
+                      // Do texturing for the brick
+                      brick.bind(gl); 
                    }
                    else if (a==2)
                    {
@@ -179,6 +190,9 @@ class RaceTrack {
                       P11 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+4],updateInnerControlPoints1(this.controlPoints[i*15+i+4]),updateInnerControlPoints2(this.controlPoints[i*15+i+4]),updateInnerControlPoints3(this.controlPoints[i*15+i+4]));
                       P22 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+8],updateInnerControlPoints1(this.controlPoints[i*15+i+8]),updateInnerControlPoints2(this.controlPoints[i*15+i+8]),updateInnerControlPoints3(this.controlPoints[i*15+i+8]));
                       P33 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+12],updateInnerControlPoints1(this.controlPoints[i*15+i+12]),updateInnerControlPoints2(this.controlPoints[i*15+i+12]),updateInnerControlPoints3(this.controlPoints[i*15+i+12]));
+                   
+                      // Do texturing for the brick
+                      brick.bind(gl); 
                    }
                    else if (a==3)
                    {
@@ -193,28 +207,9 @@ class RaceTrack {
                       P22 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+11],updateInnerControlPoints1(this.controlPoints[i*15+i+11]),updateInnerControlPoints2(this.controlPoints[i*15+i+11]),updateInnerControlPoints3(this.controlPoints[i*15+i+11]));
                       P33 = this.getCubicBezierPoint((float)(u+1)/NU, this.controlPoints[i*15+i+15],updateInnerControlPoints1(this.controlPoints[i*15+i+15]),updateInnerControlPoints2(this.controlPoints[i*15+i+15]),updateInnerControlPoints3(this.controlPoints[i*15+i+15]));
 
+                      // Do texturing for the brick
+                      brick.bind(gl); 
                    }
-
-                // divided the surface into four tracks and draw the lane with different coolor
-                if (a==0)
-                {
-                    if (u == 0 || u == NU/4 || u == 2*NU/4 || u == 3*NU/4 || u == NU-1)
-                    {
-                        gl.glColor3f(0f, 0f, 0f);
-                    }
-                /* else  if (u == NU/8 || u == 3*NU/8 || u == 5*NU/8 || u == 7*NU/8)
-                 {
-                    gl.glColor3f(0f, 0f, 1f);
-                 } */
-                    else
-                    { 
-                        gl.glColor3d(Color.BROWN.getRed(), Color.BROWN.getGreen(), Color.BROWN.getBlue());
-                    //gl.glColor3f(133f, 94f, 66f);
-                    } 
-                }
-                else{
-                    gl.glColor3f(0.5f, 0.5f, 0.5f);
-                }
                 
                 // draw the surface through drawing trangles
                gl.glBegin(GL_TRIANGLES); 
@@ -292,102 +287,36 @@ class RaceTrack {
                            listLaneOutter.add(P41);
                        }
                        
-                   }
+                   } 
                    
-                   drawTriangles(gl, normal1, normal2,P41,P42, P43,P44); 
-                  //  gl.glVertex3f((float)P41.x,(float)P41.y,(float)P41.z);  
-                    
+                gl.glColor3f(1f, 1f, 1f); 
+                  
+                gl.glTexCoord2d((float)(u+1)/NU, (float)(v+1)/NV);
+                gl.glVertex3f((float)P41.x, (float)P41.y, (float)P41.z);
+                
+                gl.glTexCoord2d((float)(u+1)/NU, (float)v/NV);
+                gl.glVertex3f((float)P43.x, (float)P43.y, (float)P43.z);
+                
+                gl.glTexCoord2d((float)u/NU, (float)v/NV);
+                gl.glVertex3f((float)P44.x, (float)P44.y, (float)P44.z);
+               
+                gl.glTexCoord2d((float)(u+1)/NU, (float)(v+1)/NV);
+                gl.glVertex3f((float)P44.x, (float)P44.y, (float)P44.z);
+               
+                gl.glTexCoord2d((float)(u+1)/NU,(float) v/NV);  
+                gl.glVertex3f((float)P42.x, (float)P42.y, (float)P42.z);
+                
+                gl.glTexCoord2d((float)u/NU,(float) v/NV);  
+                gl.glVertex3f((float)P41.x, (float)P41.y, (float)P41.z);
+             
                 }
                 gl.glEnd();
                 }   
             }
         }
-        
-        // Add texturing for the outter track
-        addTextureInnerOutterTrack(gl, listLaneOutter, listLaneInner,0.2);
-        
-        // Add texturing for the inner track
-        addTextureInnerOutterTrack(gl, listLaneInner, listLaneOutter,0.1);
-        
-        // Add texturing for the lower track
-        addTextureLowerTrack(gl, listLaneOutter, listLaneInner);
-        
-   
-    }
-    }
-    
-    public void addTextureInnerOutterTrack(GL2 gl,List<Vector> listLaneOutter,List<Vector> listLaneInner, double offsetConst)
-    {
-        gl.glEnable(GL_TEXTURE_2D);
-            
-        gl.glColor3f(1f, 1f, 1f); 
-        track.bind(gl); 
-           
-        gl.glBegin(GL_QUADS);
-        
-            Vector offset1 = new Vector (0,0,0);
-            Vector direction1 = new Vector (0,0,0);
-            Vector offset2 = new Vector (0,0,0);
-            Vector direction2 = new Vector (0,0,0);
-           
-            for (int i=0; i<listLaneOutter.size() -1; i++)
-            {  
-                   
-                   
-                   direction1.x = listLaneOutter.get(i).x - listLaneInner.get(i).x;
-                   direction1.y = listLaneOutter.get(i).y - listLaneInner.get(i).y;
-                   
-                   direction2.x = listLaneOutter.get(i+1).x - listLaneInner.get(i+1).x;
-                   direction2.y = listLaneOutter.get(i+1).y - listLaneInner.get(i+1).y;
-                   //direction.x = listLaneOutter.get(i).z - listLanePos4.get(i).z;
-                   
-                   offset1.x = offsetConst*direction1.normalized().x;
-                   offset1.y = offsetConst*direction1.normalized().y;
-                   offset2.x = offsetConst*direction2.normalized().x;
-                   offset2.y = offsetConst*direction2.normalized().y;
-                  //offset.z = 0.1*direction.normalized().z +listLaneOutter.get(i).z;
-                   
-               gl.glTexCoord2d(0, 0); 
-               gl.glVertex3d(listLaneOutter.get(i).x + offset1.x, listLaneOutter.get(i).y+ offset1.y, listLaneOutter.get(i).z-0.75); 
-               gl.glTexCoord2d(0, 1);
-               gl.glVertex3d(listLaneOutter.get(i).x+ offset1.x, listLaneOutter.get(i).y+ offset1.y, listLaneOutter.get(i).z);
-               gl.glTexCoord2d(1, 1); 
-               gl.glVertex3d(listLaneOutter.get(i+1).x+ offset2.x, listLaneOutter.get(i+1).y+ offset2.y, listLaneOutter.get(i+1).z);
-               gl.glTexCoord2d(1, 0); 
-               gl.glVertex3d(listLaneOutter.get(i+1).x+ offset2.x, listLaneOutter.get(i+1).y+ offset2.y, listLaneOutter.get(i+1).z-0.75);
-               }
-   
-            gl.glEnd();
-            
         gl.glDisable(GL_TEXTURE_2D);
-    }  
-    
-    public void addTextureLowerTrack(GL2 gl,List<Vector> listLaneOutter,List<Vector> listLaneInner)
-    {
-        gl.glEnable(GL_TEXTURE_2D);
-            
-        gl.glColor3f(1f, 1f, 1f); 
-        track.bind(gl); 
-           
-        gl.glBegin(GL_QUADS);
-           
-            for (int i=0; i<listLaneOutter.size() -1; i++)
-            {    
-               gl.glTexCoord2d(0, 0); 
-               gl.glVertex3d(listLaneInner.get(i).x , listLaneInner.get(i).y, listLaneInner.get(i).z-0.78); 
-               gl.glTexCoord2d(0, 1);
-               gl.glVertex3d(listLaneOutter.get(i).x , listLaneOutter.get(i).y, listLaneOutter.get(i).z-0.78);
-               
-               gl.glTexCoord2d(1, 1); 
-               gl.glVertex3d(listLaneOutter.get(i+1).x , listLaneOutter.get(i+1).y, listLaneOutter.get(i+1).z-0.78); 
-               
-               gl.glTexCoord2d(1, 0); 
-               gl.glVertex3d(listLaneInner.get(i+1).x , listLaneInner.get(i+1).y, listLaneInner.get(i+1).z-0.78); 
-            }
-   
-            gl.glEnd();
-            
-        gl.glDisable(GL_TEXTURE_2D);
+
+    }
     }
     
     /**
