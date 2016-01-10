@@ -213,7 +213,7 @@ class RaceTrack {
                     } 
                 }
                 else{
-                    gl.glColor3f(0.5f, 0f, 0.5f);
+                    gl.glColor3f(0.5f, 0.5f, 0.5f);
                 }
                 
                 // draw the surface through drawing trangles
@@ -304,21 +304,19 @@ class RaceTrack {
         }
         
         // Add texturing for the outter track
-        //addTextureForTrack(gl, listLaneOutter, listLaneInner,0.3);
+        addTextureInnerOutterTrack(gl, listLaneOutter, listLaneInner,0.2);
         
         // Add texturing for the inner track
-        //addTextureForTrack(gl, listLaneInner, listLaneOutter,0.1);
+        addTextureInnerOutterTrack(gl, listLaneInner, listLaneOutter,0.1);
+        
         // Add texturing for the lower track
-        //for (int i=0 ; i<= listLaneOutter.size(); i++)
-        //{    
+        addTextureLowerTrack(gl, listLaneOutter, listLaneInner);
         
-       // }
-            
-        
+   
     }
     }
     
-    public void addTextureForTrack(GL2 gl,List<Vector> listLaneOutter,List<Vector> listLaneInner, double offsetConst)
+    public void addTextureInnerOutterTrack(GL2 gl,List<Vector> listLaneOutter,List<Vector> listLaneInner, double offsetConst)
     {
         gl.glEnable(GL_TEXTURE_2D);
             
@@ -362,7 +360,35 @@ class RaceTrack {
             gl.glEnd();
             
         gl.glDisable(GL_TEXTURE_2D);
-    }        
+    }  
+    
+    public void addTextureLowerTrack(GL2 gl,List<Vector> listLaneOutter,List<Vector> listLaneInner)
+    {
+        gl.glEnable(GL_TEXTURE_2D);
+            
+        gl.glColor3f(1f, 1f, 1f); 
+        track.bind(gl); 
+           
+        gl.glBegin(GL_QUADS);
+           
+            for (int i=0; i<listLaneOutter.size() -1; i++)
+            {    
+               gl.glTexCoord2d(0, 0); 
+               gl.glVertex3d(listLaneInner.get(i).x , listLaneInner.get(i).y, listLaneInner.get(i).z-0.78); 
+               gl.glTexCoord2d(0, 1);
+               gl.glVertex3d(listLaneOutter.get(i).x , listLaneOutter.get(i).y, listLaneOutter.get(i).z-0.78);
+               
+               gl.glTexCoord2d(1, 1); 
+               gl.glVertex3d(listLaneOutter.get(i+1).x , listLaneOutter.get(i+1).y, listLaneOutter.get(i+1).z-0.78); 
+               
+               gl.glTexCoord2d(1, 0); 
+               gl.glVertex3d(listLaneInner.get(i+1).x , listLaneInner.get(i+1).y, listLaneInner.get(i+1).z-0.78); 
+            }
+   
+            gl.glEnd();
+            
+        gl.glDisable(GL_TEXTURE_2D);
+    }
     
     /**
      * Returns the center of a lane at 0 <= t < 1.

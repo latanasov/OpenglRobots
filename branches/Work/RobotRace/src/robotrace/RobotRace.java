@@ -223,72 +223,72 @@ public class RobotRace extends Base {
         // C-track
         raceTracks[3] = new RaceTrack(new Vector[]{ /* add control points */
             //top
-            new Vector(2-12-0.1, 0+2, h), new Vector((2+4.0/3)-12-0.1, 0+2, h), new Vector((2+8.0/3)-12-0.1, 0+2, h), new Vector((2+12.0/3)-12-0.1, 0+2, h),
-            new Vector(2-12, 2*4*(Math.sqrt(2)-1)/3+2, h), new Vector((2+4.0/3)-12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector((2+8.0/3)-12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector((2+12.0/3)-12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2, h),
-            new Vector(2*4*(Math.sqrt(2)-1)/3-12, 2+2, h), new Vector((2+4.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+4.0/3)+2, h), new Vector((2+8.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+8.0/3)+2, h), new Vector((2+12.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+12.0/3)+2, h),
-            new Vector(0-12, 2+2, h), new Vector(0-12, (2+4.0/3)+2, h), new Vector(0-12, (2+8.0/3)+2, h), new Vector(0-12, (2+12.0/3)+2, h),
+            new Vector(2-12-0.1, 0+2+5, h), new Vector((2+4.0/3)-12-0.1, 0+2+5, h), new Vector((2+8.0/3)-12-0.1, 0+2+5, h), new Vector((2+12.0/3)-12-0.1, 0+2+5, h),
+            new Vector(2-12, 2*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector((2+4.0/3)-12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector((2+8.0/3)-12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector((2+12.0/3)-12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h),
+            new Vector(2*4*(Math.sqrt(2)-1)/3-12, 2+2+5, h), new Vector((2+4.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+4.0/3)+2+5, h), new Vector((2+8.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+8.0/3)+2+5, h), new Vector((2+12.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+12.0/3)+2+5, h),
+            new Vector(0-12, 2+2+5, h), new Vector(0-12, (2+4.0/3)+2+5, h), new Vector(0-12, (2+8.0/3)+2+5, h), new Vector(0-12, (2+12.0/3)+2+5, h),
             
-            new Vector(0-12, 2+2, h), new Vector(0-12, (2+4.0/3)+2, h), new Vector(0-12, (2+8.0/3)+2, h), new Vector(0-12, (2+12.0/3)+2, h),
-            new Vector(-2*4*(Math.sqrt(2)-1)/3-12, 2+2, h), new Vector(-(2+4.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+4.0/3)+2, h), new Vector(-(2+8.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+8.0/3)+2, h), new Vector(-(2+12.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+12.0/3)+2, h),
-            new Vector(-2-12, 2*4*(Math.sqrt(2)-1)/3+2, h), new Vector(-(2+4.0/3)-12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector(-(2+8.0/3)-12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector(-(2+12.0/3)-12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2, h),
-            new Vector(-(14+0.1), 0+2, h), new Vector(-(14+4.0/3+0.1), 0+2, h), new Vector(-(14+8.0/3+0.1), 0+2, h), new Vector(-(14+12.0/3+0.1), 0+2, h),
+            new Vector(0-12, 2+2+5, h), new Vector(0-12, (2+4.0/3)+2+5, h), new Vector(0-12, (2+8.0/3)+2+5, h), new Vector(0-12, (2+12.0/3)+2+5, h),
+            new Vector(-2*4*(Math.sqrt(2)-1)/3-12, 2+2+5, h), new Vector(-(2+4.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+4.0/3)+2+5, h), new Vector(-(2+8.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+8.0/3)+2+5, h), new Vector(-(2+12.0/3)*4*(Math.sqrt(2)-1)/3-12, (2+12.0/3)+2+5, h),
+            new Vector(-2-12, 2*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector(-(2+4.0/3)-12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector(-(2+8.0/3)-12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector(-(2+12.0/3)-12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h),
+            new Vector(-(14+0.1), 0+2+5, h), new Vector(-(14+4.0/3+0.1), 0+2+5, h), new Vector(-(14+8.0/3+0.1), 0+2+5, h), new Vector(-(14+12.0/3+0.1), 0+2+5, h),
            
             //connector
-            new Vector(-(14+0.1), 0+2, h), new Vector(-(14+4.0/3+0.1), 0+2, h), new Vector(-(14+8.0/3+0.1), 0+2, h), new Vector(-(14+12.0/3+0.1), 0+2, h),
-            new Vector(-(14+0.11), -4*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(-(14+4.0/3+0.11), -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(-(14+8.0/3+0.11), -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(-(14+12.0/3+0.11), -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h),
-            new Vector(-(14+0.11), 14*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(-(14+4.0/3+0.11), (14+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(-(14+8.0/3+0.11), (14+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(-(14+12.0/3+0.11), (14+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h),
-            new Vector(-(14+0.1), 0-2, h), new Vector(-(14+4.0/3+0.1), 0-2, h), new Vector(-(14+8.0/3+0.1), 0-2, h), new Vector(-(14+12.0/3+0.1), 0-2, h),
+            new Vector(-(14+0.1), 0+2+5, h), new Vector(-(14+4.0/3+0.1), 0+2+5, h), new Vector(-(14+8.0/3+0.1), 0+2+5, h), new Vector(-(14+12.0/3+0.1), 0+2+5, h),
+            new Vector(-(14+0.11), -4*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(-(14+4.0/3+0.11), -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(-(14+8.0/3+0.11), -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(-(14+12.0/3+0.11), -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h),
+            new Vector(-(14+0.11), 14*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(-(14+4.0/3+0.11), (14+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(-(14+8.0/3+0.11), (14+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(-(14+12.0/3+0.11), (14+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h),
+            new Vector(-(14+0.1), 0-2+5, h), new Vector(-(14+4.0/3+0.1), 0-2+5, h), new Vector(-(14+8.0/3+0.1), 0-2+5, h), new Vector(-(14+12.0/3+0.1), 0-2+5, h),
             
              //outer
-            new Vector(-14-0.1, 0-2, h), new Vector(-(14+4.0/3)-0.1, 0-2, h), new Vector(-(14+8.0/3)-0.1, 0-2, h), new Vector(-(14+12.0/3)-0.1, 0-2, h),
-            new Vector(-14, -14*4*(Math.sqrt(2)-1)/3-2, h), new Vector(-(14+4.0/3), -(14+4.0/3)*4*(Math.sqrt(2)-1)/3-2, h), new Vector(-(14+8.0/3), -(14+8.0/3)*4*(Math.sqrt(2)-1)/3-2, h), new Vector(-(14+12.0/3), -(14+12.0/3)*4*(Math.sqrt(2)-1)/3-2, h),
-            new Vector(-14*4*(Math.sqrt(2)-1)/3, -14-2, h), new Vector(-(14+4.0/3)*4*(Math.sqrt(2)-1)/3, -(14+4.0/3)-2, h), new Vector(-(14+8.0/3)*4*(Math.sqrt(2)-1)/3, -(14+8.0/3)-2, h), new Vector(-(14+12.0/3)*4*(Math.sqrt(2)-1)/3, -(14+12.0/3)-2, h),
-            new Vector(0, -14-2, h), new Vector(0, -(14+4.0/3)-2, h), new Vector(0, -(14+8.0/3)-2, h), new Vector(0, -(14+12.0/3)-2, h),
+            new Vector(-14-0.1, 0-2+5, h), new Vector(-(14+4.0/3)-0.1, 0-2+5, h), new Vector(-(14+8.0/3)-0.1, 0-2+5, h), new Vector(-(14+12.0/3)-0.1, 0-2+5, h),
+            new Vector(-14, -14*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector(-(14+4.0/3), -(14+4.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector(-(14+8.0/3), -(14+8.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector(-(14+12.0/3), -(14+12.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h),
+            new Vector(-14*4*(Math.sqrt(2)-1)/3, -14-2+5, h), new Vector(-(14+4.0/3)*4*(Math.sqrt(2)-1)/3, -(14+4.0/3)-2+5, h), new Vector(-(14+8.0/3)*4*(Math.sqrt(2)-1)/3, -(14+8.0/3)-2+5, h), new Vector(-(14+12.0/3)*4*(Math.sqrt(2)-1)/3, -(14+12.0/3)-2+5, h),
+            new Vector(0, -14-2+5, h), new Vector(0, -(14+4.0/3)-2+5, h), new Vector(0, -(14+8.0/3)-2+5, h), new Vector(0, -(14+12.0/3)-2+5, h),
 
-            new Vector(0, -14-2, h), new Vector(0, -(14+4.0/3)-2, h), new Vector(0, -(14+8.0/3)-2, h), new Vector(0, -(14+12.0/3)-2, h),
-            new Vector(14*4*(Math.sqrt(2)-1)/3, -14-2, h), new Vector((14+4.0/3)*4*(Math.sqrt(2)-1)/3, -(14+4.0/3)-2, h), new Vector((14+8.0/3)*4*(Math.sqrt(2)-1)/3, -(14+8.0/3)-2, h), new Vector((14+12.0/3)*4*(Math.sqrt(2)-1)/3, -(14+12.0/3)-2, h),
-            new Vector(14, -14*4*(Math.sqrt(2)-1)/3-2, h), new Vector((14+4.0/3), -(14+4.0/3)*4*(Math.sqrt(2)-1)/3-2, h), new Vector((14+8.0/3), -(14+8.0/3)*4*(Math.sqrt(2)-1)/3-2, h), new Vector((14+12.0/3), -(14+12.0/3)*4*(Math.sqrt(2)-1)/3-2, h),
-            new Vector(14+0.1, 0-2, h), new Vector(14+4.0/3+0.1, 0-2, h), new Vector(14+8.0/3+0.1, 0-2, h), new Vector(14+12.0/3+0.1, 0-2, h),
+            new Vector(0, -14-2+5, h), new Vector(0, -(14+4.0/3)-2+5, h), new Vector(0, -(14+8.0/3)-2+5, h), new Vector(0, -(14+12.0/3)-2+5, h),
+            new Vector(14*4*(Math.sqrt(2)-1)/3, -14-2+5, h), new Vector((14+4.0/3)*4*(Math.sqrt(2)-1)/3, -(14+4.0/3)-2+5, h), new Vector((14+8.0/3)*4*(Math.sqrt(2)-1)/3, -(14+8.0/3)-2+5, h), new Vector((14+12.0/3)*4*(Math.sqrt(2)-1)/3, -(14+12.0/3)-2+5, h),
+            new Vector(14, -14*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector((14+4.0/3), -(14+4.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector((14+8.0/3), -(14+8.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector((14+12.0/3), -(14+12.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h),
+            new Vector(14+0.1, 0-2+5, h), new Vector(14+4.0/3+0.1, 0-2+5, h), new Vector(14+8.0/3+0.1, 0-2+5, h), new Vector(14+12.0/3+0.1, 0-2+5, h),
             
             //connector
-            new Vector(14+0.1, 0-2, h), new Vector(14+4.0/3+0.1, 0-2, h), new Vector(14+8.0/3+0.1, 0-2, h), new Vector(14+12.0/3+0.1, 0-2, h),
-            new Vector(14+0.11, 14*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(14+4.0/3+0.11, (14+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(14+8.0/3+0.11, (14+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(14+12.0/3+0.11, (14+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h),
-            new Vector(14+0.11, -4*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(14+4.0/3+0.11, -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(14+8.0/3+0.11, -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(14+12.0/3+0.11, -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h),
-            new Vector(14+0.1, 0+2, h), new Vector(14+4.0/3+0.1, 0+2, h), new Vector(14+8.0/3+0.1, 0+2, h), new Vector(14+12.0/3+0.1, 0+2, h),
+            new Vector(14+0.1, 0-2+5, h), new Vector(14+4.0/3+0.1, 0-2+5, h), new Vector(14+8.0/3+0.1, 0-2+5, h), new Vector(14+12.0/3+0.1, 0-2+5, h),
+            new Vector(14+0.11, 14*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(14+4.0/3+0.11, (14+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(14+8.0/3+0.11, (14+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(14+12.0/3+0.11, (14+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h),
+            new Vector(14+0.11, -4*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(14+4.0/3+0.11, -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(14+8.0/3+0.11, -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(14+12.0/3+0.11, -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h),
+            new Vector(14+0.1, 0+2+5, h), new Vector(14+4.0/3+0.1, 0+2+5, h), new Vector(14+8.0/3+0.1, 0+2+5, h), new Vector(14+12.0/3+0.1, 0+2+5, h),
             
             //bottom
-            new Vector(14+0.1, 0+2, h), new Vector(14+4.0/3+0.1, 0+2, h), new Vector(14+8.0/3+0.1, 0+2, h), new Vector(14+12.0/3+0.1, 0+2, h),
-            new Vector(2+12, 2*4*(Math.sqrt(2)-1)/3+2, h), new Vector((2+4.0/3)+12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector((2+8.0/3)+12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector((2+12.0/3)+12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2, h),
-            new Vector(2*4*(Math.sqrt(2)-1)/3+12, 2+2, h), new Vector((2+4.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+4.0/3)+2, h), new Vector((2+8.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+8.0/3)+2, h), new Vector((2+12.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+12.0/3)+2, h),
-            new Vector(0+12, 2+2, h), new Vector(0+12, (2+4.0/3)+2, h), new Vector(0+12, (2+8.0/3)+2, h), new Vector(0+12, (2+12.0/3)+2, h),
+            new Vector(14+0.1, 0+2+5, h), new Vector(14+4.0/3+0.1, 0+2+5, h), new Vector(14+8.0/3+0.1, 0+2+5, h), new Vector(14+12.0/3+0.1, 0+2+5, h),
+            new Vector(2+12, 2*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector((2+4.0/3)+12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector((2+8.0/3)+12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector((2+12.0/3)+12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h),
+            new Vector(2*4*(Math.sqrt(2)-1)/3+12, 2+2+5, h), new Vector((2+4.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+4.0/3)+2+5, h), new Vector((2+8.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+8.0/3)+2+5, h), new Vector((2+12.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+12.0/3)+2+5, h),
+            new Vector(0+12, 2+2+5, h), new Vector(0+12, (2+4.0/3)+2+5, h), new Vector(0+12, (2+8.0/3)+2+5, h), new Vector(0+12, (2+12.0/3)+2+5, h),
             
-            new Vector(0+12, 2+2, h), new Vector(0+12, (2+4.0/3)+2, h), new Vector(0+12, (2+8.0/3)+2, h), new Vector(0+12, (2+12.0/3)+2, h),
-            new Vector(-2*4*(Math.sqrt(2)-1)/3+12, 2+2, h), new Vector(-(2+4.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+4.0/3)+2, h), new Vector(-(2+8.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+8.0/3)+2, h), new Vector(-(2+12.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+12.0/3)+2, h),
-            new Vector(-2+12, 2*4*(Math.sqrt(2)-1)/3+2, h), new Vector(-(2+4.0/3)+12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector(-(2+8.0/3)+12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2, h), new Vector(-(2+12.0/3)+12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2, h),
-            new Vector(-2+12+0.1, 0+2, h), new Vector(-(2+4.0/3)+12+0.1, 0+2, h), new Vector(-(2+8.0/3)+12+0.1, 0+2, h), new Vector(-(2+12.0/3)+12+0.1, 0+2, h),
+            new Vector(0+12, 2+2+5, h), new Vector(0+12, (2+4.0/3)+2+5, h), new Vector(0+12, (2+8.0/3)+2+5, h), new Vector(0+12, (2+12.0/3)+2+5, h),
+            new Vector(-2*4*(Math.sqrt(2)-1)/3+12, 2+2+5, h), new Vector(-(2+4.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+4.0/3)+2+5, h), new Vector(-(2+8.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+8.0/3)+2+5, h), new Vector(-(2+12.0/3)*4*(Math.sqrt(2)-1)/3+12, (2+12.0/3)+2+5, h),
+            new Vector(-2+12, 2*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector(-(2+4.0/3)+12, (2+4.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector(-(2+8.0/3)+12, (2+8.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h), new Vector(-(2+12.0/3)+12, (2+12.0/3)*4*(Math.sqrt(2)-1)/3+2+5, h),
+            new Vector(-2+12+0.1, 0+2+5, h), new Vector(-(2+4.0/3)+12+0.1, 0+2+5, h), new Vector(-(2+8.0/3)+12+0.1, 0+2+5, h), new Vector(-(2+12.0/3)+12+0.1, 0+2+5, h),
             
             //connector
-            new Vector(6+12.0/3+0.1, 0+2, h), new Vector(6+8.0/3+0.1, 0+2, h),  new Vector(6+4.0/3+0.1, 0+2, h), new Vector(6+0.1, 0+2, h),
-            new Vector(6+12.0/3+0.11, -4*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(6+8.0/3+0.11, -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(6+4.0/3+0.11, -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(6+0.11, -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), 
-            new Vector(6+12.0/3+0.11, (6+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(6+8.0/3+0.11, (6+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(6+4.0/3+0.11, (6+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(6+0.11, 6*(4*(Math.sqrt(2)-1)/3)/10-2, h),
-            new Vector(6+12.0/3+0.1, 0-2, h), new Vector(6+8.0/3+0.1, 0-2, h), new Vector(6+4.0/3+0.1, 0-2, h), new Vector(6+0.1, 0-2, h),
+            new Vector(6+12.0/3+0.1, 0+2+5, h), new Vector(6+8.0/3+0.1, 0+2+5, h),  new Vector(6+4.0/3+0.1, 0+2+5, h), new Vector(6+0.1, 0+2+5, h),
+            new Vector(6+12.0/3+0.11, -4*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(6+8.0/3+0.11, -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(6+4.0/3+0.11, -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(6+0.11, -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), 
+            new Vector(6+12.0/3+0.11, (6+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(6+8.0/3+0.11, (6+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(6+4.0/3+0.11, (6+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(6+0.11, 6*(4*(Math.sqrt(2)-1)/3)/10-2+5, h),
+            new Vector(6+12.0/3+0.1, 0-2+5, h), new Vector(6+8.0/3+0.1, 0-2+5, h), new Vector(6+4.0/3+0.1, 0-2+5, h), new Vector(6+0.1, 0-2+5, h),
             
             //inner
-            new Vector(6+12.0/3+0.1, 0-2, h),new Vector(6+8.0/3+0.1, 0-2, h), new Vector(6+4.0/3+0.1, 0-2, h), new Vector(6+0.1, 0-2, h), 
-            new Vector((6+12.0/3), -(6+12.0/3)*4*(Math.sqrt(2)-1)/3-2, h),new Vector((6+8.0/3), -(6+8.0/3)*4*(Math.sqrt(2)-1)/3-2, h), new Vector((6+4.0/3), -(6+4.0/3)*4*(Math.sqrt(2)-1)/3-2, h), new Vector(6, -6*4*(Math.sqrt(2)-1)/3-2, h), 
-            new Vector((6+12.0/3)*4*(Math.sqrt(2)-1)/3, -(6+12.0/3)-2, h),new Vector((6+8.0/3)*4*(Math.sqrt(2)-1)/3, -(6+8.0/3)-2, h), new Vector((6+4.0/3)*4*(Math.sqrt(2)-1)/3, -(6+4.0/3)-2, h), new Vector(6*4*(Math.sqrt(2)-1)/3, -6-2, h), 
-            new Vector(0, -(6+12.0/3)-2, h),new Vector(0, -(6+8.0/3)-2, h), new Vector(0, -(6+4.0/3)-2, h), new Vector(0, -6-2, h),
+            new Vector(6+12.0/3+0.1, 0-2+5, h),new Vector(6+8.0/3+0.1, 0-2+5, h), new Vector(6+4.0/3+0.1, 0-2+5, h), new Vector(6+0.1, 0-2+5, h), 
+            new Vector((6+12.0/3), -(6+12.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h),new Vector((6+8.0/3), -(6+8.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector((6+4.0/3), -(6+4.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h), new Vector(6, -6*4*(Math.sqrt(2)-1)/3-2+5, h), 
+            new Vector((6+12.0/3)*4*(Math.sqrt(2)-1)/3, -(6+12.0/3)-2+5, h),new Vector((6+8.0/3)*4*(Math.sqrt(2)-1)/3, -(6+8.0/3)-2+5, h), new Vector((6+4.0/3)*4*(Math.sqrt(2)-1)/3, -(6+4.0/3)-2+5, h), new Vector(6*4*(Math.sqrt(2)-1)/3, -6-2+5, h), 
+            new Vector(0, -(6+12.0/3)-2+5, h),new Vector(0, -(6+8.0/3)-2+5, h), new Vector(0, -(6+4.0/3)-2+5, h), new Vector(0, -6-2+5, h),
             
-            new Vector(0, -(6+12.0/3)-2, h),new Vector(0, -(6+8.0/3)-2, h), new Vector(0, -(6+4.0/3)-2, h), new Vector(0, -6-2, h), 
-            new Vector(-(6+12.0/3)*4*(Math.sqrt(2)-1)/3, -(6+12.0/3)-2, h),new Vector(-(6+8.0/3)*4*(Math.sqrt(2)-1)/3, -(6+8.0/3)-2, h), new Vector(-(6+4.0/3)*4*(Math.sqrt(2)-1)/3, -(6+4.0/3)-2, h), new Vector(-6*4*(Math.sqrt(2)-1)/3, -6-2, h), 
-            new Vector(-(6+12.0/3), -(6+12.0/3)*4*(Math.sqrt(2)-1)/3-2, h),new Vector(-(6+8.0/3), -(6+8.0/3)*4*(Math.sqrt(2)-1)/3-2, h),  new Vector(-(6+4.0/3), -(6+4.0/3)*4*(Math.sqrt(2)-1)/3-2, h),new Vector(-6, -6*4*(Math.sqrt(2)-1)/3-2, h), 
-            new Vector(-(6+12.0/3)-0.1, 0-2, h),new Vector(-(6+8.0/3)-0.1, 0-2, h),  new Vector(-(6+4.0/3)-0.1, 0-2, h), new Vector(-6-0.1, 0-2, h),
+            new Vector(0, -(6+12.0/3)-2+5, h),new Vector(0, -(6+8.0/3)-2+5, h), new Vector(0, -(6+4.0/3)-2+5, h), new Vector(0, -6-2+5, h), 
+            new Vector(-(6+12.0/3)*4*(Math.sqrt(2)-1)/3, -(6+12.0/3)-2+5, h),new Vector(-(6+8.0/3)*4*(Math.sqrt(2)-1)/3, -(6+8.0/3)-2+5, h), new Vector(-(6+4.0/3)*4*(Math.sqrt(2)-1)/3, -(6+4.0/3)-2+5, h), new Vector(-6*4*(Math.sqrt(2)-1)/3, -6-2+5, h), 
+            new Vector(-(6+12.0/3), -(6+12.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h),new Vector(-(6+8.0/3), -(6+8.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h),  new Vector(-(6+4.0/3), -(6+4.0/3)*4*(Math.sqrt(2)-1)/3-2+5, h),new Vector(-6, -6*4*(Math.sqrt(2)-1)/3-2+5, h), 
+            new Vector(-(6+12.0/3)-0.1, 0-2+5, h),new Vector(-(6+8.0/3)-0.1, 0-2+5, h),  new Vector(-(6+4.0/3)-0.1, 0-2+5, h), new Vector(-6-0.1, 0-2+5, h),
             
            //connector
-            new Vector(-(6+12.0/3+0.1), 0-2, h), new Vector(-(6+8.0/3+0.1), 0-2, h), new Vector(-(6+4.0/3+0.1), 0-2, h), new Vector(-(6+0.1), 0-2, h),
-            new Vector(-(6+12.0/3+0.11), (6+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(-(6+8.0/3+0.11), (6+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(-(6+4.0/3+0.11), (6+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2, h), new Vector(-(6+0.11), 6*(4*(Math.sqrt(2)-1)/3)/10-2, h),
-            new Vector(-(6+12.0/3+0.11), -4*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(-(6+8.0/3+0.11), -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(-(6+4.0/3+0.11), -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), new Vector(-(6+0.11), -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2, h), 
-            new Vector(-(6+12.0/3+0.1), 0+2, h), new Vector(-(6+8.0/3+0.1), 0+2, h),  new Vector(-(6+4.0/3+0.1), 0+2, h), new Vector(-(6+0.1), 0+2, h),
+            new Vector(-(6+12.0/3+0.1), 0-2+5, h), new Vector(-(6+8.0/3+0.1), 0-2+5, h), new Vector(-(6+4.0/3+0.1), 0-2+5, h), new Vector(-(6+0.1), 0-2+5, h),
+            new Vector(-(6+12.0/3+0.11), (6+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(-(6+8.0/3+0.11), (6+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(-(6+4.0/3+0.11), (6+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10-2+5, h), new Vector(-(6+0.11), 6*(4*(Math.sqrt(2)-1)/3)/10-2+5, h),
+            new Vector(-(6+12.0/3+0.11), -4*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(-(6+8.0/3+0.11), -(4+4.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(-(6+4.0/3+0.11), -(4+8.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), new Vector(-(6+0.11), -(4+12.0/3)*(4*(Math.sqrt(2)-1)/3)/10+2+5, h), 
+            new Vector(-(6+12.0/3+0.1), 0+2+5, h), new Vector(-(6+8.0/3+0.1), 0+2+5, h),  new Vector(-(6+4.0/3+0.1), 0+2+5, h), new Vector(-(6+0.1), 0+2+5, h),
         });
         
             
