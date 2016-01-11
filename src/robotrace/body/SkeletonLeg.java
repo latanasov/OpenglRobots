@@ -33,27 +33,11 @@ public class SkeletonLeg extends SkeletonPart {
 
         for (Shape shape : this.partShape.getShapeCollection()) {
 
+            double angle =Math.sin(time*4)*45;
+            shape.setAngleOfRotation((float) angle);
             shape.setToBeAnimated(true);
-            float angle = shape.getAngleOfRotation();
-            if ((angle >= -75) && (goBack == false)) {
-                 angle=angle-5;
-                 if (angle==-75)
-                 {
-                     goBack=true;
-                 }
- 
-  
-            }
-             if ((angle <= 55) && (goBack == true)) {
-                 if (angle==55) {
-                     goBack=false;
-                 }
-                    angle=angle+5;
-            }
-
-            shape.setAngleOfRotation(angle);
-        }
-
     }
+
+}
 
 }

@@ -52,7 +52,7 @@ class Robot {
     public float robotAngle;
 
     private boolean robotIsDrawn = false;
-
+    private double atime=0;
     /**
      * Constructs the robot with initial parameters.
      */
@@ -71,6 +71,7 @@ class Robot {
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, boolean stickFigure, float tAnim) {
+        this.atime=tAnim;
         this.walk(tAnim);
         //Apply the matterials 
         gl.glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, FloatBuffer.wrap(this.material.ambient));
@@ -85,7 +86,7 @@ class Robot {
         } else {
 
             gl.glPushMatrix();
-            drawRobot(gl, glut);
+            drawRobot(gl, glut,glu);
             gl.glPopMatrix();
 
         }
@@ -120,10 +121,10 @@ class Robot {
         this.drawLine(gl, bodyPos, rLegPos);
     }
 
-    void drawRobot(GL2 gl, GLUT glut) {
+    void drawRobot(GL2 gl, GLUT glut,GLU glu) {
         //Iterate through robot parts
 
-        gl.glTranslatef((float) (this.position.x), (float) (this.position.y), (float) (this.position.z + 0.8));
+        gl.glTranslatef((float) (this.position.x), (float) (this.position.y), (float) (this.position.z + 0.7));
         this.robotAngle = (float) (Math.PI - Math.atan2(direction.x(), direction.y()) + 5);
         double rAngle = this.robotAngle * (180.0 / Math.PI);
         gl.glRotated(rAngle, 0, 0, 1);
@@ -136,7 +137,7 @@ class Robot {
 
             //Draw the part
             gl.glPushMatrix();
-            drawPart(gl, glut, tempPart.partShape);
+            drawPart(gl, glut,glu, tempPart.partShape);
             gl.glPopMatrix();
         }
 
@@ -145,12 +146,12 @@ class Robot {
     public void walk(float time) {
 
         this.Skeleton.lLeg.Animate(time);
-        this.Skeleton.rLeg.Animate(time);
+        this.Skeleton.rLeg.Animate(-time);
         this.Skeleton.lArm.Animate(time);
-        this.Skeleton.rArm.Animate(time);
+        this.Skeleton.rArm.Animate(-time);
     }
 
-    void drawPart(GL2 gl, GLUT glut, Shape partShape) {
+    void drawPart(GL2 gl, GLUT glut,GLU glu, Shape partShape) {
         gl.glPushMatrix();
         if (partShape.getShapeType() != ComplexShape) {
             gl.glColor3d(partShape.getColor().getRed(), partShape.getColor().getGreen(), partShape.getColor().getBlue());
@@ -159,9 +160,11 @@ class Robot {
         //Check if the shape has to be animated and if yes apply rotation
 
         if (partShape.isToBeAnimated()) {
-            gl.glTranslatef((float) -partShape.getShapePos().x, (float) -partShape.getShapePos().y, (float) -partShape.getShapePos().z);
-            gl.glRotated(partShape.getAngleOfRotation(), 0, 1, 0);
-            gl.glTranslatef((float) partShape.getShapePos().x, (float) partShape.getShapePos().y, (float) partShape.getShapePos().z);
+            gl.glTranslatef((float) 0, 0, (float) -partShape.getShapePos().z);
+  
+           
+            gl.glRotated(partShape.getAngleOfRotation(), 0,1,0);
+            gl.glTranslatef((float) 0, 0, (float) partShape.getShapePos().z);
 
         }
 
@@ -169,6 +172,8 @@ class Robot {
         if (partShape.isToBeScaled()) {
             this.scale3D(gl, (float) partShape.getScale().x, (float) partShape.getScale().y, (float) partShape.getScale().z);
         }
+        
+       
 
         switch (partShape.getShapeType()) {
 
@@ -190,7 +195,7 @@ class Robot {
                 for (int j = 0; j < partShape.getShapeCollection().size(); j++) {
                     //Draw the part
                     //         gl.glPushMatrix();
-                    drawPart(gl, glut, partShape.getShapeCollection().get(j));
+                    drawPart(gl, glut,glu, partShape.getShapeCollection().get(j));
                     //       gl.glPopMatrix();
 
                 }
@@ -199,6 +204,8 @@ class Robot {
         gl.glPopMatrix();
 
     }
+   
+    
 
     void rotate3D(GL2 gl, Vector p1, Vector p2, float thetaDegree
     ) {
