@@ -71,12 +71,12 @@ class Camera {
         // Set position for camera
         center = gs.cnt;
         up = Vector.Z;
-       
+
         //Calculate Eye x y z
         eye = new Vector(
                 gs.vDist * Math.cos(gs.theta) * Math.cos(gs.phi),
                 gs.vDist * Math.sin(gs.theta) * Math.cos(gs.phi),
-                gs.vDist * Math.sin(gs.phi)+40
+                gs.vDist * Math.sin(gs.phi) + 40
         );
 
         eye.add(center);
@@ -86,8 +86,9 @@ class Camera {
      * Computes eye, center, and up, based on the helicopter mode. The camera
      * should focus on the robot.
      */
-    private void setHelicopterMode(GlobalState gs, Robot focus) {
+    int lTimeHel = 0;
 
+    private void setHelicopterMode(GlobalState gs, Robot focus) {
         // The height of the camera above the robot
         final float helicopterCameraheight = 35;
 
@@ -109,6 +110,13 @@ class Camera {
 
         // focus the robot
         center = new Vector(x_robot, y_robot, z_robot);
+        if (lTimeHel + 10 <= Math.round(gs.tAnim)) {
+            lTimeHel = Math.round(gs.tAnim);
+            robotOnFocus++;
+        }
+        if (this.robotOnFocus > 3) {
+            robotOnFocus = 0;
+        }
     }
 
     /**
@@ -118,11 +126,11 @@ class Camera {
     private void setMotorCycleMode(GlobalState gs, Robot focus) {
 
         // center is the robot position 
-        center = robots[0].position;
+        center = robots[this.robotOnFocus].position;
         up = Vector.Z;
 
         // calculate the eye position 
-        eye = robots[0].direction.cross(Vector.Z).normalized().scale(20);
+        eye = robots[robotOnFocus].direction.cross(Vector.Z).normalized().scale(20);
         eye = center.add(eye);
         eye = eye.add(new Vector(0, 0, 1));
 
@@ -132,16 +140,24 @@ class Camera {
      * Computes eye, center, and up, based on the first person mode. The camera
      * should view from the perspective of the robot.
      */
+    int lTimeFPM;
+
     private void setFirstPersonMode(GlobalState gs, Robot focus) {
 
-        eye = robots[0].position;
+        eye = robots[robotOnFocus].position;
         eye.z = eye.z + 1;
         up = Vector.Z;
         // center is in the direction of the tangent 
-        center = robots[0].direction;
-        center.normalized().scale(10);
+        center = robots[robotOnFocus].direction;
+        center.normalized().scale(8);
         center = eye.add(center);
-
+        if (lTimeFPM + 10 <= Math.round(gs.tAnim)) {
+            lTimeFPM = Math.round(gs.tAnim);
+            robotOnFocus++;
+        }
+        if (this.robotOnFocus > 3) {
+            robotOnFocus = 0;
+        }
     }
 
     /**
