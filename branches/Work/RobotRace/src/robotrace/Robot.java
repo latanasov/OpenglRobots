@@ -8,12 +8,15 @@ import static javax.media.opengl.GL.GL_COLOR_BUFFER_BIT;
 import static javax.media.opengl.GL.GL_DEPTH_BUFFER_BIT;
 import static javax.media.opengl.GL.GL_FRONT_AND_BACK;
 import static javax.media.opengl.GL.GL_LINES;
+import static javax.media.opengl.GL.GL_TEXTURE;
 import javax.media.opengl.GL2;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_AMBIENT;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_DIFFUSE;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_SHININESS;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_SPECULAR;
 import javax.media.opengl.glu.GLU;
+import static robotrace.Base.torso;
+import static robotrace.Base.track;
 import robotrace.body.SkeletonPart;
 import robotrace.shape.Shape;
 import robotrace.shape.ShapeEnum;
@@ -121,7 +124,7 @@ class Robot {
         //Iterate through robot parts
 
         gl.glTranslatef((float) (this.position.x), (float) (this.position.y), (float) (this.position.z + 0.8));
-        this.robotAngle = (float) (Math.PI - Math.atan2(direction.x(), direction.y())+5);
+        this.robotAngle = (float) (Math.PI - Math.atan2(direction.x(), direction.y()) + 5);
         double rAngle = this.robotAngle * (180.0 / Math.PI);
         gl.glRotated(rAngle, 0, 0, 1);
         gl.glScaled(0.5, 0.5, 0.5);
@@ -148,7 +151,7 @@ class Robot {
     }
 
     void drawPart(GL2 gl, GLUT glut, Shape partShape) {
-    gl.glPushMatrix();
+        gl.glPushMatrix();
         if (partShape.getShapeType() != ComplexShape) {
             gl.glColor3d(partShape.getColor().getRed(), partShape.getColor().getGreen(), partShape.getColor().getBlue());
             gl.glTranslatef((float) partShape.getShapePos().x, (float) partShape.getShapePos().y, (float) partShape.getShapePos().z);
@@ -164,7 +167,7 @@ class Robot {
 
         //Check if the shape has to be rotated and if yes apply rotation
         if (partShape.isToBeScaled()) {
-            //this.scale3D(gl, (float) partShape.getScale().x, (float) partShape.getScale().y, (float) partShape.getScale().z);
+            this.scale3D(gl, (float) partShape.getScale().x, (float) partShape.getScale().y, (float) partShape.getScale().z);
         }
 
         switch (partShape.getShapeType()) {
@@ -186,14 +189,14 @@ class Robot {
             case ComplexShape:
                 for (int j = 0; j < partShape.getShapeCollection().size(); j++) {
                     //Draw the part
-           //         gl.glPushMatrix();
+                    //         gl.glPushMatrix();
                     drawPart(gl, glut, partShape.getShapeCollection().get(j));
-             //       gl.glPopMatrix();
+                    //       gl.glPopMatrix();
 
                 }
                 break;
         }
-    gl.glPopMatrix();
+        gl.glPopMatrix();
 
     }
 
