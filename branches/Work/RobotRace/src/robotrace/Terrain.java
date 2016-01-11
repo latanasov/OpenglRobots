@@ -2,17 +2,13 @@ package robotrace;
 
 import com.jogamp.opengl.util.gl2.GLUT;
 import java.awt.Color;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import static javax.media.opengl.GL.GL_LINEAR;
-import static javax.media.opengl.GL.GL_LINES;
 import static javax.media.opengl.GL.GL_RGBA;
-import static javax.media.opengl.GL.GL_RGBA8;
 import static javax.media.opengl.GL.GL_TEXTURE_2D;
 import static javax.media.opengl.GL.GL_TEXTURE_MAG_FILTER;
 import static javax.media.opengl.GL.GL_TEXTURE_MIN_FILTER;
-import static javax.media.opengl.GL.GL_TRIANGLES;
 import static javax.media.opengl.GL.GL_UNSIGNED_BYTE;
 import javax.media.opengl.GL2;
 import static javax.media.opengl.GL2GL3.GL_QUADS;
