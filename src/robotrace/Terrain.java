@@ -53,7 +53,7 @@ class Terrain {
         // code goes here ..
         
         // initialize 1D texture 
-        initTerrainTexture(gl,texture);
+       initTerrainTexture(gl,texture);
 
             // define the segements 
             int NV = 100;
@@ -82,8 +82,7 @@ class Terrain {
                     gl.glEnd();
                 }
 
-            }        
-        gl.glEnd();
+            } 
 
         // disable 1D texture
         gl.glDisable(GL_TEXTURE_1D);
