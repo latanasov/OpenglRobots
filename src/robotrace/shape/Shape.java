@@ -32,11 +32,12 @@ public class Shape {
 
     private ShapeEnum ShapeType;
     private Color shapeColor;
-    private float angleOfRotation;
+    private float angleOfRotation=0;
     private Vector vScale;
     private boolean toBeRotated;
     private boolean toBeScaled;
     private boolean toBeAnimated;
+    private boolean toBeTextured;
     private Vector shapePos;
     private Vector originPos;
     private List<Shape> ShapeCollection = new ArrayList<Shape>();
@@ -241,5 +242,19 @@ public class Shape {
      */
     public void setToBeAnimated(boolean toBeAnimated) {
         this.toBeAnimated = toBeAnimated;
+    }
+
+    /**
+     * @return the toBeTextured
+     */
+    public boolean isToBeTextured() {
+        return toBeTextured;
+    }
+
+    /**
+     * @param toBeTextured the toBeTextured to set
+     */
+    public void setToBeTextured(boolean toBeTextured) {
+        this.toBeTextured = toBeTextured;
     }
 }
