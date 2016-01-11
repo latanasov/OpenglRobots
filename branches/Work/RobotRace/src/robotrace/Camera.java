@@ -21,7 +21,7 @@ class Camera {
     public Vector up = Vector.Z;
 
     /**
-     * Array of robots needed to retrieve positions of a selected one *
+     * Array of robots needed to retrieve position/direction of a selected one *
      */
     private Robot robots[];
 
@@ -29,6 +29,10 @@ class Camera {
      * The robot witch is on focus
      */
     public int robotOnFocus = 0;
+    /**
+     * The current camera mode
+     */
+    int currentMode;
 
     /**
      * Updates the camera viewpoint and direction based on the selected camera
@@ -76,7 +80,7 @@ class Camera {
         eye = new Vector(
                 gs.vDist * Math.cos(gs.theta) * Math.cos(gs.phi),
                 gs.vDist * Math.sin(gs.theta) * Math.cos(gs.phi),
-                gs.vDist * Math.sin(gs.phi)
+                gs.vDist * Math.sin(gs.phi) + 40
         );
 
         eye.add(center);
@@ -86,29 +90,38 @@ class Camera {
      * Computes eye, center, and up, based on the helicopter mode. The camera
      * should focus on the robot.
      */
-    private void setHelicopterMode(GlobalState gs, Robot focus) {
+    //Time passed since the method has been first called
+    int lTimeHel = 0;
 
-        // The height of the camera above the robot
+    private void setHelicopterMode(GlobalState gs, Robot focus) {
+        // The distance of the camera above the robot
         final float helicopterCameraheight = 35;
 
-        //The position of the focused robot
-        float x_robot = (float) robots[this.robotOnFocus].position.x;
-        float y_robot = (float) robots[this.robotOnFocus].position.y;
-        float z_robot = (float) (robots[this.robotOnFocus].position.z);
+        float x_pos = (float) robots[this.robotOnFocus].position.x;
+        float y_pos = (float) robots[this.robotOnFocus].position.y;
+        float z_pos = (float) (robots[this.robotOnFocus].position.z);
 
         // Set the angle of the camera
         float cameraAngle = -10;
 
         // Calculate camera position
-        float x = (float) (x_robot + cameraAngle);
-        float y = (float) (y_robot + cameraAngle);
-        float z = z_robot + helicopterCameraheight;
+        float x = (float) (x_pos + cameraAngle);
+        float y = (float) (y_pos + cameraAngle);
+        float z = z_pos + helicopterCameraheight;
 
         // Set the new coordinates
         eye = new Vector(x, y, z);
 
         // focus the robot
-        center = new Vector(x_robot, y_robot, z_robot);
+        center = new Vector(x_pos, y_pos, z_pos);
+        //Focus  the next robot every few seconds
+        if (lTimeHel + 10 <= Math.round(gs.tAnim)) {
+            lTimeHel = Math.round(gs.tAnim);
+            robotOnFocus++;
+        }
+        if (this.robotOnFocus > 3) {
+            robotOnFocus = 0;
+        }
     }
 
     /**
@@ -117,64 +130,81 @@ class Camera {
      */
     private void setMotorCycleMode(GlobalState gs, Robot focus) {
 
-        // The distance from the robot
-        final int distance = 15;
+        //Set center to the focused robot position
+        center = robots[this.robotOnFocus].position;
+        up = Vector.Z;
+        // Calculate the position of the eye
+        eye = robots[robotOnFocus].direction.cross(Vector.Z).normalized().scale(20);
+        eye = center.add(eye);
+        eye = eye.add(up);
 
-        // Get the position of the robot
-        float x_robot = (float) robots[0].position.x;
-        float y_robot = (float) robots[0].position.y;
-        float z_robot = (float) (robots[0].position.z + 0.5 * 4);
-
-        // Get the angle of the robot
-        float angle = robots[0].robotAngle;
-
-        // Calculate camera position
-        float x = (float) (x_robot + distance * Math.cos(angle + 5));
-        float y = (float) (y_robot + distance * Math.sin(angle + 5));
-        float z = z_robot;
-
-        // Set the new coordinates
-        eye = new Vector(x, y, z);
-
-        // Look towards the robot, which is the center
-        center = new Vector(0, 0, 0);
     }
 
     /**
      * Computes eye, center, and up, based on the first person mode. The camera
      * should view from the perspective of the robot.
      */
+    //Time passed since the method has been first called
+    int lTimeFPM;
+
     private void setFirstPersonMode(GlobalState gs, Robot focus) {
-// Get the position of the last robot
 
-//TODO change to look from last robot
-        float x_robot = (float) robots[0].position.x;
-        float y_robot = (float) robots[0].position.y;
-        float z_robot = (float) (robots[0].position.z + 4);
-
-        // Get the angle of the robot
-        float angle = (float) (robots[0].robotAngle * Math.PI);
-
-        // Calculate camera viewing point
-        float x = (float) (x_robot + Math.cos(angle));
-        float y = (float) (y_robot + Math.sin(angle));
-        float z = z_robot;
-
-        // Set the new coordinates
-        eye = new Vector(x_robot, y_robot, z_robot);
-
-        // Look towards the robot
-        center = new Vector(x, y, z);
+        //Eye position equals the robot position
+        eye = robots[robotOnFocus].position;
+        //Move up from the robot
+        eye.z = eye.z + 1;
+        up = Vector.Z;
+        // Look towards the direction of the tangent
+        center = robots[robotOnFocus].direction;
+        center.normalized().scale(8);
+        center = eye.add(center);
+        //Focus  the next robot every few seconds
+        if (lTimeFPM + 10 <= Math.round(gs.tAnim)) {
+            lTimeFPM = Math.round(gs.tAnim);
+            robotOnFocus++;
+        }
+        if (this.robotOnFocus > 3) {
+            robotOnFocus = 0;
+        }
     }
 
     /**
      * Computes eye, center, and up, based on the auto mode. The above modes are
      * alternated.
      */
+    //Time passed since method has been called;
+    float lastTimeAutoMode;
+
     private void setAutoMode(GlobalState gs, Robot focus) {
-        // code goes here ...
+        //Change to the next camera mode every few seconds
+
+        if (lastTimeAutoMode + 10 <= Math.round(gs.tAnim)) {
+            lastTimeAutoMode = Math.round(gs.tAnim);
+            currentMode++;
+        }
+        if (currentMode > 2) {
+            currentMode = 0;
+        }
+
+        //Select the appropriate mode
+        switch (currentMode) {
+            case 0:
+                setHelicopterMode(gs, focus);
+                break;
+            case 1:
+                setMotorCycleMode(gs, focus);
+                break;
+            case 2:
+                setFirstPersonMode(gs, focus);
+                break;
+        }
     }
 
+    /**
+     *
+     * @param robots array of robots used to select the focused robot and
+     * retrieve its position/direction
+     */
     public void initRobots(Robot robots[]) {
         this.robots = robots;
     }

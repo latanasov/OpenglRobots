@@ -408,34 +408,7 @@ public class RobotRace extends Base {
         if (gs.showAxes) {
             drawAxisFrame();
         }
-        /*
-        // Get the position and direction of the first robot.
-        Vector a = raceTracks[gs.trackNr].getLanePoint(1, 0);
-        // test track
-        robots[0].position = raceTracks[gs.trackNr].getLanePoint(1, 0.25*gs.tAnim);
-        robots[0].direction = raceTracks[gs.trackNr].getLaneTangent(1, 0.25*gs.tAnim);
-        
-        // move object
-        
-        //gl.glTranslatef((float) ( this.position.x), (float) ( this.position.y), (float) ( this.position.z+0.75));
-       
-        Vector b = raceTracks[gs.trackNr].getLanePoint(2, 0);
-        robots[1].position = raceTracks[gs.trackNr].getLanePoint(2,0.21*gs.tAnim);
-        robots[1].direction = raceTracks[gs.trackNr].getLaneTangent(2, 0.21*gs.tAnim);
-        
-        Vector c = raceTracks[gs.trackNr].getLanePoint(3, 0.5*gs.tAnim);
-        robots[2].position = raceTracks[gs.trackNr].getLanePoint(3, 0.11*gs.tAnim);
-        robots[2].direction = raceTracks[gs.trackNr].getLaneTangent(3, 0.11*gs.tAnim);
-        
-        Vector d = raceTracks[gs.trackNr].getLanePoint(4, 0.08*gs.tAnim);
-        robots[3].position = raceTracks[gs.trackNr].getLanePoint(4, 0.05*gs.tAnim);
-        robots[3].direction = raceTracks[gs.trackNr].getLaneTangent(4, 0.05*gs.tAnim);*/
 
-        // Get the position and direction of the first robot.
-        // O track
-        // L track
-        // C track
-        // Customer track
         robots[0].draw(gl, glu, glut, gs.showStick, gs.tAnim);
         // Draw the second robot.
         robots[1].draw(gl, glu, glut, gs.showStick, gs.tAnim);
@@ -449,6 +422,7 @@ public class RobotRace extends Base {
         // Draw the race track.
         raceTracks[gs.trackNr].draw(gl, glu, glut);
 
+        //Get the position and direction of each robot
         robots[0].position = raceTracks[gs.trackNr].getLanePoint(1, 0.25 * gs.tAnim);
         robots[0].direction = raceTracks[gs.trackNr].getLaneTangent(1, 0.25 * gs.tAnim);
 
@@ -463,27 +437,13 @@ public class RobotRace extends Base {
 
         // Draw the terrain.
         terrain.draw(gl, glu, glut);
+        //Get current time
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date dateobj = new Date();
         String s = df.format(dateobj);
-  
+        //Print current time on the scene
         this.output(5, 5, 2, (float) Color.BLUEVIOLET.getRed(), (float) Color.BLUEVIOLET.getGreen(), (float) Color.BLUEVIOLET.getRed(), s.toCharArray());
 
-
-        // Unit box around origin.
-        // glut.glutWireCube(1f);
-/*
-        // Move in x-direction.
-        gl.glTranslatef(2f, 0f, 0f);
-        
-        // Rotate 30 degrees, around z-axis.
-        gl.glRotatef(30f, 0f, 0f, 1f);
-        
-        // Scale in z-direction.
-        gl.glScalef(1f, 1f, 2f);
-
-        // Translated, rotated, scaled box.
-       // glut.glutWireCube(1f);*/
     }
 
     /* This function is used to endable light source*/
@@ -570,10 +530,20 @@ public class RobotRace extends Base {
         gl.glPopMatrix();
     }
 
+    /**
+     * Prints a string on the scene
+     *
+     * @param x - pos
+     * @param y - pos
+     * @param z -pos
+     * @param r - r(gb)
+     * @param g-(r)g(b)
+     * @param b-(rg)b
+     * @param s- The string to be printied
+     */
     void output(double x, double y, double z, float r, float g, float b, char[] s) {
         gl.glColor3f(r, g, b);
         gl.glRasterPos3d(x, y, z);
-
         int len, i;
         len = s.length;
         for (i = 0; i < len; i++) {

@@ -26,7 +26,17 @@ public class SkeletonEye extends SkeletonPart {
      */
     @Override
     public void Animate(float time) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int rSpeed = 10;
+        //Iterate through each shape the eye consists of
+        for (Shape shape : this.partShape.getShapeCollection()) {
+            //Calculate the new angle based on the time passed
+            double angle = Math.sin(time * rSpeed) * 5;
+            //Set the angle of rotation
+            shape.setAngleOfRotation((float) angle);
+            //Enable animation for the shape
+            shape.setToBeAnimated(true);
+        }
+
     }
 
 }

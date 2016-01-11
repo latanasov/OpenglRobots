@@ -49,7 +49,7 @@ public class RobotSkeleton {
     /**
      * eye body part*
      */
-    SkeletonPart lEye;
+    public SkeletonPart lEye;
     /**
      * origin of the robot (the center of the body-core is considered as origin*
      */
@@ -71,7 +71,6 @@ public class RobotSkeleton {
         this.oPos = oPos;
 
         //this.initSkeleton();
-
     }
 
     /**

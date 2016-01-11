@@ -26,7 +26,6 @@ public class SkeletonHead extends SkeletonPart {
      */
     @Override
     public void Animate(float time) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

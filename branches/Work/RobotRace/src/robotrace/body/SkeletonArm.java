@@ -23,18 +23,21 @@ public class SkeletonArm extends SkeletonPart {
     }
 
     /**
-     * TODO provide own implementation of animation *
+     *
+     * @param time- global time passed
      */
     @Override
     public void Animate(float time) {
-        
+        int rSpeed = 4;
+        //Iterate through each shape the arm consists of
         for (Shape shape : this.partShape.getShapeCollection()) {
-         
-          Vector newPost=new Vector (shape.getShapePos().x()+time*0.0025,shape.getShapePos().y(),shape.getShapePos().z());
-            
-           shape.setShapePos(newPost);
-          
+            //Calculate the new angle based on the time passed
+            double angle = Math.sin(time * rSpeed) * 45;
+            //Set the angle of rotation
+            shape.setAngleOfRotation((float) angle);
+            //Enable animation for the shape
+            shape.setToBeAnimated(true);
         }
-    }
 
+    }
 }
