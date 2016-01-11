@@ -160,15 +160,24 @@ class Robot {
         gl.glScaled(0.5, 0.5, 0.5);
     }
     
+    /* Thsi function is to do robot texture with the following parameters
+       r : define the radius of the texture
+       upL : define upper limit of the texture loaction
+       lowL : define lower limit of the texture loaction
+       t : define which texture photo will be used*/
     private void textureRobot(GL2 gl, double r, double upL, double lowL, Texture t) {
         
         double pi = Math.PI;
+        
+        // disable 1D texture
         gl.glDisable(GL_TEXTURE_1D);
         gl.glColor3f(1f, 1f, 1f);
         
+        // enable 2D texture
         gl.glEnable(GL_TEXTURE_2D);
         t.bind(gl);
         
+        // draw quads to do texture mapping
         gl.glBegin(GL_QUADS);
         
         for (int a = 0; a <= 20; a++) {
@@ -183,6 +192,8 @@ class Robot {
         }
         
         gl.glEnd();
+        
+        // disable 2D texture
         gl.glDisable(GL_TEXTURE_2D);
     }
 
