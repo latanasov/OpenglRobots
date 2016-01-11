@@ -192,8 +192,8 @@ class RaceTrack {
                             brick.bind(gl);
                         }
 
-                        // draw the surface through drawing trangles
-                        gl.glBegin(GL_TRIANGLES);
+                        // draw the surface through drawing quads
+                        gl.glBegin(GL_QUADS);
                         
                         for (int v = 0; v < NV; v++) {
                             Vector P41 = new Vector(0, 0, 0);
@@ -251,31 +251,23 @@ class RaceTrack {
                             }
 
                             // coloring with 2D texturing map
-                            gl.glColor3f(1f, 1f, 1f);
-
-                            gl.glNormal3d(normal1.x, normal1.y, normal1.z);
-                            gl.glTexCoord2d((float) (u + 1) / NU, (float) (v + 1) / NV);
-                            gl.glVertex3f((float) P41.x, (float) P41.y, (float) P41.z);
-
-                            gl.glNormal3d(normal1.x, normal1.y, normal1.z);
-                            gl.glTexCoord2d((float) (u + 1) / NU, (float) v / NV);
-                            gl.glVertex3f((float) P43.x, (float) P43.y, (float) P43.z);
-
-                            gl.glNormal3d(normal1.x, normal1.y, normal1.z);
-                            gl.glTexCoord2d((float) u / NU, (float) v / NV);
-                            gl.glVertex3f((float) P44.x, (float) P44.y, (float) P44.z);
-
-                            gl.glNormal3d(normal2.x, normal2.y, normal2.z);
-                            gl.glTexCoord2d((float) (u + 1) / NU, (float) (v + 1) / NV);
-                            gl.glVertex3f((float) P44.x, (float) P44.y, (float) P44.z);
-
-                            gl.glNormal3d(normal2.x, normal2.y, normal2.z);
+                            gl.glColor3f(1f, 1f, 1f);                          
+                            
+                            gl.glNormal3d(normal1.x, normal1.y, normal1.z); //
                             gl.glTexCoord2d((float) (u + 1) / NU, (float) v / NV);
                             gl.glVertex3f((float) P42.x, (float) P42.y, (float) P42.z);
 
-                            gl.glNormal3d(normal2.x, normal2.y, normal2.z);
+                            gl.glNormal3d(normal1.x, normal1.y, normal1.z);
                             gl.glTexCoord2d((float) u / NU, (float) v / NV);
                             gl.glVertex3f((float) P41.x, (float) P41.y, (float) P41.z);
+                            
+                            gl.glNormal3d(normal1.x, normal1.y, normal1.z);
+                            gl.glTexCoord2d((float) u  / NU, (float) (v + 1) / NV);
+                            gl.glVertex3f((float) P43.x, (float) P43.y, (float) P43.z);
+                             
+                            gl.glNormal3d(normal1.x, normal1.y, normal1.z);
+                            gl.glTexCoord2d((float) (u + 1) / NU, (float) (v + 1) / NV);
+                            gl.glVertex3f((float) P44.x, (float) P44.y, (float) P44.z);  
 
                         }
                         gl.glEnd();
