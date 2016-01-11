@@ -302,52 +302,65 @@ class RaceTrack {
     int lane3Index = 0;
     int lane4Index = 0;
 
-    public Vector getLanePoint(int lane, double t) {
+     public Vector getLanePoint(int lane, double t) {
         if (null == controlPoints) {
-            // calculate the tagent for the xenter point of each lane
             Vector point1 = new Vector(0, 0, 0);
             Vector point2 = new Vector(0, 0, 0);
             Vector point3 = new Vector(0, 0, 1);
+            Vector tagent = this.getTangent(t);
 
             point1 = this.getPoint(t, true);
             point2 = this.getTangent(t).cross(point3);
-            
-            point3.x = point1.x + (float) point2.normalized().x*laneWidth*0.5 + (float) point2.normalized().x*laneWidth*(lane-1)*1;
-            point3.y = point1.y + (float) point2.normalized().y*laneWidth*lane*0.5+ (float) point2.normalized().y*laneWidth*(lane-1)*1;
-            point3.z = point1.z + (float) point2.normalized().z*laneWidth*lane*0.5;
+
+            double a = point2.normalized().y * laneWidth * 0.5;
+            double b = point2.normalized().y * laneWidth * (lane - 1) * 1;
+
+            /*point3.x = point1.x + point2.normalized().x * laneWidth * (lane - 1) * 1;
+            point3.y = point1.y + point2.normalized().y * laneWidth * (lane - 1) * 1;
+            point3.z = point1.z;*/
+            point3.x = point1.x + point2.normalized().x*laneWidth*0.5 + point2.normalized().x*laneWidth*(lane-1)*1;
+            point3.y = point1.y + point2.normalized().y*laneWidth*lane*0.5+ point2.normalized().y*laneWidth*(lane-1)*1;
+            point3.z = point1.z + point2.normalized().z*laneWidth*lane*0.5;
+
 
             return point3; // <- code goes here
         } else {
             Vector result = null;
+      
+       
             if (lane == 1) {
-                if (this.listLanePos1.size() - 1 < this.lane1Index) {
+                int index=lane1Index+Math.round((int)t);
+                if (this.listLanePos1.size()  < index) {
                     this.lane1Index = 0;
                 }
-                result = this.listLanePos1.get(lane1Index); // <- code goes here
+                result = this.listLanePos1.get(index); // <- code goes here
 
                 lane1Index++;
             }
             if (lane == 2) {
-                if (this.listLanePos2.size() - 1 < this.lane2Index) {
+                 int index=lane1Index+Math.round((int)t);
+                if (this.listLanePos2.size()  < index) {
                     this.lane2Index = 0;
                 }
-                result = this.listLanePos2.get(lane2Index); // <- code goes here
+                result = this.listLanePos2.get(index); // <- code goes here
 
                 lane2Index++;
             }
             if (lane == 3) {
-                if (this.listLanePos3.size() - 1 < this.lane3Index) {
+                int index=lane1Index+Math.round((int)t);
+                if (this.listLanePos3.size()  < index) {
                     this.lane3Index = 0;
                 }
-                result = this.listLanePos3.get(lane3Index); // <- code goes here
+                result = this.listLanePos3.get(index); // <- code goes here
 
                 lane3Index++;
             }
             if (lane == 4) {
-                if (this.listLanePos4.size() - 1 < this.lane4Index) {
+                int index=lane1Index+Math.round((int)t);
+                if (this.listLanePos4.size() < index) {
                     this.lane4Index = 0;
                 }
-                result = this.listLanePos4.get(lane4Index); // <- code goes here
+                result = this.listLanePos4.get(index); // <- code goes here
 
                 lane4Index++;
             }
@@ -366,11 +379,12 @@ class RaceTrack {
             tagentVector = this.getTangent(t);
             return tagentVector; 
         } else {
-            Vector tagentVector = new Vector(0, 0, 0);
+                            int index=lane1Index+Math.round((int)t);
 
-            tagentVector.x = listLanePos1.get(lane1Index + 1).x - listLanePos1.get(lane1Index).x;
-            tagentVector.y = listLanePos1.get(lane1Index + 1).y - listLanePos1.get(lane1Index).y;
-            tagentVector.z = listLanePos1.get(lane1Index + 1).z - listLanePos1.get(lane1Index).z;
+            Vector tagentVector = new Vector(0, 0, 0);
+            tagentVector.x = listLanePos1.get(index + 1).x - listLanePos1.get(index).x;
+            tagentVector.y = listLanePos1.get(index + 1).y - listLanePos1.get(index).y;
+            tagentVector.z = listLanePos1.get(index + 1).z - listLanePos1.get(index).z;
 
             return tagentVector;
         }
