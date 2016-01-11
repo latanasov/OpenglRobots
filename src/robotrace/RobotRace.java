@@ -108,11 +108,19 @@ public class RobotRace extends Base {
 
         double h = 1.5;
 
+        initTracks(h);
+
+        // Initialize the terrain
+        terrain = new Terrain();
+
+    }
+
+    private void initTracks(double h) {
         // O-track
         raceTracks[1] = new RaceTrack(new Vector[]{ /* add control points like:
             new Vector(10, 0, 1), new Vector(10, 5, 1), new Vector(5, 10, 1),
             new Vector(..., ..., ...), ...
-             */
+            */
             //bottom right
             new Vector((9 + 0.2) + 5, 0 + 5, h), new Vector((9 + 4.0 / 3 + 0.2) + 5, 0 + 5, h), new Vector((9 + 8.0 / 3 + 0.2) + 5, 0 + 5, h), new Vector((9 + 12.0 / 3 + 0.2) + 5, 0 + 5, h),
             new Vector((9 + 5), 4 * (Math.sqrt(2) - 1) / 3 * 9.0 + 5, h), new Vector((9 + 4.0 / 3) + 5, 4 * (Math.sqrt(2) - 1) / 3 * (9 + 4.0 / 3) + 5, h), new Vector(((9 + 8.0 / 3)) + 5, 4 * (Math.sqrt(2) - 1) / 3 * (9 + 8.0 / 3) + 5, h), new Vector(((9 + 12.0 / 3)) + 5, 4 * (Math.sqrt(2) - 1) / 3 * (9 + 12.0 / 3) + 5, h),
@@ -311,10 +319,6 @@ public class RobotRace extends Base {
             new Vector(4.0 * 4.0 * (Math.sqrt(2) - 1) / 3, -4 + 6, 3 + h), new Vector((4 + 4.0 / 3) * 4 * (Math.sqrt(2) - 1) / 3, -(4 + 4.0 / 3) + 6, 3 + h), new Vector((4 + 8.0 / 3) * 4 * (Math.sqrt(2) - 1) / 3, -(4 + 8.0 / 3) + 6, 3 + h), new Vector(8.0 * 4.0 * (Math.sqrt(2) - 1) / 3, -(4 + 12.0 / 3) + 6, 3 + h),
             new Vector(4, -4.0 * 4.0 * (Math.sqrt(2) - 1) / 3 + 6, 2 + h), new Vector(4 + 4.0 / 3, -(4 + 4.0 / 3) * 4 * (Math.sqrt(2) - 1) / 3 + 6, 2 + h), new Vector(4 + 8.0 / 3, -(4 + 8.0 / 3) * 4 * (Math.sqrt(2) - 1) / 3 + 6, 2 + h), new Vector(8, -8.0 * 4.0 * (Math.sqrt(2) - 1) / 3 + 6, 2 + h),
             new Vector(4, 0 + 6, 2 + h), new Vector(4 + 4.0 / 3, 0 + 6, 2 + h), new Vector(4 + 8.0 / 3, 0 + 6, 2 + h), new Vector(4 + 12.0 / 3, 0 + 6, 2 + h),});
-
-        // Initialize the terrain
-        terrain = new Terrain();
-
     }
 
     /**
@@ -442,7 +446,8 @@ public class RobotRace extends Base {
         Date dateobj = new Date();
         String s = df.format(dateobj);
         //Print current time on the scene
-        this.output(5, 5, 2, (float) Color.BLUEVIOLET.getRed(), (float) Color.BLUEVIOLET.getGreen(), (float) Color.BLUEVIOLET.getRed(), s.toCharArray());
+        //DIGITAL CLOCK
+        this.output(5, 5, 10, (float) Color.WHITE.getRed(), (float) Color.WHITE.getGreen(), (float) Color.WHITE.getRed(), s.toCharArray());
 
     }
 
