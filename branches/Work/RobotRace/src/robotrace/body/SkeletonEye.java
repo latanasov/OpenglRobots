@@ -26,13 +26,7 @@ public class SkeletonEye extends SkeletonPart {
      */
     @Override
     public void Animate(float time) {
-              for (Shape shape : this.partShape.getShapeCollection()) {
-         
- 
-         //  shape.setToBeAnimated(true);
-           //shape.setAngleOfRotation(time*50);
-          
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

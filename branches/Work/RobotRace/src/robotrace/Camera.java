@@ -76,7 +76,7 @@ class Camera {
         eye = new Vector(
                 gs.vDist * Math.cos(gs.theta) * Math.cos(gs.phi),
                 gs.vDist * Math.sin(gs.theta) * Math.cos(gs.phi),
-                gs.vDist * Math.sin(gs.phi) + 40
+                gs.vDist * Math.sin(gs.phi)
         );
 
         eye.add(center);
@@ -86,9 +86,8 @@ class Camera {
      * Computes eye, center, and up, based on the helicopter mode. The camera
      * should focus on the robot.
      */
-    int lTimeHel = 0;
-
     private void setHelicopterMode(GlobalState gs, Robot focus) {
+
         // The height of the camera above the robot
         final float helicopterCameraheight = 35;
 
@@ -110,13 +109,6 @@ class Camera {
 
         // focus the robot
         center = new Vector(x_robot, y_robot, z_robot);
-        if (lTimeHel + 10 <= Math.round(gs.tAnim)) {
-            lTimeHel = Math.round(gs.tAnim);
-            robotOnFocus++;
-        }
-        if (this.robotOnFocus > 3) {
-            robotOnFocus = 0;
-        }
     }
 
     /**
@@ -125,70 +117,62 @@ class Camera {
      */
     private void setMotorCycleMode(GlobalState gs, Robot focus) {
 
-        // center is the robot position 
-        center = robots[this.robotOnFocus].position;
-        up = Vector.Z;
+        // The distance from the robot
+        final int distance = 15;
 
-        // calculate the eye position 
-        eye = robots[robotOnFocus].direction.cross(Vector.Z).normalized().scale(20);
-        eye = center.add(eye);
-        eye = eye.add(new Vector(0, 0, 1));
+        // Get the position of the robot
+        float x_robot = (float) robots[0].position.x;
+        float y_robot = (float) robots[0].position.y;
+        float z_robot = (float) (robots[0].position.z + 0.5 * 4);
 
+        // Get the angle of the robot
+        float angle = robots[0].robotAngle;
+
+        // Calculate camera position
+        float x = (float) (x_robot + distance * Math.cos(angle + 5));
+        float y = (float) (y_robot + distance * Math.sin(angle + 5));
+        float z = z_robot;
+
+        // Set the new coordinates
+        eye = new Vector(x, y, z);
+
+        // Look towards the robot, which is the center
+        center = new Vector(0, 0, 0);
     }
 
     /**
      * Computes eye, center, and up, based on the first person mode. The camera
      * should view from the perspective of the robot.
      */
-    int lTimeFPM;
-
     private void setFirstPersonMode(GlobalState gs, Robot focus) {
+// Get the position of the last robot
 
-        eye = robots[robotOnFocus].position;
-        eye.z = eye.z + 1;
-        up = Vector.Z;
-        // center is in the direction of the tangent 
-        center = robots[robotOnFocus].direction;
-        center.normalized().scale(8);
-        center = eye.add(center);
-        if (lTimeFPM + 10 <= Math.round(gs.tAnim)) {
-            lTimeFPM = Math.round(gs.tAnim);
-            robotOnFocus++;
-        }
-        if (this.robotOnFocus > 3) {
-            robotOnFocus = 0;
-        }
+//TODO change to look from last robot
+        float x_robot = (float) robots[0].position.x;
+        float y_robot = (float) robots[0].position.y;
+        float z_robot = (float) (robots[0].position.z + 4);
+
+        // Get the angle of the robot
+        float angle = (float) (robots[0].robotAngle * Math.PI);
+
+        // Calculate camera viewing point
+        float x = (float) (x_robot + Math.cos(angle));
+        float y = (float) (y_robot + Math.sin(angle));
+        float z = z_robot;
+
+        // Set the new coordinates
+        eye = new Vector(x_robot, y_robot, z_robot);
+
+        // Look towards the robot
+        center = new Vector(x, y, z);
     }
 
     /**
      * Computes eye, center, and up, based on the auto mode. The above modes are
      * alternated.
      */
-    float lastTime;
-    int currentMode;
-
     private void setAutoMode(GlobalState gs, Robot focus) {
-
-        if (lastTime + 10 <= Math.round(gs.tAnim)) {
-            lastTime = Math.round(gs.tAnim);
-            currentMode++;
-        }
-        if (currentMode > 2) {
-            currentMode = 0;
-        }
-
-        switch (currentMode) {
-
-            case 0:
-                setHelicopterMode(gs, focus);
-                break;
-            case 1:
-                setMotorCycleMode(gs, focus);
-                break;
-            case 2:
-                setFirstPersonMode(gs, focus);
-                break;
-        }
+        // code goes here ...
     }
 
     public void initRobots(Robot robots[]) {
