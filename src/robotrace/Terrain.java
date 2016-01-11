@@ -121,11 +121,12 @@ class Terrain {
      * Computes the elevation of the terrain at (x, y).
      */
     public float heightAt(float x, float y) {
+        // return the height of the terrin according to the give formula
         return (float) (0.6 * Math.cos(0.3 * x + 0.2 * y) + 0.4 * Math.cos(x - 0.5 * y)); // <- code goes here
     }
 
     public void drawTress(GL2 gl, GLUT glut) {
-        // draw first tree
+        // draw first tree with one cycliner and three cones
         gl.glPushMatrix();
         gl.glColor3f(124 / 255f, 75 / 255f, 0f);
         gl.glTranslatef(2f, 5f, 0f);
@@ -139,7 +140,7 @@ class Terrain {
         glut.glutSolidCone(0.8, 2, 60, 60);
         gl.glPopMatrix();
 
-        // draw second tree
+        // draw second tree with one cycliner and three scaled sphere
         gl.glPushMatrix();
         gl.glColor3f(124 / 255f, 75 / 255f, 0f);
         gl.glTranslatef(-2f, 7f, 0f);
@@ -155,7 +156,7 @@ class Terrain {
         glut.glutSolidSphere(0.5, 60, 60);
         gl.glPopMatrix();
 
-        // draw third tree
+        // draw third tree with one cycliner and three cubes
         gl.glPushMatrix();
         gl.glColor3f(124 / 255f, 75 / 255f, 0f);
         gl.glTranslatef(16f, -18.5f, 0.5f);
@@ -169,7 +170,6 @@ class Terrain {
         gl.glColor3f(67 / 255f, 92 / 255f, 17 / 255f);
         gl.glTranslatef(-0.2f, -0.8f, 0f);
         glut.glutSolidCube(1.5f);
-
         gl.glPopMatrix();
     }
 }
