@@ -2,6 +2,7 @@ package robotrace;
 
 import robotrace.body.RobotSkeleton;
 import com.jogamp.opengl.util.gl2.GLUT;
+import com.jogamp.opengl.util.texture.Texture;
 import java.nio.FloatBuffer;
 import javafx.geometry.Point3D;
 import static javax.media.opengl.GL.GL_COLOR_BUFFER_BIT;
@@ -9,12 +10,16 @@ import static javax.media.opengl.GL.GL_DEPTH_BUFFER_BIT;
 import static javax.media.opengl.GL.GL_FRONT_AND_BACK;
 import static javax.media.opengl.GL.GL_LINES;
 import static javax.media.opengl.GL.GL_TEXTURE;
+import static javax.media.opengl.GL.GL_TEXTURE_2D;
 import javax.media.opengl.GL2;
+import static javax.media.opengl.GL2GL3.GL_QUADS;
+import static javax.media.opengl.GL2GL3.GL_TEXTURE_1D;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_AMBIENT;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_DIFFUSE;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_SHININESS;
 import static javax.media.opengl.fixedfunc.GLLightingFunc.GL_SPECULAR;
 import javax.media.opengl.glu.GLU;
+import static robotrace.Base.head;
 import static robotrace.Base.torso;
 import static robotrace.Base.track;
 import robotrace.body.SkeletonPart;
@@ -140,8 +145,42 @@ class Robot {
             drawPart(gl, glut,glu, tempPart.partShape);
             gl.glPopMatrix();
         }
+   // texture head
+        textureRobot(gl, 0.9,2.0,1.5,head);
+        
+        // texture torso
+        textureRobot(gl, 1.1,0.3,0.0,torso);
 
     }
+    
+
+    private void textureRobot(GL2 gl, double r,double upL,double lowL,Texture t) {
+        
+        double pi = Math.PI;
+        gl.glDisable(GL_TEXTURE_1D);
+        gl.glColor3f(1f, 1f, 1f);                          
+                            
+        gl.glEnable(GL_TEXTURE_2D);
+           t.bind(gl);
+          
+        gl.glBegin(GL_QUADS);
+
+        for (int a=0; a<=20; a++)
+        {
+            gl.glTexCoord2d(0, 0);
+            gl.glVertex3d(r *Math.sin(a*2*pi/20), r *Math.cos(a*2*pi/20), upL);
+            gl.glTexCoord2d(1,0);
+            gl.glVertex3d(r *Math.sin((a+1)*2*pi/20), r *Math.cos((a+1)*2*pi/20), upL);
+            gl.glTexCoord2d(1, 1);
+            gl.glVertex3d(r *Math.sin((a+1)*2*pi/20), r *Math.cos((a+1)*2*pi/20), lowL);
+            gl.glTexCoord2d(0,1);
+            gl.glVertex3d(r *Math.sin(a*2*pi/20), r *Math.cos(a*2*pi/20), lowL);  
+        }
+        
+        gl.glEnd();
+        gl.glDisable(GL_TEXTURE_2D);
+    }
+
 
     public void walk(float time) {
 
